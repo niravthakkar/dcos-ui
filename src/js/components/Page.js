@@ -20,7 +20,14 @@ var Page = React.createClass({
     title: React.PropTypes.oneOfType([
       React.PropTypes.object,
       React.PropTypes.string
-    ])
+    ]),
+    wrapChildren: React.PropTypes.bool
+  },
+
+  getDefaultProps: function () {
+    return {
+      wrapChildren: true
+    };
   },
 
   componentDidMount: function () {
@@ -86,14 +93,22 @@ var Page = React.createClass({
 
     let classSet = classNames('page flex-container-col', className);
 
+    let content = this.getChildren();
+
+    if (this.props.wrapChildren) {
+      content = (
+        <GeminiScrollbar autoshow={true} className="page-content container-scrollable inverse">
+          <div className="flex-container-col container container-fluid container-pod container-pod-short-top">
+            {content}
+          </div>
+        </GeminiScrollbar>
+      );
+    }
+
     return (
       <div className={classSet}>
         {this.getPageHeader(title, navigation)}
-        <GeminiScrollbar autoshow={true} className="page-content container-scrollable inverse">
-          <div className="flex-container-col container container-fluid container-pod container-pod-short-top">
-            {this.getChildren()}
-          </div>
-        </GeminiScrollbar>
+        {content}
       </div>
     );
   }

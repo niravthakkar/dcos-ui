@@ -24,7 +24,7 @@ var Chart = React.createClass({
   },
 
   componentWillMount: function () {
-    this.internalStorage_set({width: null});
+    this.internalStorage_set({height: null, width: null});
   },
 
   componentDidMount: function () {
