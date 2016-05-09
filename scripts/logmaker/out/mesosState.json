@@ -1,0 +1,2499 @@
+{
+  "version": "0.2",
+  "git_sha": "29292",
+  "build_date": "some date",
+  "build_time": 1467047655946,
+  "build_user": "",
+  "start_time": 1467047655946,
+  "elected_time": 1467047655946,
+  "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-",
+  "hostname": "10.0.1.59",
+  "pid": "master@10.0.1.59:5050",
+  "activited_slaves": 11,
+  "deactivated_slaves": 0,
+  "cluster": "andrew-viz",
+  "leader": "master@10.0.1.59:5050",
+  "log_dir": "/var/log/mesos",
+  "flags": {},
+  "slaves": [
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+      "hostname": "10.0.7.101",
+      "pid": "slave(1)@10.0.7.101:5051",
+      "registered_time": 1467047655938,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 6.3,
+        "gpus": 0,
+        "disk": 32320,
+        "mem": 4040
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+      "hostname": "10.0.6.184",
+      "pid": "slave(1)@10.0.6.184:5051",
+      "registered_time": 1467047655938,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 6,
+        "gpus": 0,
+        "disk": 32000,
+        "mem": 4000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+      "hostname": "10.0.6.221",
+      "pid": "slave(1)@10.0.6.221:5051",
+      "registered_time": 1467047655938,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 5.2,
+        "gpus": 0,
+        "disk": 27360,
+        "mem": 3420
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+      "hostname": "10.0.2.132",
+      "pid": "slave(1)@10.0.2.132:5051",
+      "registered_time": 1467047655938,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 5.2,
+        "gpus": 0,
+        "disk": 27360,
+        "mem": 3420
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+      "hostname": "10.0.0.36",
+      "pid": "slave(1)@10.0.0.36:5051",
+      "registered_time": 1467047655938,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 5.4,
+        "gpus": 0,
+        "disk": 28960,
+        "mem": 3620
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+      "hostname": "10.0.7.160",
+      "pid": "slave(1)@10.0.7.160:5051",
+      "registered_time": 1467047655938,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 5.8,
+        "gpus": 0,
+        "disk": 30560,
+        "mem": 3820
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+      "hostname": "10.0.5.4",
+      "pid": "slave(1)@10.0.5.4:5051",
+      "registered_time": 1467047655938,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "disk": 33920,
+        "mem": 4240
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+      "hostname": "10.0.3.49",
+      "pid": "slave(1)@10.0.3.49:5051",
+      "registered_time": 1467047655938,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "disk": 32320,
+        "mem": 4040
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+      "hostname": "10.0.2.84",
+      "pid": "slave(1)@10.0.2.84:5051",
+      "registered_time": 1467047655938,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "disk": 32320,
+        "mem": 4040
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+      "hostname": "10.0.4.8",
+      "pid": "slave(1)@10.0.4.8:5051",
+      "registered_time": 1467047655938,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "disk": 32640,
+        "mem": 4080
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S10",
+      "hostname": "10.0.1.151",
+      "pid": "slave(1)@10.0.1.151:5051",
+      "registered_time": 1467047655940,
+      "resources": {
+        "cpus": 6.4,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 2.7,
+        "gpus": 0,
+        "disk": 13440,
+        "mem": 1680
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "attributes": {
+        "public_ip": "true"
+      },
+      "active": true,
+      "version": "0.27.0"
+    }
+  ],
+  "frameworks": [
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+      "name": "marathon",
+      "hostname": "10.0.4.105",
+      "pid": "scheduler-sbenn6lb-eil5-v0xv-itw2-zctxw2ufkrc@10.0.4.105:34121",
+      "used_resources": {
+        "cpus": 4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.4.105:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S10",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-marathon",
+          "name": "scheduler-marathon",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 0,
+            "disk": 320,
+            "mem": 40,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "marathon0",
+          "name": "marathon0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S10",
+          "resources": {
+            "cpus": 0.1,
+            "disk": 640,
+            "mem": 80,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "marathon1",
+          "name": "marathon1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+          "resources": {
+            "cpus": 0.1,
+            "disk": 640,
+            "mem": 80,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "marathon2",
+          "name": "marathon2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+          "resources": {
+            "cpus": 0,
+            "disk": 320,
+            "mem": 40,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "marathon3",
+          "name": "marathon3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+          "resources": {
+            "cpus": 0,
+            "disk": 320,
+            "mem": 40,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "marathon4",
+          "name": "marathon4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 0,
+            "disk": 320,
+            "mem": 40,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "marathon6",
+          "name": "marathon6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0,
+            "disk": 160,
+            "mem": 20,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "marathon7",
+          "name": "marathon7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0,
+            "disk": 160,
+            "mem": 20,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "marathon8",
+          "name": "marathon8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0,
+            "disk": 160,
+            "mem": 20,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "marathon9",
+          "name": "marathon9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0,
+            "disk": 160,
+            "mem": 20,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "marathon",
+      "registered_time": 1467047655946,
+      "unregistered_time": 0,
+      "principal": "marathon",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+      "name": "jenkins",
+      "hostname": "10.0.4.90",
+      "pid": "scheduler-qkgkp507-ewrv-iqal-r86e-au6vjmrnazp@10.0.4.90:30618",
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.4.90:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S10"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-jenkins",
+          "name": "scheduler-jenkins",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "jenkins0",
+          "name": "jenkins0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S10",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "jenkins1",
+          "name": "jenkins1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S10",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "jenkins2",
+          "name": "jenkins2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "jenkins3",
+          "name": "jenkins3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "jenkins4",
+          "name": "jenkins4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "jenkins6",
+          "name": "jenkins6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "jenkins7",
+          "name": "jenkins7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "jenkins8",
+          "name": "jenkins8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "jenkins9",
+          "name": "jenkins9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "jenkins",
+      "registered_time": 1467047655947,
+      "unregistered_time": 0,
+      "principal": "jenkins",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+      "name": "hdfs",
+      "hostname": "10.0.5.111",
+      "pid": "scheduler-s2cw7a8d-6tfz-uubc-tk47-0mfk4bbcgz2@10.0.5.111:88911",
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.5.111:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-hdfs",
+          "name": "scheduler-hdfs",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "hdfs0",
+          "name": "hdfs0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "hdfs1",
+          "name": "hdfs1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "hdfs2",
+          "name": "hdfs2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "hdfs3",
+          "name": "hdfs3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "hdfs4",
+          "name": "hdfs4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "hdfs6",
+          "name": "hdfs6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "hdfs7",
+          "name": "hdfs7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "hdfs8",
+          "name": "hdfs8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "hdfs9",
+          "name": "hdfs9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0002",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "hdfs",
+      "registered_time": 1467047655947,
+      "unregistered_time": 0,
+      "principal": "hdfs",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+      "name": "calico",
+      "hostname": "10.0.2.145",
+      "pid": "scheduler-ymi1b4kf-3vtf-8xz1-c0rm-w3om0650mo9y@10.0.2.145:58130",
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.2.145:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-calico",
+          "name": "scheduler-calico",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "calico0",
+          "name": "calico0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "calico1",
+          "name": "calico1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "calico2",
+          "name": "calico2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "calico3",
+          "name": "calico3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "calico4",
+          "name": "calico4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "calico6",
+          "name": "calico6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "calico7",
+          "name": "calico7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "calico8",
+          "name": "calico8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "calico9",
+          "name": "calico9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0003",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "calico",
+      "registered_time": 1467047655947,
+      "unregistered_time": 0,
+      "principal": "calico",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+      "name": "chronos",
+      "hostname": "10.0.1.108",
+      "pid": "scheduler-6f7teza-zsud-uucm-yais-2y0iidlbuqne@10.0.1.108:40111",
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.1.108:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-chronos",
+          "name": "scheduler-chronos",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "chronos0",
+          "name": "chronos0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "chronos1",
+          "name": "chronos1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "chronos2",
+          "name": "chronos2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "chronos3",
+          "name": "chronos3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "chronos4",
+          "name": "chronos4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "chronos6",
+          "name": "chronos6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "chronos7",
+          "name": "chronos7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "chronos8",
+          "name": "chronos8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "chronos9",
+          "name": "chronos9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0004",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "chronos",
+      "registered_time": 1467047655947,
+      "unregistered_time": 0,
+      "principal": "chronos",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+      "name": "spark",
+      "hostname": "10.0.5.37",
+      "pid": "scheduler-jqdibplt-qy61-1z2m-m2rn-o9r9zqtqtvmz@10.0.5.37:41771",
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.5.37:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-spark",
+          "name": "scheduler-spark",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "spark0",
+          "name": "spark0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "spark1",
+          "name": "spark1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "spark2",
+          "name": "spark2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "spark3",
+          "name": "spark3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "spark4",
+          "name": "spark4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "spark6",
+          "name": "spark6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "spark7",
+          "name": "spark7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "spark8",
+          "name": "spark8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "spark9",
+          "name": "spark9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0005",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "spark",
+      "registered_time": 1467047655947,
+      "unregistered_time": 0,
+      "principal": "spark",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+      "name": "kafka",
+      "hostname": "10.0.5.253",
+      "pid": "scheduler-fksewp-5q9e-uooe-1pdu-hnwvflt14520@10.0.5.253:26386",
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.5.253:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-kafka",
+          "name": "scheduler-kafka",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "kafka0",
+          "name": "kafka0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "kafka1",
+          "name": "kafka1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "kafka2",
+          "name": "kafka2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "kafka3",
+          "name": "kafka3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "kafka4",
+          "name": "kafka4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "kafka6",
+          "name": "kafka6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "kafka7",
+          "name": "kafka7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "kafka8",
+          "name": "kafka8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "kafka9",
+          "name": "kafka9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0006",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "kafka",
+      "registered_time": 1467047655947,
+      "unregistered_time": 0,
+      "principal": "kafka",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+      "name": "cassandra",
+      "hostname": "10.0.5.108",
+      "pid": "scheduler-4pus7ic-opf6-nai8-enhl-tmcyufwt2dw7@10.0.5.108:7622",
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.5.108:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-cassandra",
+          "name": "scheduler-cassandra",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "cassandra0",
+          "name": "cassandra0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "cassandra1",
+          "name": "cassandra1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "cassandra2",
+          "name": "cassandra2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "cassandra3",
+          "name": "cassandra3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "cassandra4",
+          "name": "cassandra4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "cassandra6",
+          "name": "cassandra6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "cassandra7",
+          "name": "cassandra7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "cassandra8",
+          "name": "cassandra8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "cassandra9",
+          "name": "cassandra9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0007",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "cassandra",
+      "registered_time": 1467047655947,
+      "unregistered_time": 0,
+      "principal": "cassandra",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+      "name": "arangodb",
+      "hostname": "10.0.4.241",
+      "pid": "scheduler-t7ubjh56-2u5z-twx-r2q3-x2xpq3a07ypf@10.0.4.241:16528",
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.4.241:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-arangodb",
+          "name": "scheduler-arangodb",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "arangodb0",
+          "name": "arangodb0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "arangodb1",
+          "name": "arangodb1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "arangodb2",
+          "name": "arangodb2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "arangodb3",
+          "name": "arangodb3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "arangodb4",
+          "name": "arangodb4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "arangodb6",
+          "name": "arangodb6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "arangodb7",
+          "name": "arangodb7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "arangodb8",
+          "name": "arangodb8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "arangodb9",
+          "name": "arangodb9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "arangodb",
+      "registered_time": 1467047655947,
+      "unregistered_time": 0,
+      "principal": "arangodb",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+      "name": "elasticsearch",
+      "hostname": "10.0.6.148",
+      "pid": "scheduler-g6yct41w-e6wd-tsvg-z6v6-tui4oz27dy0x@10.0.6.148:84492",
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.6.148:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-elasticsearch",
+          "name": "scheduler-elasticsearch",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "elasticsearch0",
+          "name": "elasticsearch0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "elasticsearch1",
+          "name": "elasticsearch1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "elasticsearch2",
+          "name": "elasticsearch2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "elasticsearch3",
+          "name": "elasticsearch3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "elasticsearch4",
+          "name": "elasticsearch4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "elasticsearch6",
+          "name": "elasticsearch6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "elasticsearch7",
+          "name": "elasticsearch7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "elasticsearch8",
+          "name": "elasticsearch8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "elasticsearch9",
+          "name": "elasticsearch9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "elasticsearch",
+      "registered_time": 1467047655947,
+      "unregistered_time": 0,
+      "principal": "elasticsearch",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    },
+    {
+      "id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+      "name": "mysql",
+      "hostname": "10.0.8.234",
+      "pid": "scheduler-u4jtepr7-ay3i-bb8-p31x-exjbo0su0k56@10.0.8.234:25014",
+      "used_resources": {
+        "cpus": 6.4,
+        "gpus": 0,
+        "mem": 4000,
+        "disk": 32000
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "mem": 0,
+        "disk": 0
+      },
+      "webui_url": "http://10.0.8.234:8080",
+      "capabilities": [],
+      "active": true,
+      "slave_ids": [
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+        "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9"
+      ],
+      "tasks": [
+        {
+          "id": "scheduler-mysql",
+          "name": "scheduler-mysql",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S9",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "mysql0",
+          "name": "mysql0",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S8",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "mysql1",
+          "name": "mysql1",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S7",
+          "resources": {
+            "cpus": 1.3,
+            "disk": 6400,
+            "mem": 800,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "mysql2",
+          "name": "mysql2",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "mysql3",
+          "name": "mysql3",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "mysql4",
+          "name": "mysql4",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
+          "resources": {
+            "cpus": 0.6,
+            "disk": 3200,
+            "mem": 400,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "mysql6",
+          "name": "mysql6",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "mysql7",
+          "name": "mysql7",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "mysql8",
+          "name": "mysql8",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        },
+        {
+          "id": "mysql9",
+          "name": "mysql9",
+          "framework_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
+          "executor_id": "",
+          "slave_id": "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
+          "resources": {
+            "cpus": 0.3,
+            "disk": 1600,
+            "mem": 200,
+            "gpus": 0
+          },
+          "statuses": [],
+          "labels": []
+        }
+      ],
+      "failover_timeout": 604800,
+      "checkpoint": true,
+      "role": "mysql",
+      "registered_time": 1467047655947,
+      "unregistered_time": 0,
+      "principal": "mysql",
+      "completed_tasks": [],
+      "offers": [],
+      "executors": []
+    }
+  ],
+  "completed_frameworks": [],
+  "orphan_tasks": [],
+  "unregistered_frameworks": []
+}

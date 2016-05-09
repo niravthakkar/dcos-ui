@@ -1,0 +1,6 @@
+{
+  "id": "dcos-cluster-id.service",
+  "name": "Admin Router Reloader",
+  "health": 0,
+  "description": "Reload admin router to get new DNS"
+}

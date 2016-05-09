@@ -50,7 +50,7 @@
     "reactjs-components": "0.14.0-beta.33",
     "reactjs-mixin": "0.0.2",
     "redux": "3.3.1",
-    "three": "^0.76.1",
+    "three": "0.76.1",
     "tv4": "1.2.7",
     "underscore": "1.7.0"
   },
