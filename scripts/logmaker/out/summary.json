@@ -1,4 +1,5 @@
 {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
   "hostname": "10.0.1.92",
   "cluser": "andrew-viz",
   "slaves": [
@@ -9,16 +10,35 @@
       "registered_time": 1467047655938,
       "resources": {
         "cpus": 6.4,
+=======
+  "hostname": "10.0.0.82",
+  "cluser": "andrew-viz",
+  "slaves": [
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S0",
+      "hostname": "10.0.6.71",
+      "pid": "slave(1)@10.0.6.71:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 6.3,
         "gpus": 0,
         "disk": 32320,
         "mem": 4040
+=======
+        "cpus": 1.7866666666666668,
+        "gpus": 0,
+        "disk": 14293.333333333332,
+        "mem": 1786.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -28,20 +48,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 11,
+=======
+      "TASK_RUNNING": 21,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
@@ -61,16 +89,41 @@
       "registered_time": 1467047655938,
       "resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S1",
+      "hostname": "10.0.0.241",
+      "pid": "slave(1)@10.0.0.241:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 6,
         "gpus": 0,
         "disk": 32000,
         "mem": 4000
+=======
+        "cpus": 1.7866666666666668,
+        "gpus": 0,
+        "disk": 14293.333333333332,
+        "mem": 1786.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -80,20 +133,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 13,
+=======
+      "TASK_RUNNING": 21,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
@@ -113,16 +174,41 @@
       "registered_time": 1467047655938,
       "resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S2",
+      "hostname": "10.0.0.52",
+      "pid": "slave(1)@10.0.0.52:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 5.2,
         "gpus": 0,
         "disk": 27360,
         "mem": 3420
+=======
+        "cpus": 1.7866666666666668,
+        "gpus": 0,
+        "disk": 14293.333333333332,
+        "mem": 1786.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -132,20 +218,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 13,
+=======
+      "TASK_RUNNING": 21,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
@@ -166,16 +260,41 @@
       "registered_time": 1467047655938,
       "resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S3",
+      "hostname": "10.0.0.17",
+      "pid": "slave(1)@10.0.0.17:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 5.2,
         "gpus": 0,
         "disk": 27360,
         "mem": 3420
+=======
+        "cpus": 1.7866666666666668,
+        "gpus": 0,
+        "disk": 14293.333333333332,
+        "mem": 1786.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -185,20 +304,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 13,
+=======
+      "TASK_RUNNING": 21,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
@@ -219,16 +346,41 @@
       "registered_time": 1467047655938,
       "resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S4",
+      "hostname": "10.0.0.164",
+      "pid": "slave(1)@10.0.0.164:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 5.4,
         "gpus": 0,
         "disk": 28960,
         "mem": 3620
+=======
+        "cpus": 1.7866666666666668,
+        "gpus": 0,
+        "disk": 14293.333333333332,
+        "mem": 1786.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -238,20 +390,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 12,
+=======
+      "TASK_RUNNING": 21,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
@@ -272,16 +432,41 @@
       "registered_time": 1467047655938,
       "resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S5",
+      "hostname": "10.0.2.69",
+      "pid": "slave(1)@10.0.2.69:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 5.8,
         "gpus": 0,
         "disk": 30560,
         "mem": 3820
+=======
+        "cpus": 1.7866666666666668,
+        "gpus": 0,
+        "disk": 14293.333333333332,
+        "mem": 1786.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -291,20 +476,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 12,
+=======
+      "TASK_RUNNING": 21,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
@@ -325,16 +518,41 @@
       "registered_time": 1467047655938,
       "resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S6",
+      "hostname": "10.0.6.16",
+      "pid": "slave(1)@10.0.6.16:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 6.4,
         "gpus": 0,
         "disk": 33920,
         "mem": 4240
+=======
+        "cpus": 1.7866666666666668,
+        "gpus": 0,
+        "disk": 14293.333333333332,
+        "mem": 1786.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -344,20 +562,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 11,
+=======
+      "TASK_RUNNING": 21,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
@@ -377,16 +603,41 @@
       "registered_time": 1467047655938,
       "resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S7",
+      "hostname": "10.0.2.145",
+      "pid": "slave(1)@10.0.2.145:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 6.4,
         "gpus": 0,
         "disk": 32320,
         "mem": 4040
+=======
+        "cpus": 1.7866666666666668,
+        "gpus": 0,
+        "disk": 14293.333333333332,
+        "mem": 1786.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -396,20 +647,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 7,
+=======
+      "TASK_RUNNING": 21,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
@@ -426,16 +685,41 @@
       "registered_time": 1467047655938,
       "resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S8",
+      "hostname": "10.0.5.2",
+      "pid": "slave(1)@10.0.5.2:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 6.4,
         "gpus": 0,
         "disk": 32320,
         "mem": 4040
+=======
+        "cpus": 1.7866666666666668,
+        "gpus": 0,
+        "disk": 14293.333333333332,
+        "mem": 1786.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -445,20 +729,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 7,
+=======
+      "TASK_RUNNING": 21,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
@@ -475,16 +767,41 @@
       "registered_time": 1467047655938,
       "resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S9",
+      "hostname": "10.0.0.84",
+      "pid": "slave(1)@10.0.0.84:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 6.4,
         "gpus": 0,
         "disk": 32640,
         "mem": 4080
+=======
+        "cpus": 1.7866666666666668,
+        "gpus": 0,
+        "disk": 14293.333333333332,
+        "mem": 1786.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -494,20 +811,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 8,
+=======
+      "TASK_RUNNING": 21,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0010",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0009",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0008",
@@ -525,16 +850,41 @@
       "registered_time": 1467047655940,
       "resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S10",
+      "hostname": "10.0.4.90",
+      "pid": "slave(1)@10.0.4.90:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 2,
         "mem": 16000,
         "disk": 256000,
         "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
       },
       "used_resources": {
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "cpus": 2.7,
         "gpus": 0,
         "disk": 13440,
         "mem": 1680
+=======
+        "cpus": 1.6533333333333335,
+        "gpus": 0,
+        "disk": 13226.666666666666,
+        "mem": 1653.3333333333333
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
@@ -544,20 +894,28 @@
       },
       "reserved_resources": [],
       "unreserved_resources": [],
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "attributes": {
         "public_ip": "true"
       },
+=======
+>>>>>>> refactor into OO components, easier to make other log files
       "active": true,
       "version": "0.27.0",
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 3,
+=======
+      "TASK_RUNNING": 20,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "framework_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0001",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-0000"
       ]
@@ -574,10 +932,39 @@
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S11",
+      "hostname": "10.0.9.153",
+      "pid": "slave(1)@10.0.9.153:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 1.6533333333333335,
+        "gpus": 0,
+        "disk": 13226.666666666666,
+        "mem": 1653.3333333333333
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
         "gpus": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "mem": 0,
         "disk": 0
       },
@@ -587,11 +974,24 @@
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
       "TASK_RUNNING": "10",
+=======
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "active": true,
+      "version": "0.27.0",
+      "TASK_STAGING": 0,
+      "TASK_STARTING": 0,
+      "TASK_RUNNING": 20,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "slave_ids": [
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
@@ -767,10 +1167,40 @@
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
+=======
+      "framework_ids": [
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S12",
+      "hostname": "10.0.8.24",
+      "pid": "slave(1)@10.0.8.24:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 1.7066666666666668,
+        "gpus": 0,
+        "disk": 13653.333333333332,
+        "mem": 1706.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
         "gpus": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "mem": 0,
         "disk": 0
       },
@@ -780,11 +1210,24 @@
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
       "TASK_RUNNING": 10,
+=======
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "active": true,
+      "version": "0.27.0",
+      "TASK_STAGING": 0,
+      "TASK_STARTING": 0,
+      "TASK_RUNNING": 20,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "slave_ids": [
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
@@ -956,10 +1399,40 @@
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
+=======
+      "framework_ids": [
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S13",
+      "hostname": "10.0.6.187",
+      "pid": "slave(1)@10.0.6.187:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 1.7066666666666668,
+        "gpus": 0,
+        "disk": 13653.333333333332,
+        "mem": 1706.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
         "gpus": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "mem": 0,
         "disk": 0
       },
@@ -969,11 +1442,24 @@
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
       "TASK_RUNNING": 10,
+=======
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "active": true,
+      "version": "0.27.0",
+      "TASK_STAGING": 0,
+      "TASK_STARTING": 0,
+      "TASK_RUNNING": 20,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "slave_ids": [
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S5",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S6",
@@ -1146,10 +1632,40 @@
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
+=======
+      "framework_ids": [
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S14",
+      "hostname": "10.0.3.31",
+      "pid": "slave(1)@10.0.3.31:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 1.7066666666666668,
+        "gpus": 0,
+        "disk": 13653.333333333332,
+        "mem": 1706.6666666666665
+>>>>>>> refactor into OO components, easier to make other log files
       },
       "offered_resources": {
         "cpus": 0,
         "gpus": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "mem": 0,
         "disk": 0
       },
@@ -1159,11 +1675,24 @@
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
       "TASK_RUNNING": 10,
+=======
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "active": true,
+      "version": "0.27.0",
+      "TASK_STAGING": 0,
+      "TASK_STARTING": 0,
+      "TASK_RUNNING": 20,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "slave_ids": [
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
@@ -1333,6 +1862,73 @@
       "pid": "scheduler-6f7teza-zsud-uucm-yais-2y0iidlbuqne@10.0.1.108:40111",
       "used_resources": {
         "cpus": 6.4,
+=======
+      "framework_ids": [
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S15",
+      "hostname": "10.0.0.132",
+      "pid": "slave(1)@10.0.0.132:5051",
+      "registered_time": 1463525151225,
+      "resources": {
+        "cpus": 8,
+        "gpus": 2,
+        "mem": 16000,
+        "disk": 256000,
+        "ports": "[1025-2180, 2182-3887, 3889-5049, 5052-8079, 8082-8180, 8182-32000]"
+      },
+      "used_resources": {
+        "cpus": 1.7066666666666668,
+        "gpus": 0,
+        "disk": 13653.333333333332,
+        "mem": 1706.6666666666665
+      },
+      "offered_resources": {
+        "cpus": 0,
+        "gpus": 0,
+        "disk": 0,
+        "mem": 0
+      },
+      "reserved_resources": [],
+      "unreserved_resources": [],
+      "active": true,
+      "version": "0.27.0",
+      "TASK_STAGING": 0,
+      "TASK_STARTING": 0,
+      "TASK_RUNNING": 20,
+      "TASK_FINISHED": 0,
+      "TASK_KILLED": 0,
+      "TASK_FAILED": 0,
+      "TASK_LOST": 0,
+      "TASK_ERROR": 0,
+      "framework_ids": [
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000"
+      ]
+    }
+  ],
+  "frameworks": [
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0000",
+      "name": "marathon",
+      "hostname": "10.0.0.129",
+      "pid": "scheduler-cocirt7-z4bw-cs5h-ejk6-0wtosec2nx86@10.0.0.129:77844",
+      "used_resources": {
+        "cpus": 4,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
@@ -1343,18 +1939,27 @@
         "mem": 0,
         "disk": 0
       },
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "webui_url": "http://10.0.1.108:8080",
+=======
+      "webui_url": "http://10.0.0.129:8080",
+>>>>>>> refactor into OO components, easier to make other log files
       "capabilities": [],
       "active": true,
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 10,
+=======
+      "TASK_RUNNING": 30,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "slave_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
@@ -1526,6 +2131,33 @@
       "pid": "scheduler-jqdibplt-qy61-1z2m-m2rn-o9r9zqtqtvmz@10.0.5.37:41771",
       "used_resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S12",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S13",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S14",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S15",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S0",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S1",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S2",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S3",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S4",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S5",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S6",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S7",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S8",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S9",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S10",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S11"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0001",
+      "name": "spark",
+      "hostname": "10.0.6.138",
+      "pid": "scheduler-luwph5jp-vmw-daxh-l3z-kn7o2swtwt4a@10.0.6.138:17812",
+      "used_resources": {
+        "cpus": 4,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
@@ -1536,18 +2168,27 @@
         "mem": 0,
         "disk": 0
       },
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "webui_url": "http://10.0.5.37:8080",
+=======
+      "webui_url": "http://10.0.6.138:8080",
+>>>>>>> refactor into OO components, easier to make other log files
       "capabilities": [],
       "active": true,
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 10,
+=======
+      "TASK_RUNNING": 50,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "slave_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S3",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S4",
@@ -1719,6 +2360,33 @@
       "pid": "scheduler-fksewp-5q9e-uooe-1pdu-hnwvflt14520@10.0.5.253:26386",
       "used_resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S10",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S11",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S12",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S13",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S14",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S15",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S0",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S1",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S2",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S3",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S4",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S5",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S6",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S7",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S8",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S9"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0002",
+      "name": "cassandra",
+      "hostname": "10.0.8.116",
+      "pid": "scheduler-08k5t8h-xtee-4sio-x8k6-u219y6jw6vmb@10.0.8.116:2737",
+      "used_resources": {
+        "cpus": 4,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
@@ -1729,18 +2397,27 @@
         "mem": 0,
         "disk": 0
       },
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "webui_url": "http://10.0.5.253:8080",
+=======
+      "webui_url": "http://10.0.8.116:8080",
+>>>>>>> refactor into OO components, easier to make other log files
       "capabilities": [],
       "active": true,
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 10,
+=======
+      "TASK_RUNNING": 50,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "slave_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
@@ -1910,6 +2587,33 @@
       "pid": "scheduler-4pus7ic-opf6-nai8-enhl-tmcyufwt2dw7@10.0.5.108:7622",
       "used_resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S8",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S9",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S10",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S11",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S12",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S13",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S14",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S15",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S0",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S1",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S2",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S3",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S4",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S5",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S6",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S7"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0003",
+      "name": "jenkins",
+      "hostname": "10.0.1.228",
+      "pid": "scheduler-r81o7j3-vqd5-7p4r-l4e7-rhu7x62nu1j6@10.0.1.228:76330",
+      "used_resources": {
+        "cpus": 4,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
@@ -1920,18 +2624,27 @@
         "mem": 0,
         "disk": 0
       },
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "webui_url": "http://10.0.5.108:8080",
+=======
+      "webui_url": "http://10.0.1.228:8080",
+>>>>>>> refactor into OO components, easier to make other log files
       "capabilities": [],
       "active": true,
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 10,
+=======
+      "TASK_RUNNING": 50,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "slave_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
@@ -2103,6 +2816,33 @@
       "pid": "scheduler-t7ubjh56-2u5z-twx-r2q3-x2xpq3a07ypf@10.0.4.241:16528",
       "used_resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S6",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S7",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S8",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S9",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S10",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S11",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S12",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S13",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S14",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S15",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S0",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S1",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S2",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S3",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S4",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S5"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0004",
+      "name": "chronos",
+      "hostname": "10.0.0.26",
+      "pid": "scheduler-yfz9pbr-rnkc-o2z-iwba-eqbi3vl5pmb@10.0.0.26:5654",
+      "used_resources": {
+        "cpus": 4,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
@@ -2113,18 +2853,27 @@
         "mem": 0,
         "disk": 0
       },
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "webui_url": "http://10.0.4.241:8080",
+=======
+      "webui_url": "http://10.0.0.26:8080",
+>>>>>>> refactor into OO components, easier to make other log files
       "capabilities": [],
       "active": true,
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 10,
+=======
+      "TASK_RUNNING": 50,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "slave_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
@@ -2296,6 +3045,33 @@
       "pid": "scheduler-g6yct41w-e6wd-tsvg-z6v6-tui4oz27dy0x@10.0.6.148:84492",
       "used_resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S4",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S5",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S6",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S7",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S8",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S9",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S10",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S11",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S12",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S13",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S14",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S15",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S0",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S1",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S2",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S3"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0005",
+      "name": "calico",
+      "hostname": "10.0.5.32",
+      "pid": "scheduler-ssjvu48-7p5p-so0d-sb0y-np5i2kdpbx5p@10.0.5.32:70474",
+      "used_resources": {
+        "cpus": 4,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
@@ -2306,18 +3082,27 @@
         "mem": 0,
         "disk": 0
       },
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "webui_url": "http://10.0.6.148:8080",
+=======
+      "webui_url": "http://10.0.5.32:8080",
+>>>>>>> refactor into OO components, easier to make other log files
       "capabilities": [],
       "active": true,
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 10,
+=======
+      "TASK_RUNNING": 50,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "slave_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
@@ -2489,6 +3274,33 @@
       "pid": "scheduler-u4jtepr7-ay3i-bb8-p31x-exjbo0su0k56@10.0.8.234:25014",
       "used_resources": {
         "cpus": 6.4,
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S2",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S3",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S4",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S5",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S6",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S7",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S8",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S9",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S10",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S11",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S12",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S13",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S14",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S15",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S0",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S1"
+      ]
+    },
+    {
+      "id": "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-0006",
+      "name": "elasticsearch",
+      "hostname": "10.0.6.213",
+      "pid": "scheduler-4jkby2ew-r7d6-29ms-qd7v-tq5kdtf7c03w@10.0.6.213:60934",
+      "used_resources": {
+        "cpus": 4,
+>>>>>>> refactor into OO components, easier to make other log files
         "gpus": 0,
         "mem": 4000,
         "disk": 32000
@@ -2499,18 +3311,27 @@
         "mem": 0,
         "disk": 0
       },
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "webui_url": "http://10.0.8.234:8080",
+=======
+      "webui_url": "http://10.0.6.213:8080",
+>>>>>>> refactor into OO components, easier to make other log files
       "capabilities": [],
       "active": true,
       "TASK_STAGING": 0,
       "TASK_STARTING": 0,
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
       "TASK_RUNNING": 10,
+=======
+      "TASK_RUNNING": 50,
+>>>>>>> refactor into OO components, easier to make other log files
       "TASK_FINISHED": 0,
       "TASK_KILLED": 0,
       "TASK_FAILED": 0,
       "TASK_LOST": 0,
       "TASK_ERROR": 0,
       "slave_ids": [
+<<<<<<< 5aa4c8284eadce88545f987db2e5cf98fa256fa7
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S0",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S1",
         "tt6rl2t-m9r5-qm21-uhna-ixkb61bcyc4-S2",
@@ -2673,6 +3494,24 @@
           "statuses": [],
           "labels": []
         }
+=======
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S0",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S1",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S2",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S3",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S4",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S5",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S6",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S7",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S8",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S9",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S10",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S11",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S12",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S13",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S14",
+        "vgf4w1tg-3d3i-mdu-dt79-qn4apog6m06-S15"
+>>>>>>> refactor into OO components, easier to make other log files
       ]
     }
   ]
