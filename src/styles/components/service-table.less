@@ -7,10 +7,12 @@
     // when it wraps to two lines.
     .status-bar-wrapper {
       line-height: 1;
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .status-bar-column {
-      width: @base-spacing-unit * 6;
+      width: @base-spacing-unit * 7;
     }
 
     .status-bar-indicator {
@@ -18,6 +20,9 @@
     }
 
     .status-bar-text {
+      &:extend(.text-overflow);
+      display: block;
+      line-height: normal;
       white-space: nowrap;
     }
 
