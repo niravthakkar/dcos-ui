@@ -39,7 +39,7 @@ class Framework {
 		this.TASK_ERROR = 0,
 		this.slave_ids = []
 
-		// make big tasks, medium tasks, and small tasks. 50 tasks total
+		// make big tasks, medium tasks, and small tasks. 49 tasks total + 1 scheduler
 		let tasks = []
 
 		let cpuEven = options.cpus / this.getNumberTasks()
@@ -47,8 +47,19 @@ class Framework {
 		let memEven = options.mem / this.getNumberTasks()
 		let diskEven = options.disk / this.getNumberTasks()
 
+		// scheduler task
+		// 1 scheduler, using 1 share of resource
+		tasks.push(new Task(
+			utils.roundTenth(cpuEven),
+			utils.roundTenth(gpuEven),
+			utils.roundTenth(memEven),
+			utils.roundTenth(diskEven),
+			this.id, // framework id
+			'scheduler-' + this.name // id of task
+		))
+
 		// big tasks, they use double their even share of things
-		// 2 are big, using 4 shares of resource for each
+		// 2 are big, using 4 shares of resource
 		for (let i = 0; i < 2; i++) {
 				tasks.push(new Task(
 					utils.roundTenth(cpuEven * 2),
@@ -61,8 +72,8 @@ class Framework {
 		}
 
 		// normal tasks
-		// 4 are normal, using 4 shares of resource
-		for (let i = 2; i < 6; i++) {
+		// 3 are normal, using 3 shares of resource
+		for (let i = 2; i < 5; i++) {
 				tasks.push(new Task(
 					utils.roundTenth(cpuEven),
 					utils.roundTenth(gpuEven),

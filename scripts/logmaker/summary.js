@@ -28,6 +28,7 @@ let utils = require('./utils.js')
 /************** CLI ARGS *****************/
 let numberSlaves = process.argv[2]
 let numberFrameworks = Math.min(process.argv[3], 10) // must be less than 10
+let numberApps = process.argv[4]
 
 
 
@@ -41,7 +42,7 @@ frameworks.push(new Framework(tag, 0, 'marathon', {
 	gpus: 0,
 	mem: 4000,
 	disk: 32000,
-	tasks: 30
+	tasks: numberApps
 }))
 
 const names = ['arangodb', 'cassandra', 'chronos', 'jenkins', 'kafka', 'spark', 'elasticsearch', 'calico', 'hdfs', 'mysql']
@@ -50,6 +51,7 @@ for (let i = 0; i < numberFrameworks; i++) {
 	frameworks.push(new Framework(tag, frameworks.length, names[index]))
 	names.splice(index, 1)
 }
+
 
 
 /************** MAKE SLAVES **************/
@@ -61,13 +63,13 @@ for (let i = 0; i < numberSlaves; i++) {
 
 
 
-/************* SCHEDULE ALL TASKS ON THE SLAVES *************/
+/************* SCHEDULE ALL *************/
 
 let tasks = []
+
 for (let f of frameworks) {
 	tasks = tasks.concat(f.tasks)
 }
-
 
 let slaveIndex = 0
 while (tasks.length > 0) {
@@ -116,6 +118,8 @@ summary.write()
 /*************** MARATHON GROUPS JSON *************/
 
 let marathonTasks = []
+
+// one scheduler for each framework (except marathon)
 for (let f of frameworks) {
 	if (f.name === 'marathon') continue
 	marathonTasks.push(f.getMarathonTask())
