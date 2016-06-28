@@ -140,27 +140,13 @@ var Index = React.createClass({
       'canvas-sidebar-open': data.isOpen
     });
 
-    let content = this.getScreenOverlays(showLoadingScreen, showErrorScreen);
-
-    if (!content) {
-      content = (
+    return (
+      <div>
         <div id="canvas" className={classSet}>
           {this.getScreenOverlays(showErrorScreen)}
           <Sidebar />
           <RouteHandler />
         </div>
-      );
-    } else {
-      content = (
-        <div id="canvas" className={classSet}>
-          {content}
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        {content}
         <Modals
           showErrorModal={this.state.showErrorModal}
           modalErrorMsg={this.state.modalErrorMsg} />

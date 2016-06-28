@@ -67,6 +67,7 @@ module.exports = {
     FilterInputText: 'FilterInputText',
     FormModal: 'FormModal',
     Icon: 'Icon',
+    IconDCOSLogoMark: 'icons/IconDCOSLogoMark',
     MesosphereLogo: 'icons/MesosphereLogo',
     NestedServiceLinks: 'NestedServiceLinks',
     Page: 'Page',
