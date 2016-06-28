@@ -1,20 +1,26 @@
-import _ from 'underscore';
+import {RequestUtil} from 'mesosphere-shared-reactjs';
 
 import ActionTypes from '../constants/ActionTypes';
 import AppDispatcher from './AppDispatcher';
 import Config from '../config/Config';
 // TODO for mlunoe: We shouldn't be including stores in these files. DCOS-4430
 import MesosStateStore from '../stores/MesosStateStore';
-import RequestUtil from '../utils/RequestUtil';
 
 function findWithID(stateObject, listProps, id) {
-  let idCondition = {id};
   let searchItem;
   let length = listProps.length;
+
   for (let i = 0; i < length; i++) {
-    searchItem = _.findWhere(stateObject[listProps[i]], idCondition);
-    if (searchItem) {
-      return searchItem;
+    let array = stateObject[listProps[i]];
+
+    if (array) {
+      searchItem = array.find(function (element) {
+        return element.id === id;
+      });
+
+      if (searchItem) {
+        return searchItem;
+      }
     }
   }
 

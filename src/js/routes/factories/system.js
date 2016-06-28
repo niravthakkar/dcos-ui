@@ -1,8 +1,16 @@
+/* eslint-disable no-unused-vars */
+import React, {PropTypes} from 'react';
+/* eslint-enable no-unused-vars */
 import {Route, Redirect} from 'react-router';
 
 import {Hooks} from 'PluginSDK';
+import OverviewDetailTab from '../../pages/system/OverviewDetailTab';
 import RepositoriesTab from '../../pages/system/RepositoriesTab';
 import SystemPage from '../../pages/SystemPage';
+import UnitsHealthDetail from '../../pages/system/UnitsHealthDetail';
+import UnitsHealthNodeDetail from '../../pages/system/UnitsHealthNodeDetail';
+import UnitsHealthDetailBreadcrumb from '../../pages/system/breadcrumbs/UnitsHealthDetailBreadcrumb';
+import UnitsHealthNodeDetailBreadcrumb from '../../pages/system/breadcrumbs/UnitsHealthNodeDetailBreadcrumb';
 import UnitsHealthTab from '../../pages/system/UnitsHealthTab';
 import UsersTab from '../../pages/system/UsersTab';
 
@@ -15,28 +23,66 @@ let RouteFactory = {
         routes: [
           {
             type: Route,
+            name: 'system-overview-details',
+            path: 'details/?',
+            handler: OverviewDetailTab
+          },
+          {
+            type: Route,
             name: 'system-overview-units',
             path: 'components/?',
             handler: UnitsHealthTab,
-            children: [
-              {
-                type: Route,
-                name: 'system-overview-units-unit-nodes-panel',
-                path: ':unitID/?',
-                children: [
-                  {
-                    type: Route,
-                    name: 'system-overview-units-unit-nodes-node-panel',
-                    path: 'nodes/:unitNodeID/?'
-                  }
-                ]
-              },
-              {
-                type: Redirect,
-                from: ':unitID/?',
-                to: 'system-overview-units-unit-nodes-panel'
+            buildBreadCrumb: function () {
+              return {
+                getCrumbs: function () {
+                  return [
+                    {
+                      label: 'System Components',
+                      route: {to: 'system-overview-units'}
+                    }
+                  ];
+                }
               }
-            ]
+            }
+          },
+          {
+            type: Route,
+            name: 'system-overview-units-unit-nodes-detail',
+            path: 'components/:unitID/?',
+            handler: UnitsHealthDetail,
+            hideHeaderNavigation: true,
+            buildBreadCrumb: function () {
+              return {
+                parentCrumb: 'system-overview-units',
+                getCrumbs: function (router) {
+                  return [
+                    <UnitsHealthDetailBreadcrumb
+                      parentRouter={router}
+                      routeName="system-overview-units-unit-nodes-detail" />
+                  ];
+                }
+              }
+            }
+          },
+          {
+            type: Route,
+            name: 'system-overview-units-unit-nodes-node-detail',
+            path: 'components/:unitID/nodes/:unitNodeID/?',
+            handler: UnitsHealthNodeDetail,
+            hideHeaderNavigation: true,
+            buildBreadCrumb: function () {
+              return {
+                parentCrumb: 'system-overview-units-unit-nodes-detail',
+                getCrumbs: function (router) {
+                  return [
+                    <UnitsHealthNodeDetailBreadcrumb
+                      parentRouter={router}
+                      routeName="system-overview-units-unit-nodes-node-detail"
+                      />
+                  ];
+                }
+              }
+            }
           },
           {
             type: Route,
@@ -48,7 +94,7 @@ let RouteFactory = {
         redirect: {
           type: Redirect,
           from: '/system/overview/?',
-          to: 'system-overview-units'
+          to: 'system-overview-details'
         }
       })
     );
@@ -63,6 +109,19 @@ let RouteFactory = {
           name: 'system-organization-users',
           path: 'users/?',
           handler: UsersTab,
+          buildBreadCrumb: function () {
+            return {
+              parentCrumb: 'system-organization',
+              getCrumbs: function () {
+                return [
+                  {
+                    label: 'Users',
+                    route: {to: 'system-organization-users'}
+                  }
+                ];
+              }
+            }
+          },
           children: []
         }],
         redirect: {
@@ -87,6 +146,18 @@ let RouteFactory = {
       type: Route,
       name: 'system-organization',
       path: 'organization/?',
+      buildBreadCrumb: function () {
+        return {
+          getCrumbs: function () {
+            return [
+              {
+                label: 'Organization',
+                route: {to: 'system-organization'}
+              }
+            ];
+          }
+        }
+      },
       // Get children for Overview
       children: RouteFactory.getOrganizationRoutes()
     };
@@ -119,7 +190,19 @@ let RouteFactory = {
       name: 'system',
       path: 'system/?',
       handler: SystemPage,
-      children: childRoutes
+      children: childRoutes,
+      buildBreadCrumb: function () {
+        return {
+          getCrumbs: function () {
+            return [
+              {
+                label: 'System',
+                route: {to: 'system'}
+              }
+            ]
+          }
+        }
+      }
     };
   }
 };

@@ -1,3 +1,5 @@
+import {RequestUtil} from 'mesosphere-shared-reactjs';
+
 import {
   REQUEST_SUMMARY_HISTORY_SUCCESS,
   REQUEST_MESOS_HISTORY_ONGOING,
@@ -5,18 +7,27 @@ import {
   REQUEST_SUMMARY_ERROR,
   REQUEST_SUMMARY_ONGOING
 } from '../constants/ActionTypes';
-
 var AppDispatcher = require('./AppDispatcher');
 var Config = require('../config/Config');
-var RequestUtil = require('../utils/RequestUtil');
+import {Hooks} from 'PluginSDK';
 var TimeScales = require('../constants/TimeScales');
+
 var _historyServiceOnline = true;
+
+function testHistoryServerResponse(response) {
+  // If the response is an empty object, that means something is whack
+  // Fall back to making requests to Mesos
+  if (response === {}) {
+    _historyServiceOnline = false;
+  }
+}
 
 function testHistoryOnline() {
   RequestUtil.json({
     url: `${Config.historyServer}/dcos-history-service/history/last`,
-    success: function () {
+    success: function (response) {
       _historyServiceOnline = true;
+      testHistoryServerResponse(response);
     },
     error: function () {
       setTimeout(testHistoryOnline, Config.testHistoryInterval);
@@ -35,6 +46,7 @@ function requestFromHistoryServer(resolve, reject, timeScale = 'last') {
   RequestUtil.json({
     url,
     success: function (response) {
+      testHistoryServerResponse(response);
       AppDispatcher.handleServerAction({
         type: successEventType,
         data: response
@@ -84,7 +96,11 @@ var MesosSummaryActions = {
     function (resolve, reject) {
 
       return function (timeScale) {
-        if (!_historyServiceOnline) {
+        let canAccessHistoryServer = Hooks.applyFilter(
+          'hasCapability', false, 'historyServiceAPI'
+        );
+
+        if (!_historyServiceOnline || !canAccessHistoryServer) {
           requestFromMesos(resolve, reject);
         } else {
           requestFromHistoryServer(resolve, reject, timeScale);

@@ -1,27 +1,34 @@
-import classNames from 'classnames';
-import {Form, Tooltip} from 'reactjs-components';
-import GeminiScrollbar from 'react-gemini-scrollbar';
+import mixin from 'reactjs-mixin';
 import React from 'react';
+import {StoreMixin} from 'mesosphere-shared-reactjs';
+import {Tooltip} from 'reactjs-components';
 
+import FormUtil from '../utils/FormUtil';
 import GeminiUtil from '../utils/GeminiUtil';
-import SideTabs from './SideTabs';
+import Icon from './Icon';
 import SchemaFormUtil from '../utils/SchemaFormUtil';
 import SchemaUtil from '../utils/SchemaUtil';
+import TabForm from './TabForm';
+import Util from '../utils/Util';
 
 const METHODS_TO_BIND = [
-  'getTriggerSubmit', 'validateForm', 'handleFormChange', 'handleTabClick',
-  'handleExternalSubmit'
+  'getAddNewRowButton',
+  'getRemoveRowButton',
+  'getTriggerTabFormSubmit',
+  'handleFormChange',
+  'handleExternalSubmit',
+  'validateForm'
 ];
 
-class SchemaForm extends React.Component {
+class SchemaForm extends mixin(StoreMixin) {
   constructor() {
     super();
-
-    this.state = {currentTab: ''};
 
     METHODS_TO_BIND.forEach((method) => {
       this[method] = this[method].bind(this);
     });
+
+    this.store_listeners = [];
 
     this.triggerSubmit = function () {};
     this.isValidated = true;
@@ -41,12 +48,14 @@ class SchemaForm extends React.Component {
       this.model = {};
     }
 
-    this.submitMap = {};
-    this.setState({
-      currentTab: Object.keys(this.multipleDefinition)[0]
-    });
-
     this.props.getTriggerSubmit(this.handleExternalSubmit);
+  }
+
+  componentWillUnmount() {
+    // Unschedule all validation if component unmounts.
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
   }
 
   componentDidUpdate() {
@@ -54,10 +63,6 @@ class SchemaForm extends React.Component {
     setTimeout(() => {
       GeminiUtil.updateWithRef(this.refs.geminiForms);
     });
-  }
-
-  handleTabClick(currentTab) {
-    this.setState({currentTab});
   }
 
   handleFormChange(formData, eventObj) {
@@ -74,19 +79,98 @@ class SchemaForm extends React.Component {
       return;
     }
 
-    setTimeout(() => {
+    // The cleartimeout is there to debounce the validation. And to make
+    // sure it is only run once.
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+
+    this.timer = setTimeout(() => {
       this.validateForm();
       this.props.onChange(this.getDataTriple());
     });
   }
 
-  handleFormSubmit(formKey, formModel) {
-    this.model[formKey] = formModel;
-  }
-
   handleExternalSubmit() {
     this.validateForm();
     return this.getDataTriple();
+  }
+
+  handleRemoveRow(definition, prop, id) {
+    FormUtil.removePropID(definition, prop, id);
+    this.forceUpdate();
+  }
+
+  handleAddRow(prop, definition, newDefinition) {
+    let propID = Util.uniqueID(prop);
+    newDefinition = FormUtil.getMultipleFieldDefinition(
+      prop,
+      propID,
+      newDefinition
+    );
+
+    let deleteButtonTop = Object.values(definition.itemShapes || {})
+      .some(function (itemShape) {
+        return itemShape.deleteButtonTop;
+      });
+    let arrayAction = 'push';
+
+    if (deleteButtonTop) {
+      arrayAction = 'unshift';
+    }
+    newDefinition[arrayAction](
+      this.getRemoveRowButton(definition, prop, propID)
+    );
+
+    // Default to prepending.
+    let lastIndex = -1;
+    definition.forEach(function (field, i) {
+      if (FormUtil.isFieldInstanceOfProp(prop, field)) {
+        lastIndex = i;
+        return;
+      }
+
+      if (field.props && field.props.prop === prop) {
+        lastIndex = i - 1;
+      }
+    });
+
+    definition.splice(lastIndex + 1, 0, newDefinition);
+    this.forceUpdate();
+  }
+
+  getAddNewRowButton(prop, generalDefinition, definition, labelText = '') {
+    let label = 'Add New Line';
+
+    if (labelText !== '') {
+      label = labelText;
+    }
+
+    return (
+      <div prop={prop} key={`${prop}-add-new-row`}>
+        <div className="row form-row-element">
+          <a
+            className="clickable row"
+            onClick={
+              this.handleAddRow.bind(this, prop, generalDefinition, definition)
+            }>
+            + {label}
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  getRemoveRowButton(generalDefinition, prop, id) {
+    return (
+      <div key={`${prop}${id}-remove`} className="form-row-element align-self-flex-end">
+        <button
+          className="button button-link"
+          onClick={this.handleRemoveRow.bind(this, generalDefinition, prop, id)}>
+          <Icon id="close" size="mini" family="mini" />
+        </button>
+      </div>
+    );
   }
 
   getDataTriple() {
@@ -100,27 +184,33 @@ class SchemaForm extends React.Component {
   getNewDefinition() {
     let {model, schema} = this.props;
     let definition = SchemaUtil.schemaToMultipleDefinition(
-      schema, this.getSubHeader, this.getLabel
+      schema,
+      this.getSubHeader,
+      this.getLabel,
+      this.getRemoveRowButton,
+      this.getAddNewRowButton
     );
 
     if (model) {
-      SchemaFormUtil.mergeModelIntoDefinition(model, definition);
+      SchemaFormUtil.mergeModelIntoDefinition(
+        model,
+        definition,
+        this.getRemoveRowButton
+      );
     }
 
     return definition;
   }
 
-  buildModel() {
-    Object.keys(this.multipleDefinition).forEach((formKey) => {
-      this.submitMap[formKey]();
-    });
+  getTriggerTabFormSubmit(submitTrigger) {
+    this.triggerTabFormSubmit = submitTrigger;
   }
 
   validateForm() {
     let schema = this.props.schema;
     let isValidated = true;
 
-    this.buildModel();
+    this.model = this.triggerTabFormSubmit();
     // Reset the definition in order to reset all errors.
     this.multipleDefinition = this.getNewDefinition();
     let model = SchemaFormUtil.processFormModel(
@@ -143,15 +233,32 @@ class SchemaForm extends React.Component {
     return isValidated;
   }
 
-  getTriggerSubmit(formKey, triggerSubmit) {
-    this.submitMap[formKey] = triggerSubmit;
-  }
+  getSubHeader(name, description) {
+    let tooltip = null;
+    if (description) {
+      tooltip = (
+        <Tooltip content={description} wrapperClassName="tooltip-wrapper
+          media-object-item" wrapText={true} maxWidth={300}
+          scrollContainer=".gm-scroll-view">
+          <Icon
+            color="grey"
+            family="mini"
+            id="ring-question"
+            size="mini" />
+        </Tooltip>
+      );
+    }
 
-  getSubHeader(name) {
     return (
-      <div key={name}>
-        <div className="h5 form-row-element flush-bottom flush-top">
-          {name}
+      <div className="media-object-spacing-wrapper
+          media-object-spacing-narrow">
+        <div className="media-object">
+          <div className="media-object-item">
+            <div className="h5 form-row-element flush-bottom flush-top">
+              {name}
+            </div>
+          </div>
+          {tooltip}
         </div>
       </div>
     );
@@ -169,7 +276,11 @@ class SchemaForm extends React.Component {
             <Tooltip content={description} wrapperClassName="tooltip-wrapper
               media-object-item" wrapText={true} maxWidth={300}
               scrollContainer=".gm-scroll-view">
-              <i className="icon icon-sprite icon-sprite-mini icon-error" />
+              <Icon
+                color="grey"
+                family="mini"
+                id="ring-question"
+                size="mini" />
             </Tooltip>
           </div>
         </span>
@@ -177,15 +288,19 @@ class SchemaForm extends React.Component {
     );
   }
 
-  getServiceHeader() {
+  getFormHeader() {
     let {packageIcon, packageName, packageVersion} = this.props;
+
+    if (!packageName || !packageIcon) {
+      return null;
+    }
 
     return (
       <div className="modal-header modal-header-padding-narrow modal-header-bottom-border modal-header-white flex-no-shrink">
         <div className="media-object-spacing-wrapper media-object-spacing-narrow media-object-offset">
           <div className="media-object media-object-align-middle">
             <div className="media-object-item">
-              <div className="icon icon-sprite icon-sprite-medium icon-sprite-medium-color icon-image-container icon-app-container icon-default-white">
+              <div className="icon icon-medium icon-image-container icon-app-container icon-default-white">
                 <img src={packageIcon} />
               </div>
             </div>
@@ -203,73 +318,15 @@ class SchemaForm extends React.Component {
     );
   }
 
-  getHeader(title, description) {
-    return (
-      <div key={title} className="form-row-element">
-        <h3 className="form-header flush-bottom">{title}</h3>
-        <p className="flush-bottom">{description}</p>
-      </div>
-    );
-  }
-
-  getSideContent(multipleDefinition) {
-    let {currentTab} = this.state;
-
-    return (
-      <div className="column-mini-12 column-small-4 multiple-form-left-column">
-        <SideTabs
-          onTabClick={this.handleTabClick}
-          selectedTab={currentTab}
-          tabs={Object.values(multipleDefinition)} />
-      </div>
-    );
-  }
-
-  getFormPanels() {
-    let currentTab = this.state.currentTab;
-    let multipleDefinition = this.multipleDefinition;
-
-    let panels = Object.keys(multipleDefinition).map((formKey, i) => {
-      let panelClassSet = classNames('form', {
-        'hidden': currentTab !== formKey
-      });
-
-      let {definition, description, title} = multipleDefinition[formKey];
-      let formDefinition = [{
-        render: this.getHeader.bind(this, title, description)
-      }].concat(definition);
-
-      return (
-        <div key={i} className="form-panel">
-          <Form
-            className={panelClassSet}
-            formGroupClass="form-group flush"
-            definition={formDefinition}
-            triggerSubmit={this.getTriggerSubmit.bind(this, formKey)}
-            onChange={this.handleFormChange}
-            onSubmit={this.handleFormSubmit.bind(this, formKey)} />
-        </div>
-      );
-    });
-
-    return (
-      <GeminiScrollbar
-        autoshow={true}
-        className="multiple-form-right-column column-mini-12 column-small-8"
-        ref="geminiForms">
-        {panels}
-      </GeminiScrollbar>
-    );
-  }
-
   render() {
     return (
       <div>
-        {this.getServiceHeader()}
-        <div className={this.props.className}>
-          {this.getSideContent(this.multipleDefinition)}
-          {this.getFormPanels()}
-        </div>
+        {this.getFormHeader()}
+        <TabForm
+          definition={this.multipleDefinition}
+          formRowClass="flex-box"
+          getTriggerSubmit={this.getTriggerTabFormSubmit}
+          onChange={this.handleFormChange} />
       </div>
     );
   }
@@ -278,6 +335,7 @@ class SchemaForm extends React.Component {
 SchemaForm.defaultProps = {
   className: 'multiple-form row',
   getTriggerSubmit: function () {},
+  onChange: function () {},
   schema: {}
 };
 

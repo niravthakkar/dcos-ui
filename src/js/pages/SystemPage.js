@@ -4,7 +4,11 @@ import mixin from 'reactjs-mixin';
 import React from 'react';
 /* eslint-enable no-unused-vars */
 import {Hooks} from 'PluginSDK';
+
+import Icon from '../components/Icon';
+import NotificationStore from '../stores/NotificationStore';
 import Page from '../components/Page';
+import RouterUtil from '../utils/RouterUtil';
 import SidebarActions from '../events/SidebarActions';
 import TabsUtil from '../utils/TabsUtil';
 import TabsMixin from '../mixins/TabsMixin';
@@ -22,6 +26,10 @@ let DEFAULT_SERVICES_TABS = {
 };
 
 let DEFAULT_OVERVIEW_TABS = {
+  'system-overview-details': {
+    content: 'Details',
+    priority: 30
+  },
   'system-overview-units': {
     content: 'Components',
     priority: 20
@@ -43,7 +51,7 @@ let SYSTEM_TABS;
 
 class SystemPage extends mixin(TabsMixin) {
   constructor() {
-    super();
+    super(...arguments);
 
     // Get top level tabs
     SYSTEM_TABS = TabsUtil.sortTabs(
@@ -84,16 +92,39 @@ class SystemPage extends mixin(TabsMixin) {
   }
 
   getRoutedItem(tab) {
+    let notificationCount = NotificationStore.getNotificationCount(tab);
+
+    if (notificationCount > 0) {
+      return (
+        <Link
+          to={tab}
+          className="tab-item-label inverse flush">
+          <span className="tab-item-label-text">
+            {SYSTEM_TABS[tab]}
+          </span>
+          <span className="badge-container badge-primary">
+            <span className="badge text-align-center">{notificationCount}</span>
+          </span>
+        </Link>
+      );
+    }
+
     return (
       <Link
         to={tab}
         className="tab-item-label inverse flush">
-        {SYSTEM_TABS[tab]}
+        <span className="tab-item-label-text">
+          {SYSTEM_TABS[tab]}
+        </span>
       </Link>
     );
   }
 
   getNavigation() {
+    if (RouterUtil.shouldHideNavigation(this.context.router)) {
+      return null;
+    }
+
     let routes = this.context.router.getCurrentRoutes();
     let currentRoute = routes[routes.length - 2].name;
 
@@ -109,10 +140,18 @@ class SystemPage extends mixin(TabsMixin) {
   }
 
   getSubNavigation() {
+    if (RouterUtil.shouldHideNavigation(this.context.router)) {
+      return null;
+    }
+
     return (
-      <ul className="tabs list-inline flush-bottom inverse">
-        {this.tabs_getRoutedTabs()}
-      </ul>
+      <div className="container-pod container-pod-short flush-top">
+        <div className="container-pod container-pod-divider-bottom container-pod-divider-inverse container-pod-divider-bottom-align-right flush-top flush-bottom">
+           <ul className="tabs list-inline flush-bottom inverse">
+            {this.tabs_getRoutedTabs()}
+          </ul>
+        </div>
+      </div>
     );
   }
 
@@ -121,11 +160,7 @@ class SystemPage extends mixin(TabsMixin) {
       <Page
         title="System"
         navigation={this.getNavigation()}>
-        <div className="container-pod container-pod-short flush-top">
-          <div className="container-pod container-pod-divider-bottom container-pod-divider-inverse container-pod-divider-bottom-align-right flush-top flush-bottom">
-            {this.getSubNavigation()}
-          </div>
-        </div>
+        {this.getSubNavigation()}
         <RouteHandler currentTab={this.state.currentTab} />
       </Page>
     );
@@ -138,7 +173,7 @@ SystemPage.contextTypes = {
 
 SystemPage.routeConfig = {
   label: 'System',
-  icon: 'system',
+  icon: <Icon id="gears" />,
   matches: /^\/system/
 };
 

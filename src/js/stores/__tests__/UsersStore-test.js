@@ -2,14 +2,13 @@ jest.dontMock('../UsersStore');
 jest.dontMock('../../mixins/GetSetMixin');
 jest.dontMock('../../../../tests/_fixtures/acl/users-unicode.json');
 
-var _ = require('underscore');
+import {RequestUtil} from 'mesosphere-shared-reactjs';
 
 var UsersStore = require('../UsersStore');
 var AppDispatcher = require('../../events/AppDispatcher');
 var ActionTypes = require('../../constants/ActionTypes');
 var EventTypes = require('../../constants/EventTypes');
 var UsersList = require('../../structs/UsersList');
-var RequestUtil = require('../../utils/RequestUtil');
 var Config = require('../../config/Config');
 
 var usersFixture = require('../../../../tests/_fixtures/acl/users-unicode.json');
@@ -21,7 +20,7 @@ describe('UsersStore', function () {
     RequestUtil.json = function (handlers) {
       handlers.success(usersFixture);
     };
-    this.usersFixture = _.clone(usersFixture);
+    this.usersFixture = Object.assign({}, usersFixture);
     this.useFixtures = Config.useFixtures;
     Config.useFixtures = true;
   });

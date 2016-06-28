@@ -4,13 +4,15 @@
   background-color: @gray;
   margin-right: 0;
   height: @status-bar-height;
-  width: @status-bar-width;
+  width: @status-bar-width * 0.6;
   max-width: 100%;
 
   .bar {
 
     background-color: currentColor;
     border-left: 1px solid @black;
+    transform: none;
+    transition: width 600ms;
 
     &:first-child {
 
@@ -37,30 +39,12 @@
   }
 }
 
+& when (@screen-small-enabled) {
 
+  @media (min-width: @screen-small) {
 
-& when (@table-enabled) {
-
-  .table {
-
-    .status-bar-column {
-
-      width: 138px;
-
-    }
-
-  }
-
-  @media (min-width: @screen-medium-max) {
-
-    .table {
-
-      .status-bar-column {
-
-        width: 330px;
-
-      }
-
+    .status-bar {
+      width: @status-bar-width;
     }
 
   }

@@ -1,56 +1,73 @@
-import {Store} from 'mesosphere-shared-reactjs';
+import GetSetBaseStore from './GetSetBaseStore';
 
 import ActionTypes from '../constants/ActionTypes';
 import AppDispatcher from '../events/AppDispatcher';
 import ConfigActions from '../events/ConfigActions';
 import EventTypes from '../constants/EventTypes';
-import GetSetMixin from '../mixins/GetSetMixin';
 
-var ConfigStore = Store.createStore({
-  storeID: 'config',
+class ConfigStore extends GetSetBaseStore {
+  constructor() {
+    super(...arguments);
 
-  mixins: [GetSetMixin],
+    this.getSet_data = {
+      ccid: {},
+      config: null
+    };
 
-  getSet_data: {
-    config: null
-  },
+    this.dispatcherIndex = AppDispatcher.register((payload) => {
+      if (payload.source !== ActionTypes.SERVER_ACTION) {
+        return false;
+      }
 
-  addChangeListener: function (eventName, callback) {
+      var action = payload.action;
+      switch (action.type) {
+        case ActionTypes.REQUEST_CONFIG_SUCCESS:
+          this.processConfigSuccess(action.data);
+          break;
+        case ActionTypes.REQUEST_CONFIG_ERROR:
+          this.emit(EventTypes.CONFIG_ERROR);
+          break;
+        case ActionTypes.REQUEST_CLUSTER_CCID_SUCCESS:
+          this.processCCIDSuccess(action.data);
+          break;
+        case ActionTypes.REQUEST_CLUSTER_CCID_ERROR:
+          this.emit(EventTypes.CLUSTER_CCID_ERROR);
+          break;
+      }
+
+      return true;
+    });
+  }
+
+  addChangeListener(eventName, callback) {
     this.on(eventName, callback);
-  },
+  }
 
-  removeChangeListener: function (eventName, callback) {
+  removeChangeListener(eventName, callback) {
     this.removeListener(eventName, callback);
-  },
+  }
 
-  processStateSuccess: function (config) {
+  processConfigSuccess(config) {
     this.set({config});
     this.emit(EventTypes.CONFIG_LOADED);
-  },
+  }
 
-  processStateError: function () {
-    this.emit(EventTypes.CONFIG_ERROR);
-  },
+  processCCIDSuccess(ccid) {
+    this.set({ccid});
+    this.emit(EventTypes.CLUSTER_CCID_SUCCESS);
+  }
 
-  fetchConfig: ConfigActions.fetchConfig,
+  fetchConfig() {
+    return ConfigActions.fetchConfig(...arguments);
+  }
 
-  dispatcherIndex: AppDispatcher.register(function (payload) {
-    if (payload.source !== ActionTypes.SERVER_ACTION) {
-      return false;
-    }
+  fetchCCID() {
+    return ConfigActions.fetchCCID(...arguments);
+  }
 
-    var action = payload.action;
-    switch (action.type) {
-      case ActionTypes.REQUEST_CONFIG_SUCCESS:
-        ConfigStore.processStateSuccess(action.data);
-        break;
-      case ActionTypes.REQUEST_CONFIG_ERROR:
-        ConfigStore.processStateError();
-        break;
-    }
+  get storeID() {
+    return 'config';
+  }
+}
 
-    return true;
-  })
-});
-
-module.exports = ConfigStore;
+module.exports = new ConfigStore();

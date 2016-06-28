@@ -5,13 +5,13 @@ jest.dontMock('../../events/UnitHealthActions');
 jest.dontMock('../../mixins/GetSetMixin');
 jest.dontMock('../../../../tests/_fixtures/unit-health/units.json');
 
-var _ = require('underscore');
+import {RequestUtil} from 'mesosphere-shared-reactjs';
+
 var ActionTypes = require('../../constants/ActionTypes');
 var AppDispatcher = require('../../events/AppDispatcher');
 var Config = require('../../config/Config');
 var EventTypes = require('../../constants/EventTypes');
 var HealthUnitsList = require('../../structs/HealthUnitsList');
-var RequestUtil = require('../../utils/RequestUtil');
 var UnitHealthStore = require('../UnitHealthStore');
 var unitsFixture = require('../../../../tests/_fixtures/unit-health/units.json');
 
@@ -22,7 +22,7 @@ describe('UnitHealthStore', function () {
     RequestUtil.json = function (handlers) {
       handlers.success(unitsFixture);
     };
-    this.unitsFixture = _.clone(unitsFixture);
+    this.unitsFixture = Object.assign({}, unitsFixture);
   });
 
   afterEach(function () {

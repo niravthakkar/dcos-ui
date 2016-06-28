@@ -4,12 +4,12 @@ import mixin from 'reactjs-mixin';
 import React from 'react';
 import {StoreMixin} from 'mesosphere-shared-reactjs';
 
-import AdvancedConfig from '../AdvancedConfig';
 import CosmosErrorMessage from '../CosmosErrorMessage';
 import CosmosPackagesStore from '../../stores/CosmosPackagesStore';
-import IconCircleCheckmark from '../icons/IconCircleCheckmark';
+import Icon from '../Icon';
 import InternalStorageMixin from '../../mixins/InternalStorageMixin';
 import ReviewConfig from '../ReviewConfig';
+import SchemaForm from '../SchemaForm';
 import SchemaUtil from '../../utils/SchemaUtil';
 import StringUtil from '../../utils/StringUtil';
 import TabsMixin from '../../mixins/TabsMixin';
@@ -372,7 +372,7 @@ class InstallPackageModal extends mixin(InternalStorageMixin, TabsMixin, StoreMi
     let {pendingRequest, hasFormErrors} = this.internalStorage_get();
     let cosmosPackage = CosmosPackagesStore.getPackageDetails();
 
-    // Only return footer, we always render AdvancedConfig, but just change
+    // Only return footer, we always render SchemaForm, but just change
     // the hidden class in render
     return (
       <div className="modal-footer">
@@ -447,7 +447,7 @@ class InstallPackageModal extends mixin(InternalStorageMixin, TabsMixin, StoreMi
         <div className="modal-content">
           <div className="horizontal-center modal-content-inner container container-pod container-pod-short text-align-center">
             <span className="text-success">
-              <IconCircleCheckmark />
+              <Icon id="ring-check" size="jumbo" />
             </span>
             <h2 className="short-top short-bottom">Success!</h2>
             <div
@@ -528,14 +528,15 @@ class InstallPackageModal extends mixin(InternalStorageMixin, TabsMixin, StoreMi
 
     return (
       <div>
-        <AdvancedConfig
-          className={advancedConfigClasses}
-          packageIcon={cosmosPackage.getIcons()['icon-small']}
-          packageName={name}
-          packageVersion={version}
-          schema={cosmosPackage.get('config')}
-          onChange={this.handleAdvancedFormChange}
-          getTriggerSubmit={this.getAdvancedSubmit} />
+        <div className={advancedConfigClasses}>
+          <SchemaForm
+            packageIcon={cosmosPackage.getIcons()['icon-small']}
+            packageName={name}
+            packageVersion={version}
+            schema={cosmosPackage.get('config')}
+            onChange={this.handleAdvancedFormChange}
+            getTriggerSubmit={this.getAdvancedSubmit} />
+        </div>
         {this.tabs_getTabView()}
       </div>
     );
@@ -567,12 +568,12 @@ class InstallPackageModal extends mixin(InternalStorageMixin, TabsMixin, StoreMi
         backdropClass={backdropClasses}
         bodyClass=""
         closeByBackdropClick={!isAdvanced}
-        innerBodyClass="flush-top flush-bottom"
         maxHeightPercentage={1}
         modalClass={modalClasses}
         modalWrapperClass={modalWrapperClasses}
         onClose={this.handleModalClose}
         open={props.open}
+        scrollContainerClass=""
         showCloseButton={false}
         showFooter={false}>
         {this.getModalContents()}

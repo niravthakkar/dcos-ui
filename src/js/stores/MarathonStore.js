@@ -1,19 +1,38 @@
-import {Store} from 'mesosphere-shared-reactjs';
-
-var AppDispatcher = require('../events/AppDispatcher');
+import AppDispatcher from '../events/AppDispatcher';
 import ActionTypes from '../constants/ActionTypes';
+import GetSetBaseStore from './GetSetBaseStore';
+import DeploymentsList from '../structs/DeploymentsList';
 import CompositeState from '../structs/CompositeState';
 import Service from '../structs/Service';
 import ServiceTree from '../structs/ServiceTree';
-var Config = require('../config/Config');
+import Config from '../config/Config';
 import {
   MARATHON_APPS_CHANGE,
   MARATHON_APPS_ERROR,
+  MARATHON_GROUP_CREATE_SUCCESS,
+  MARATHON_GROUP_CREATE_ERROR,
   MARATHON_GROUPS_CHANGE,
   MARATHON_GROUPS_ERROR,
+  MARATHON_DEPLOYMENTS_CHANGE,
+  MARATHON_DEPLOYMENTS_ERROR,
+  MARATHON_DEPLOYMENT_ROLLBACK_SUCCESS,
+  MARATHON_DEPLOYMENT_ROLLBACK_ERROR,
+  MARATHON_INSTANCE_INFO_SUCCESS,
+  MARATHON_INSTANCE_INFO_ERROR,
+  MARATHON_QUEUE_CHANGE,
+  MARATHON_QUEUE_ERROR,
+  MARATHON_SERVICE_CREATE_ERROR,
+  MARATHON_SERVICE_CREATE_SUCCESS,
+  MARATHON_SERVICE_DELETE_ERROR,
+  MARATHON_SERVICE_DELETE_SUCCESS,
+  MARATHON_SERVICE_EDIT_ERROR,
+  MARATHON_SERVICE_EDIT_SUCCESS,
+  MARATHON_SERVICE_VERSION_CHANGE,
+  MARATHON_SERVICE_VERSION_ERROR,
+  MARATHON_SERVICE_VERSIONS_CHANGE,
+  MARATHON_SERVICE_VERSIONS_ERROR,
   VISIBILITY_CHANGE
 } from '../constants/EventTypes';
-var GetSetMixin = require('../mixins/GetSetMixin');
 var HealthStatus = require('../constants/HealthStatus');
 var MarathonActions = require('../events/MarathonActions');
 var ServiceImages = require('../constants/ServiceImages');
@@ -23,10 +42,8 @@ var requestInterval = null;
 
 function startPolling() {
   if (requestInterval == null) {
-    MarathonActions.fetchGroups();
-    requestInterval = global.setInterval(
-      MarathonActions.fetchGroups, Config.getRefreshRate()
-    );
+    poll();
+    requestInterval = global.setInterval(poll, Config.getRefreshRate());
   }
 }
 
@@ -37,54 +54,183 @@ function stopPolling() {
   }
 }
 
-function handleInactiveChange() {
-  let isInactive = VisibilityStore.get('isInactive');
-  if (isInactive) {
-    stopPolling();
-  }
-
-  if (!isInactive && MarathonStore.shouldPoll()) {
-    startPolling();
-  }
+function poll() {
+  MarathonActions.fetchGroups();
+  MarathonActions.fetchQueue();
+  MarathonActions.fetchDeployments();
 }
 
-VisibilityStore.addChangeListener(VISIBILITY_CHANGE, handleInactiveChange);
+class MarathonStore extends GetSetBaseStore {
+  constructor() {
+    super(...arguments);
 
-var MarathonStore = Store.createStore({
-  storeID: 'marathon',
+    this.getSet_data = {
+      apps: {},
+      deployments: new DeploymentsList(),
+      groups: new ServiceTree(),
+      info: {}
+    };
 
-  mixins: [GetSetMixin],
+    this.dispatcherIndex = AppDispatcher.register((payload) => {
+      if (payload.source !== ActionTypes.SERVER_ACTION) {
+        return false;
+      }
 
-  getSet_data: {
-    apps: {}
-  },
+      var action = payload.action;
+      switch (action.type) {
+        case ActionTypes.REQUEST_MARATHON_INSTANCE_INFO_ERROR:
+          this.emit(MARATHON_INSTANCE_INFO_ERROR, action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_INSTANCE_INFO_SUCCESS:
+          this.processMarathonInfoRequest(action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_GROUP_CREATE_ERROR:
+          this.emit(MARATHON_GROUP_CREATE_ERROR, action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_GROUP_CREATE_SUCCESS:
+          this.emit(MARATHON_GROUP_CREATE_SUCCESS);
+          break;
+        case ActionTypes.REQUEST_MARATHON_SERVICE_CREATE_ERROR:
+          this.emit(MARATHON_SERVICE_CREATE_ERROR, action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_SERVICE_CREATE_SUCCESS:
+          this.emit(MARATHON_SERVICE_CREATE_SUCCESS);
+          break;
+        case ActionTypes.REQUEST_MARATHON_SERVICE_DELETE_ERROR:
+          this.emit(MARATHON_SERVICE_DELETE_ERROR, action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_SERVICE_DELETE_SUCCESS:
+          this.emit(MARATHON_SERVICE_DELETE_SUCCESS);
+          break;
+        case ActionTypes.REQUEST_MARATHON_SERVICE_EDIT_ERROR:
+          this.emit(MARATHON_SERVICE_EDIT_ERROR, action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_SERVICE_EDIT_SUCCESS:
+          this.emit(MARATHON_SERVICE_EDIT_SUCCESS);
+          break;
+        case ActionTypes.REQUEST_MARATHON_GROUPS_SUCCESS:
+          this.processMarathonGroups(action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_DEPLOYMENTS_SUCCESS:
+          this.processMarathonDeployments(action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_GROUPS_ERROR:
+          this.processMarathonGroupsError();
+          break;
+        case ActionTypes.REQUEST_MARATHON_DEPLOYMENTS_ERROR:
+          this.processMarathonDeploymentsError();
+          break;
+        case ActionTypes.REQUEST_MARATHON_GROUPS_ONGOING:
+          this.processOngoingRequest();
+          break;
+        case ActionTypes.REQUEST_MARATHON_QUEUE_SUCCESS:
+          this.processMarathonQueue(action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_QUEUE_ERROR:
+          this.processMarathonQueueError();
+          break;
+        case ActionTypes.REQUEST_MARATHON_SERVICE_VERSION_SUCCESS:
+          this.processMarathonServiceVersion(action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_SERVICE_VERSION_ERROR:
+          this.processMarathonServiceVersionError();
+          break;
+        case ActionTypes.REQUEST_MARATHON_SERVICE_VERSIONS_SUCCESS:
+          this.processMarathonServiceVersions(action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_SERVICE_VERSIONS_ERROR:
+          this.processMarathonServiceVersionsError();
+          break;
+        case ActionTypes.REQUEST_MARATHON_DEPLOYMENT_ROLLBACK_SUCCESS:
+          this.processMarathonDeploymentRollback(action.data);
+          break;
+        case ActionTypes.REQUEST_MARATHON_DEPLOYMENT_ROLLBACK_ERROR:
+          this.processMarathonDeploymentRollbackError(action.data);
+          break;
+      }
 
-  addChangeListener: function (eventName, callback) {
+      return true;
+    });
+
+    VisibilityStore.addChangeListener(
+      VISIBILITY_CHANGE,
+      this.onVisibilityStoreChange.bind(this)
+    );
+  }
+
+  addChangeListener(eventName, callback) {
     this.on(eventName, callback);
 
     if (this.shouldPoll()) {
       startPolling();
     }
-  },
+  }
 
-  removeChangeListener: function (eventName, callback) {
+  removeChangeListener(eventName, callback) {
     this.removeListener(eventName, callback);
 
     if (!this.shouldPoll()) {
       stopPolling();
     }
-  },
+  }
 
-  shouldPoll: function () {
+  onVisibilityStoreChange() {
+    if (!VisibilityStore.isInactive() && this.shouldPoll()) {
+      startPolling();
+      return;
+    }
+
+    stopPolling();
+  }
+
+  shouldPoll() {
     return this.listenerCount(MARATHON_GROUPS_CHANGE) > 0 ||
+      this.listenerCount(MARATHON_QUEUE_CHANGE) > 0 ||
+      this.listenerCount(MARATHON_DEPLOYMENTS_CHANGE) > 0 ||
       this.listenerCount(MARATHON_APPS_CHANGE) > 0;
-  },
+  }
 
-  hasProcessedApps: function () {
+  changeService() {
+    return MarathonActions.changeService(...arguments);
+  }
+
+  createGroup() {
+    return MarathonActions.createGroup(...arguments);
+  }
+
+  createService() {
+    return MarathonActions.createService(...arguments);
+  }
+
+  deleteService() {
+    return MarathonActions.deleteService(...arguments);
+  }
+
+  editService() {
+    return MarathonActions.editService(...arguments);
+  }
+
+  fetchQueue() {
+    return MarathonActions.fetchQueue(...arguments);
+  }
+
+  fetchServiceVersion() {
+    return MarathonActions.fetchServiceVersion(...arguments);
+  }
+
+  fetchServiceVersions() {
+    return MarathonActions.fetchServiceVersions(...arguments);
+  }
+
+  fetchMarathonInstanceInfo() {
+    return MarathonActions.fetchMarathonInstanceInfo(...arguments);
+  }
+
+  hasProcessedApps() {
     return !!Object.keys(this.get('apps')).length;
-  },
+  }
 
-  getFrameworkHealth: function (app) {
+  getFrameworkHealth(app) {
     if (app.healthChecks == null || app.healthChecks.length === 0) {
       return HealthStatus.NA;
     }
@@ -97,9 +243,13 @@ var MarathonStore = Store.createStore({
     }
 
     return health;
-  },
+  }
 
-  getServiceHealth: function (name) {
+  getInstanceInfo() {
+    return this.get('info');
+  }
+
+  getServiceHealth(name) {
     let appName = name.toLowerCase();
     let marathonApps = this.get('apps');
 
@@ -108,9 +258,9 @@ var MarathonStore = Store.createStore({
     }
 
     return marathonApps[appName].health;
-  },
+  }
 
-  getServiceImages: function (name) {
+  getServiceImages(name) {
     let appName = name.toLowerCase();
     let appImages = null;
     let marathonApps = this.get('apps');
@@ -120,9 +270,9 @@ var MarathonStore = Store.createStore({
     }
 
     return appImages;
-  },
+  }
 
-  getServiceInstalledTime: function (name) {
+  getServiceInstalledTime(name) {
     let appName = name.toLowerCase();
     let appInstalledTime = null;
     let marathonApps = this.get('apps');
@@ -132,9 +282,9 @@ var MarathonStore = Store.createStore({
     }
 
     return appInstalledTime;
-  },
+  }
 
-  getServiceVersion: function (name) {
+  getServiceVersion(name) {
     let appName = name.toLowerCase();
     let marathonApps = this.get('apps');
 
@@ -143,9 +293,9 @@ var MarathonStore = Store.createStore({
     }
 
     return null;
-  },
+  }
 
-  getVersion: function (app) {
+  getVersion(app) {
     if (app == null ||
       app.labels == null ||
       app.labels.DCOS_PACKAGE_VERSION == null) {
@@ -153,13 +303,44 @@ var MarathonStore = Store.createStore({
     }
 
     return app.labels.DCOS_PACKAGE_VERSION;
-  },
+  }
 
-  getServiceFromName: function (name) {
+  getServiceFromName(name) {
     return this.get('apps')[name];
-  },
+  }
 
-  processMarathonGroups: function (data) {
+  getServiceNameFromTaskID(taskID) {
+    let serviceName = taskID.split('.')[0].split('_');
+    return serviceName[serviceName.length - 1];
+  }
+
+  getServiceFromTaskID(taskID) {
+    let service = this.get('apps')[this.getServiceNameFromTaskID(taskID)];
+
+    if (service == null) {
+      return null;
+    }
+
+    return new Service(service.snapshot);
+  }
+
+  getTaskFromTaskID(taskID) {
+    let service = this.getServiceFromTaskID(taskID);
+    if (service == null || service.tasks == null || !service.tasks.length) {
+      return null;
+    }
+
+    return service.tasks.find(function (task) {
+      return task.id === taskID;
+    });
+  }
+
+  processMarathonInfoRequest(info) {
+    this.set({info});
+    this.emit(MARATHON_INSTANCE_INFO_SUCCESS);
+  }
+
+  processMarathonGroups(data) {
     let groups = new ServiceTree(data);
 
     let apps = groups.reduceItems(function (map, item) {
@@ -174,6 +355,7 @@ var MarathonStore = Store.createStore({
       return map;
     }, {});
 
+    let numberOfApps = Object.keys(apps).length;
     // Specific health check for Marathon
     // We are setting the 'marathon' key here, since we can safely assume,
     // it to be 'marathon' (we control it).
@@ -183,8 +365,8 @@ var MarathonStore = Store.createStore({
         // Make sure health check has a result
         healthChecks: [{}],
         // Marathon is healthy if this request returned apps
-        tasksHealthy: data.apps.length,
-        tasksRunning: data.apps.length
+        tasksHealthy: numberOfApps,
+        tasksRunning: numberOfApps
       }),
       images: ServiceImages.MARATHON_IMAGES
     };
@@ -196,38 +378,78 @@ var MarathonStore = Store.createStore({
 
     this.emit(MARATHON_APPS_CHANGE, apps);
     this.emit(MARATHON_GROUPS_CHANGE, groups);
-  },
+  }
 
-  processMarathonGroupsError: function () {
+  processMarathonGroupsError() {
     this.emit(MARATHON_APPS_ERROR);
     this.emit(MARATHON_GROUPS_ERROR);
-  },
+  }
 
-  processOngoingRequest: function () {
+  processMarathonDeployments(data) {
+    let deployments = new DeploymentsList({items: data});
+    this.set({deployments});
+    this.emit(MARATHON_DEPLOYMENTS_CHANGE, deployments);
+  }
+
+  processMarathonDeploymentsError() {
+    this.emit(MARATHON_DEPLOYMENTS_ERROR);
+  }
+
+  processMarathonDeploymentRollback(data) {
+    let id = data.originalDeploymentID;
+    if (id != null) {
+      let deployments = this.get('deployments')
+        .filterItems(function (deployment) {
+          return deployment.getId() !== id;
+        });
+      this.set({deployments});
+      this.emit(MARATHON_DEPLOYMENT_ROLLBACK_SUCCESS, data);
+      this.emit(MARATHON_DEPLOYMENTS_CHANGE);
+    }
+  }
+
+  processMarathonDeploymentRollbackError(data) {
+    this.emit(MARATHON_DEPLOYMENT_ROLLBACK_ERROR, data);
+  }
+
+  processMarathonQueue(data) {
+    if (data.queue != null) {
+      this.emit(MARATHON_QUEUE_CHANGE, data.queue);
+    }
+  }
+
+  processMarathonQueueError() {
+    this.emit(MARATHON_QUEUE_ERROR);
+  }
+
+  processOngoingRequest() {
     // Handle ongoing request here.
-  },
+  }
 
-  dispatcherIndex: AppDispatcher.register(function (payload) {
-    if (payload.source !== ActionTypes.SERVER_ACTION) {
-      return false;
-    }
+  processMarathonServiceVersions({serviceID, versions}) {
+    versions = versions.reduce(function (map, version) {
+      return map.set(version);
+    }, new Map());
 
-    var action = payload.action;
-    switch (action.type) {
-      case ActionTypes.REQUEST_MARATHON_GROUPS_SUCCESS:
-        MarathonStore.processMarathonGroups(action.data);
-        break;
-      case ActionTypes.REQUEST_MARATHON_GROUPS_ERROR:
-        MarathonStore.processMarathonGroupsError();
-        break;
-      case ActionTypes.REQUEST_MARATHON_GROUPS_ONGOING:
-        MarathonStore.processOngoingRequest();
-        break;
-    }
+    this.emit(MARATHON_SERVICE_VERSIONS_CHANGE, {serviceID, versions});
+  }
 
-    return true;
-  })
+  processMarathonServiceVersionsError() {
+    this.emit(MARATHON_SERVICE_VERSIONS_ERROR);
+  }
 
-});
+  processMarathonServiceVersion({serviceID, version, versionID}) {
+    // TODO (orlandohohmeier): Convert version into typed version struct
+    this.emit(MARATHON_SERVICE_VERSION_CHANGE, {serviceID, versionID, version});
+  }
 
-module.exports = MarathonStore;
+  processMarathonServiceVersionError() {
+    this.emit(MARATHON_SERVICE_VERSION_ERROR);
+  }
+
+  get storeID() {
+    return 'marathon';
+  }
+}
+
+module.exports = new MarathonStore();

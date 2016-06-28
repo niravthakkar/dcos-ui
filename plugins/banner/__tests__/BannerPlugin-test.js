@@ -1,6 +1,5 @@
 jest.dontMock('../hooks');
 
-var _ = require('underscore');
 /* eslint-disable no-unused-vars */
 import React from 'react';
 /* eslint-enable no-unused-vars */
@@ -10,7 +9,7 @@ var TestUtils = require('react-addons-test-utils');
 import PluginTestUtils from 'PluginTestUtils';
 
 PluginTestUtils.dontMock([
-  'IconInfo',
+  'Icon',
   'DOMUtils'
 ]);
 
@@ -24,7 +23,7 @@ describe('BannerPlugin', function () {
 
   beforeEach(function () {
     this.container = document.createElement('div');
-    BannerPlugin.configuration = _.clone(defaultConfiguration);
+    BannerPlugin.configuration = Object.assign({}, defaultConfiguration);
   });
 
   afterEach(function () {

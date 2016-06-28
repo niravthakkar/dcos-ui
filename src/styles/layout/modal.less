@@ -31,6 +31,18 @@
     width: @modal-width-narrow;
   }
 
+  .icon-button-collection {
+
+    .button {
+      height: auto;
+    }
+
+    .icon,
+    .button-text {
+      vertical-align: middle;
+    }
+  }
+
   &.modal-image-viewer {
     background: transparent;
     width: 100%;
@@ -144,22 +156,16 @@
     width: 100%;
   }
 
-  .form-row-element {
-    &:first-child {
-      padding-left: 0;
-    }
-
-    &:last-child {
-      padding-right: 0;
-    }
-  }
-
   .row {
     margin-left: 0;
     margin-right: 0;
 
-    [class*="column-"] {
-      padding: 0;
+    [class*="column-"]:first-child {
+      padding-left: 0;
+    }
+
+    [class*="column-"]:last-child {
+      padding-right: 0;
     }
 
     &:last-child .form-group {
@@ -169,44 +175,6 @@
 
   .allow-overflow {
     overflow: visible;
-  }
-
-  &.login-modal {
-
-    .modal-content {
-      height: auto;
-      overflow: visible;
-      position: relative;
-
-      .container {
-        width: 100%;
-      }
-    }
-
-    .modal-header {
-      background: transparent;
-      height: 144px;
-      padding: 0;
-
-      .container {
-        padding: 0;
-      }
-    }
-
-    .dcos-logo {
-      left: 50%;
-      position: absolute;
-      top: -55px;
-      transform: translateX(-50%);
-    }
-
-    .modal-body {
-      padding-top: @base-spacing-unit * 2/3;
-    }
-
-    .login-modal-heading {
-      color: @neutral;
-    }
   }
 }
 

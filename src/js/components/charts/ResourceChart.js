@@ -1,11 +1,14 @@
-import _ from 'underscore';
 import React from 'react';
 
 import BarChart from '../../components/charts/BarChart';
 import Chart from '../../components/charts/Chart';
 import Config from '../../config/Config';
-import ResourceTypes from '../../constants/ResourceTypes';
+import Icon from '../Icon';
+import ResourceColors from '../../constants/ResourceColors';
+import ResourceIcons from '../../constants/ResourceIcons';
+import ResourcesUtil from '../../utils/ResourcesUtil';
 import Units from '../../utils/Units';
+import Util from '../../utils/Util';
 
 // number to fit design of width vs. height ratio
 const WIDTH_HEIGHT_RATIO = 4.5;
@@ -13,18 +16,20 @@ const WIDTH_HEIGHT_RATIO = 4.5;
 class ResourceChart extends React.Component {
 
   getResourceChart(resource, totalResources) {
-    let colorIndex = ResourceTypes[resource].colorIndex;
-    let resourceLabel = ResourceTypes[resource].label;
+    let colorIndex = ResourcesUtil.getResourceColor(resource);
+    let resourceLabel = ResourcesUtil.getResourceLabel(resource);
     let resourceData = [{
       name: 'Alloc',
-      colorIndex: colorIndex,
+      colorIndex,
       values: totalResources[resource]
     }];
     let resourceValue = Units.formatResource(
-      resource, _.last(totalResources[resource]).value
+      resource, Util.last(totalResources[resource]).value
     );
-    let resourceIconClasses = `icon icon-sprite icon-sprite-medium
-      icon-sprite-medium-color icon-resources-${resourceLabel.toLowerCase()}`;
+
+    let resourceKey = resourceLabel.toLowerCase();
+    let iconID = ResourceIcons[resourceKey];
+    let iconColor = ResourceColors[resourceKey];
 
     let axisConfiguration = {
       x: {hideMatch: /^0$/},
@@ -53,7 +58,7 @@ class ResourceChart extends React.Component {
         <div className="media-object-spacing-wrapper media-object-offset">
           <div className="media-object media-object-align-middle">
             <div className="media-object-item">
-              <i className={resourceIconClasses}></i>
+              <Icon color={iconColor} id={iconID} />
             </div>
             <div className="media-object-item">
               <h4 className="flush-top flush-bottom inverse">

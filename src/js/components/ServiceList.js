@@ -1,5 +1,5 @@
-const _ = require('underscore');
 import classNames from 'classnames';
+import deepEqual from 'deep-equal';
 import {List, Tooltip} from 'reactjs-components';
 const React = require('react');
 
@@ -8,7 +8,6 @@ import Config from '../config/Config';
 const HealthLabels = require('../constants/HealthLabels');
 const HealthStatus = require('../constants/HealthStatus');
 const HealthTypesDescription = require('../constants/HealthTypesDescription');
-const MarathonStore = require('../stores/MarathonStore');
 
 let ServiceList = React.createClass({
 
@@ -31,14 +30,14 @@ let ServiceList = React.createClass({
 
   shouldComponentUpdate: function (nextProps, nextState) {
     var changedState =
-      nextState !== undefined && !_.isEqual(this.state, nextState);
+      nextState !== undefined && !deepEqual(this.state, nextState);
 
-    return !_.isEqual(this.props, nextProps) || changedState;
+    return !deepEqual(this.props, nextProps) || changedState;
   },
 
   handleServiceClick: function (service, event) {
     // Open service in new window/tab if service has a web URL
-    if (service.webui_url &&
+    if (service.getWebURL && service.getWebURL() &&
       (event.ctrlKey || event.shiftKey || event.metaKey)) {
       return;
     }
@@ -46,14 +45,14 @@ let ServiceList = React.createClass({
     // Modifier key not pressed or service didn't have a web URL, open detail
     event.preventDefault();
     this.context.router.transitionTo(
-      'dashboard-panel',
-      {serviceName: service.name}
+      'services-detail',
+      {id: encodeURIComponent(service.getId())}
     );
   },
 
   getServices: function (services, healthProcessed) {
-    return _.map(services, function (service) {
-      let appHealth = MarathonStore.getServiceHealth(service.name);
+    return services.map((service) => {
+      let appHealth = service.getHealth();
       let state = HealthStatus.NA;
       let tooltipContent;
 
@@ -93,11 +92,11 @@ let ServiceList = React.createClass({
             className: 'dashboard-health-list-item-description',
             content: (
               <a key="title"
-                href={Cluster.getServiceLink(service.name)}
                 onClick={this.handleServiceClick.bind(this, service)}
+                href={Cluster.getServiceLink(service.getName())}
                 className="dashboard-health-list-item-cell h4 inverse flush-top
                   flush-bottom clickable text-overflow">
-                {service.name}
+                {service.getName()}
               </a>
             ),
             tag: 'span'
@@ -114,7 +113,7 @@ let ServiceList = React.createClass({
           }
         ]
       };
-    }, this);
+    });
   },
 
   getNoServicesMessage: function () {

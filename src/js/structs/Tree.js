@@ -1,7 +1,6 @@
 import Item from './Item';
 import List from './List';
 import StringUtil from '../utils/StringUtil';
-import Util from '../utils/Util';
 
 module.exports = class Tree extends List {
   /**
@@ -18,7 +17,7 @@ module.exports = class Tree extends List {
 
     // Replace tree like items instances of Tree
     this.list = this.list.map((item) => {
-      if ((item.items != null && Util.isArray(item.items)) &&
+      if ((item.items != null && Array.isArray(item.items)) &&
           !(item instanceof Tree)) {
         return new this.constructor(
           Object.assign({filterProperties: this.getFilterProperties()}, item)
@@ -115,38 +114,6 @@ module.exports = class Tree extends List {
     return new this.constructor(
       Object.assign({}, this, {items: this.getItems()})
     );
-  }
-
-  filterItemsByFilter(filter) {
-    let services = this.getItems();
-
-    if (filter) {
-      if (filter.ids) {
-        services = services.filter(function (service) {
-          return this.ids.indexOf(service.id) !== -1;
-        }, {ids: filter.ids});
-      }
-
-      if (filter.id) {
-        let filterProperties = Object.assign({}, this.getFilterProperties(), {
-          name: function (item) {
-            return item.getId();
-          }
-        });
-
-        services = this.filterItemsByText(filter.id, filterProperties).getItems();
-      }
-
-      if (filter.health != null && filter.health.length !== 0) {
-        services = services.filter(function (service) {
-          return filter.health.some(function (healthValue) {
-            return service.getHealth().value === parseInt(healthValue, 10);
-          });
-        });
-      }
-    }
-
-    return new this.constructor(Object.assign({}, this, {items: services}));
   }
 
   /**

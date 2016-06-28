@@ -1,5 +1,5 @@
-var _ = require('underscore');
 var classNames = require('classnames');
+import deepEqual from 'deep-equal';
 var React = require('react');
 
 import EventTypes from '../constants/EventTypes';
@@ -65,10 +65,13 @@ var NodesGridView = React.createClass({
    * @param  {Object} props
    */
   componentWillReceiveProps: function (props) {
-    let ids = _.pluck(props.services, 'id');
+    let ids = props.services.map(function (service) {
+      return service.id;
+    });
+
     let serviceColors = this.internalStorage_get().serviceColors;
 
-    if (!_.isEqual(Object.keys(serviceColors), ids)) {
+    if (!deepEqual(Object.keys(serviceColors), ids)) {
       this.computeServiceColors(props.services);
       this.computeShownServices(props.services);
     }
@@ -83,7 +86,7 @@ var NodesGridView = React.createClass({
       data.hiddenServices
     );
 
-    if (!_.isEqual(resourcesByFramework, slaves)) {
+    if (!deepEqual(resourcesByFramework, slaves)) {
       this.internalStorage_update({resourcesByFramework: slaves});
     }
   },
@@ -108,11 +111,9 @@ var NodesGridView = React.createClass({
   },
 
   computeShownServices: function (services) {
-    var hidden = _.map(services.slice(MAX_SERVICES_TO_SHOW),
-      function (service) {
-        return service.id;
-      }
-    );
+    var hidden = services.slice(MAX_SERVICES_TO_SHOW).map(function (service) {
+      return service.id;
+    });
 
     this.internalStorage_update({hiddenServices: hidden});
   },
@@ -168,8 +169,8 @@ var NodesGridView = React.createClass({
     var data = this.internalStorage_get();
 
     // Filter out inactive services
-    var items = _.filter(props.services, function (service) {
-      return activeServiceIds.indexOf(service.id) !== -1;
+    var items = props.services.filter(function (service) {
+      return activeServiceIds.includes(service.id);
     })
     // Limit to max amount
     .slice(0, MAX_SERVICES_TO_SHOW)

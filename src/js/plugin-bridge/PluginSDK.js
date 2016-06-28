@@ -1,6 +1,4 @@
-import _ from 'underscore';
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
-import {Store as fluxStore} from 'mesosphere-shared-reactjs';
 
 import {APPLICATION} from '../constants/PluginConstants';
 import {APP_STORE_CHANGE} from '../constants/EventTypes';
@@ -96,7 +94,9 @@ const initialize = function (pluginsConfig) {
 
   replaceStoreReducers();
 
-  Hooks.notifyPluginsLoaded();
+  // Allows plugins to do things before the application ever renders
+  let promises = Hooks.applyFilter('pluginsLoadedCheck', []);
+  Promise.all(promises).then(Hooks.notifyPluginsLoaded.bind(Hooks));
 };
 
 /**
@@ -108,7 +108,7 @@ const createDispatcher = function (pluginID) {
   return function (action) {
     // Inject origin namespace if simple Object
     if (action === Object(action)) {
-      action = _.extend({}, action, {__origin: pluginID});
+      action = Object.assign({}, action, {__origin: pluginID});
     }
     Store.dispatch(action);
   };
@@ -195,18 +195,8 @@ const getActionsAPI = function (SDK) {
  * @param  {Object} definition - Store definition
  * @return {Object}            - Created store
  */
-const createPluginStore = function (definition) {
-  // Extend with event handling to reduce boilerplate.
-  definition = _.extend({}, {
-    addChangeListener: function (eventName, callback) {
-      this.on(eventName, callback);
-    },
-    removeChangeListener: function (eventName, callback) {
-      this.removeListener(eventName, callback);
-    }
-  }, definition);
-
-  if (definition.mixinEvents) {
+const addStoreConfig = function (definition) {
+  if (definition) {
     if (!definition.storeID) {
       throw new Error('Must define a valid storeID to expose events');
     }
@@ -214,14 +204,10 @@ const createPluginStore = function (definition) {
       throw new Error(`Store with ID ${definition.storeID} already exists.`);
     }
     EXISTING_FLUX_STORES[definition.storeID] = true;
-    // Create Store (same as used in core application)
-    definition = fluxStore.createStore(definition);
     // Register events with StoreMixinConfig. Only import this as needed
     // because its presence will degrade test performance.
     getApplicationModuleAPI().get('StoreMixinConfig')
-      .add(definition.storeID,
-        _.extend({}, definition.mixinEvents, {store: definition})
-      );
+      .add(definition.storeID, definition);
   }
 
   return definition;
@@ -275,7 +261,7 @@ const getSDK = function (pluginID, config) {
 
   let SDK = new PluginSDKStruct({
     config: config || {},
-    createStore: createPluginStore,
+    addStoreConfig,
     dispatch: createDispatcher(pluginID),
     Store: StoreAPI,
     Hooks,

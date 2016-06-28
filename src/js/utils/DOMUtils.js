@@ -1,4 +1,5 @@
-var _ = require('underscore');
+const HEIGHT_ATTRIBUTES = ['paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth'];
+const WIDTH_ATTRIBUTES = ['paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth'];
 
 var DOMUtils = {
   appendScript: function (el, code) {
@@ -28,21 +29,19 @@ var DOMUtils = {
 
     var computeInnerBound = function (acc, key) {
       var val = parseInt(compstyle[key], 10);
-      if (_.isNaN(val)) {
+      if (Number.isNaN(val)) {
         return acc;
       } else {
         return acc - val;
       }
     };
 
-    var width = _.foldl(
-      ['paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth'],
+    var width = WIDTH_ATTRIBUTES.reduce(
       computeInnerBound,
       obj.offsetWidth
     );
 
-    var height = _.foldl(
-      ['paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth'],
+    var height = HEIGHT_ATTRIBUTES.reduce(
       computeInnerBound,
       obj.offsetHeight
     );
@@ -128,8 +127,16 @@ var DOMUtils = {
       top + height / 2
     );
 
+    // If elAtPoint is null, then the element is off the screen. We return true
+    // here.
+    if (elAtPoint == null) {
+      return true;
+    }
+
     // We need to also use #contains because the elAtPoint may be a child.
-    return el === elAtPoint || el.contains(elAtPoint);
+    // We also need to check if elAtPoint contains el because it might select
+    // the parent even if the el is showing.
+    return el === elAtPoint || el.contains(elAtPoint) || elAtPoint.contains(el);
   },
 
   getDistanceFromTopOfParent: function (el) {

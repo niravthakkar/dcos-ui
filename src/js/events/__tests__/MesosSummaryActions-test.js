@@ -1,11 +1,10 @@
-var _ = require('underscore');
-
 jest.dontMock('../../constants/ActionTypes');
 jest.dontMock('../AppDispatcher');
 jest.dontMock('../../config/Config');
 jest.dontMock('../MesosSummaryActions');
-jest.dontMock('../../utils/RequestUtil');
 jest.dontMock('../../constants/TimeScales');
+
+import {Hooks} from 'PluginSDK';
 
 jest.setMock('react-router', {
   HashLocation: {
@@ -15,6 +14,7 @@ jest.setMock('react-router', {
 });
 
 import PluginTestUtils from 'PluginTestUtils';
+import {RequestUtil} from 'mesosphere-shared-reactjs';
 
 PluginTestUtils.loadPluginsByName({
   tracking: {enabled: true}
@@ -23,14 +23,15 @@ PluginTestUtils.loadPluginsByName({
 var AppDispatcher = require('../AppDispatcher');
 var Config = require('../../config/Config');
 var MesosSummaryActions = require('../MesosSummaryActions');
-var RequestUtil = require('../../utils/RequestUtil');
 var TimeScales = require('../../constants/TimeScales');
 
 global.analytics = {
   initialized: true,
-  track: _.noop,
-  log: _.noop
+  track: function () {},
+  log: function () {}
 };
+
+Hooks.addFilter('hasCapability', function () { return true; });
 
 describe('Mesos State Actions', function () {
 

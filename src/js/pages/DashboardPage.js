@@ -1,15 +1,14 @@
-var _ = require('underscore');
 import {Link} from 'react-router';
 import React from 'react';
 import {StoreMixin} from 'mesosphere-shared-reactjs';
 
 import ComponentList from '../components/ComponentList';
 import Config from '../config/Config';
-import EventTypes from '../constants/EventTypes';
+import DCOSStore from '../stores/DCOSStore';
 var HealthSorting = require('../constants/HealthSorting');
 var HostTimeSeriesChart = require('../components/charts/HostTimeSeriesChart');
+import Icon from '../components/Icon';
 var InternalStorageMixin = require('../mixins/InternalStorageMixin');
-var MarathonStore = require('../stores/MarathonStore');
 var MesosSummaryStore = require('../stores/MesosSummaryStore');
 var Page = require('../components/Page');
 var Panel = require('../components/Panel');
@@ -18,7 +17,6 @@ var ServiceList = require('../components/ServiceList');
 import StringUtil from '../utils/StringUtil';
 var TasksChart = require('../components/charts/TasksChart');
 var SidebarActions = require('../events/SidebarActions');
-import SidePanels from '../components/SidePanels';
 import UnitHealthStore from '../stores/UnitHealthStore';
 
 function getMesosState() {
@@ -26,14 +24,12 @@ function getMesosState() {
   let last = states.lastSuccessful();
 
   return {
-    hostsCount: states.getActiveNodesByState(),
-    refreshRate: Config.getRefreshRate(),
-    services: last.getServiceList(),
+    activeNodes: states.getActiveNodesByState(),
+    hostCount: last.getActiveSlaves().length,
     usedResourcesStates: states.getResourceStatesForNodeIDs(),
     usedResources: last.getSlaveUsedResources(),
-    totalResources: last.getSlaveTotalResources(),
-    activeSlaves: last.getActiveSlaves(),
-    statesProcessed: MesosSummaryStore.get('statesProcessed')
+    tasks: last.getServiceList().sumTaskStates(),
+    totalResources: last.getSlaveTotalResources()
   };
 }
 
@@ -46,7 +42,7 @@ var DashboardPage = React.createClass({
   statics: {
     routeConfig: {
       label: 'Dashboard',
-      icon: 'dashboard',
+      icon: <Icon id="gauge" />,
       matches: /^\/dashboard/
     },
 
@@ -72,10 +68,9 @@ var DashboardPage = React.createClass({
 
   componentWillMount: function () {
     this.store_listeners = [
-      {
-        name: 'unitHealth',
-        events: ['success', 'error']
-      }
+      {name: 'dcos', events: ['change']},
+      {name: 'summary', events: ['success', 'error']},
+      {name: 'unitHealth', events: ['success', 'error']}
     ];
 
     this.internalStorage_set({
@@ -85,78 +80,25 @@ var DashboardPage = React.createClass({
     this.internalStorage_update(getMesosState());
   },
 
-  componentDidMount: function () {
-    MesosSummaryStore.addChangeListener(
-      EventTypes.MESOS_SUMMARY_CHANGE,
-      this.onMesosStateChange
-    );
-    MesosSummaryStore.addChangeListener(
-      EventTypes.MESOS_SUMMARY_REQUEST_ERROR,
-      this.onMesosStateChange
-    );
-    MarathonStore.addChangeListener(
-      EventTypes.MARATHON_APPS_CHANGE,
-      this.onMarathonStateChange
-    );
-
-    this.internalStorage_update({
-      openServicePanel: this.props.params.serviceName != null,
-      openTaskPanel: this.props.params.taskID != null
-    });
-  },
-
-  componentWillReceiveProps: function (nextProps) {
-    this.internalStorage_update({
-      openServicePanel: nextProps.params.serviceName != null,
-      openTaskPanel: nextProps.params.taskID != null
-    });
-  },
-
-  componentWillUnmount: function () {
-    MesosSummaryStore.removeChangeListener(
-      EventTypes.MESOS_SUMMARY_CHANGE,
-      this.onMesosStateChange
-    );
-    MesosSummaryStore.removeChangeListener(
-      EventTypes.MESOS_SUMMARY_REQUEST_ERROR,
-      this.onMesosStateChange
-    );
-    MarathonStore.removeChangeListener(
-      EventTypes.MARATHON_APPS_CHANGE,
-      this.onMarathonStateChange
-    );
-  },
-
-  onMarathonStateChange: function () {
-    this.forceUpdate();
-  },
-
-  onMesosStateChange: function () {
+  onSummaryStoreError: function () {
     this.internalStorage_update(getMesosState());
-    this.forceUpdate();
   },
 
-  getServicesList: function (services) {
-    // Pick out only the data we need.
-    let servicesMap = services.map(function (service) {
-      return {
-        name: service.get('name'),
-        webui_url: service.get('webui_url'),
-        TASK_RUNNING: service.get('TASK_RUNNING'),
-        id: service.get('id')
-      };
+  onSummaryStoreSuccess: function () {
+    this.internalStorage_update(getMesosState());
+  },
+
+  getServicesList: function () {
+    let services = DCOSStore.serviceTree.getServices().getItems();
+
+    let sortedServices = services.sort(function (service, other) {
+      let health = service.getHealth();
+      let otherHealth = other.getHealth();
+
+      return HealthSorting[health.key] - HealthSorting[otherHealth.key];
     });
 
-    let sortedServices = _.sortBy(servicesMap, function (service) {
-      let health = MarathonStore.getServiceHealth(service.name);
-      if (health && health.key) {
-        return HealthSorting[health.key];
-      } else {
-        return HealthSorting.NA;
-      }
-    });
-
-    return _.first(sortedServices, this.props.servicesListLength);
+    return sortedServices.slice(0, this.props.servicesListLength);
   },
 
   getUnits: function () {
@@ -180,12 +122,11 @@ var DashboardPage = React.createClass({
   },
 
   getViewAllServicesBtn: function () {
-    var data = this.internalStorage_get();
-    let servicesCount = data.services.getItems().length;
+    let servicesCount = DCOSStore.serviceTree.getServices().getItems().length;
     if (!servicesCount) {
       return null;
-    }
 
+    }
     var textContent = 'View all ';
     if (servicesCount > this.props.servicesListLength) {
       textContent += servicesCount + ' ';
@@ -193,7 +134,7 @@ var DashboardPage = React.createClass({
     textContent += 'Services';
 
     return (
-      <Link to="services"
+      <Link to="services-page"
         className="button button-wide button-inverse more-button">
         {textContent}
       </Link>
@@ -209,8 +150,7 @@ var DashboardPage = React.createClass({
   },
 
   render: function () {
-    let data = this.internalStorage_get();
-    let appsProcessed = MarathonStore.hasProcessedApps();
+    var data = this.internalStorage_get();
 
     return (
       <Page title="Dashboard">
@@ -226,7 +166,7 @@ var DashboardPage = React.createClass({
                 usedResources={data.usedResources}
                 totalResources={data.totalResources}
                 mode="cpus"
-                refreshRate={data.refreshRate} />
+                refreshRate={Config.getRefreshRate()} />
             </Panel>
           </div>
           <div className="grid-item column-mini-6 column-large-4 column-x-large-3">
@@ -240,7 +180,7 @@ var DashboardPage = React.createClass({
                 usedResources={data.usedResources}
                 totalResources={data.totalResources}
                 mode="mem"
-                refreshRate={data.refreshRate} />
+                refreshRate={Config.getRefreshRate()} />
             </Panel>
           </div>
           <div className="grid-item column-mini-6 column-large-4 column-x-large-3">
@@ -254,7 +194,7 @@ var DashboardPage = React.createClass({
                 usedResources={data.usedResources}
                 totalResources={data.totalResources}
                 mode="disk"
-                refreshRate={data.refreshRate} />
+                refreshRate={Config.getRefreshRate()} />
             </Panel>
           </div>
           <div className="grid-item column-mini-6 column-large-4 column-x-large-3">
@@ -263,8 +203,8 @@ var DashboardPage = React.createClass({
               heading={this.getHeading('Services Health')}
               headingClass="panel-header panel-header-bottom-border inverse short-top short-bottom">
               <ServiceList
-                healthProcessed={appsProcessed}
-                services={this.getServicesList(data.services.getItems())} />
+                healthProcessed={DCOSStore.dataProcessed}
+                services={this.getServicesList()} />
               {this.getViewAllServicesBtn()}
             </Panel>
           </div>
@@ -273,7 +213,7 @@ var DashboardPage = React.createClass({
               className="panel panel-inverse dashboard-panel"
               heading={this.getHeading('Tasks')}
               headingClass="panel-header panel-header-bottom-border inverse short-top short-bottom">
-              <TasksChart tasks={data.services.sumTaskStates()} />
+              <TasksChart tasks={data.tasks} />
             </Panel>
           </div>
           <div className="grid-item column-mini-6 column-large-4 column-x-large-3">
@@ -293,15 +233,12 @@ var DashboardPage = React.createClass({
               heading={this.getHeading('Nodes')}
               headingClass="panel-header panel-header-bottom-border inverse short-top short-bottom">
               <HostTimeSeriesChart
-                data={data.hostsCount}
-                currentValue={data.activeSlaves.length}
-                refreshRate={data.refreshRate} />
+                data={data.activeNodes}
+                currentValue={data.hostCount}
+                refreshRate={Config.getRefreshRate()} />
             </Panel>
           </div>
         </div>
-        <SidePanels
-          params={this.props.params}
-          openedPage="dashboard" />
       </Page>
     );
   }

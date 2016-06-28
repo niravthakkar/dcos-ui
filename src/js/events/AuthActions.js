@@ -1,4 +1,4 @@
-import cookie from 'cookie';
+import {RequestUtil} from 'mesosphere-shared-reactjs';
 
 import {
   REQUEST_LOGIN_SUCCESS,
@@ -6,11 +6,8 @@ import {
   REQUEST_LOGOUT_SUCCESS,
   REQUEST_LOGOUT_ERROR
 } from '../constants/ActionTypes';
-
 import AppDispatcher from '../events/AppDispatcher';
-import AuthConstants from '../constants/AuthConstants';
 import Config from '../config/Config';
-import RequestUtil from '../utils/RequestUtil';
 
 const AuthActions = {
   login: function (credentials) {
@@ -19,14 +16,6 @@ const AuthActions = {
       method: 'POST',
       data: credentials,
       success: function () {
-        // Overrides for integration testing
-        if (Config.environment === 'testing') {
-          global.document.cookie =
-            cookie.serialize(AuthConstants.userCookieKey,
-              'eyJ1aWQiOiJqb2UiLCJkZXNjcmlwdGlvbiI6IkpvZSBEb2UifQ=='
-            );
-        }
-
         AppDispatcher.handleServerAction({
           type: REQUEST_LOGIN_SUCCESS
         });

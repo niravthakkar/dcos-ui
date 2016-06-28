@@ -1,4 +1,19 @@
+let uniqueIDMap = {};
+
 const Util = {
+
+  /**
+   * Give a unique ID for this session.
+   * @param {string} id              Namespace for the unique ids.
+   * @return {Integer}               A unique id.
+   */
+  uniqueID: function (id) {
+    if (!uniqueIDMap.hasOwnProperty(id)) {
+      uniqueIDMap[id] = 0;
+    }
+
+    return uniqueIDMap[id]++;
+  },
 
   /**
    * Copies an object, omitting blacklisted keys.
@@ -44,14 +59,6 @@ const Util = {
       }
     }
     return -1;
-  },
-
-  /**
-   * @param  {Object} arg to determine whether is an array or not
-   * @return {Boolean} returns whether given arg is an array or not
-   */
-  isArray: function (arg) {
-    return Object.prototype.toString.call(arg) === '[object Array]';
   },
 
   getLocaleCompareSortFn: function (prop) {
@@ -139,21 +146,38 @@ const Util = {
   },
 
   /**
-   * @param {Array}    array - An array to search in.
-   * @param {Function} func  - Function testing each array element.
-   * @return {anything}      - Returns first array element that passes
-   *                           func truth test. Otherwise returns undefined.
+   * Check if item is an object.
+   *
+   * @param  {Object} obj Item to check if is an object.
+   * @return {Boolean} Whether the argument is an object.
    */
-  find: function (array, func) {
-    let length = array.length;
+  isObject: function (obj) {
+    return obj && obj.toString && obj.toString() === '[object Object]';
+  },
 
-    for (let i = 0; i < length; i++) {
-      if (func(array[i]) === true) {
-        return array[i];
-      }
+  /**
+   * Deep copy an object.
+   *
+   * @param  {Object} obj Object to deep copy.
+   * @return {Object} Copy of obj.
+   */
+  deepCopy: function (obj) {
+    let copy;
+    if (Array.isArray(obj)) {
+      copy = obj.slice(); // shallow copy
+    } else if (this.isObject(obj)) {
+      copy = Object.assign({}, obj);
     }
 
-    return undefined;
+    if (copy != null) {
+      Object.keys(copy).forEach((key) => {
+        copy[key] = this.deepCopy(copy[key]);
+      });
+    } else {
+      copy = obj;
+    }
+
+    return copy;
   }
 };
 

@@ -1,5 +1,4 @@
-var _ = require('underscore');
-import {Store} from 'mesosphere-shared-reactjs';
+import GetSetBaseStore from './GetSetBaseStore';
 
 var AppDispatcher = require('../events/AppDispatcher');
 import ActionTypes from '../constants/ActionTypes';
@@ -10,9 +9,9 @@ import {
   MESOS_STATE_REQUEST_ERROR,
   VISIBILITY_CHANGE
 } from '../constants/EventTypes';
-var GetSetMixin = require('../mixins/GetSetMixin');
 var MesosStateActions = require('../events/MesosStateActions');
 var MesosStateUtil = require('../utils/MesosStateUtil');
+import Task from '../structs/Task';
 import VisibilityStore from './VisibilityStore';
 
 var requestInterval = null;
@@ -33,65 +32,101 @@ function stopPolling() {
   }
 }
 
-function handleInactiveChange() {
-  let isInactive = VisibilityStore.get('isInactive');
-  if (isInactive) {
-    stopPolling();
+class MesosStateStore extends GetSetBaseStore {
+  constructor() {
+    super(...arguments);
+
+    this.getSet_data = {
+      lastMesosState: {}
+    };
+
+    this.dispatcherIndex = AppDispatcher.register((payload) => {
+      if (payload.source !== ActionTypes.SERVER_ACTION) {
+        return false;
+      }
+
+      var action = payload.action;
+      switch (action.type) {
+        case ActionTypes.REQUEST_MESOS_STATE_SUCCESS:
+          this.processStateSuccess(action.data);
+          break;
+        case ActionTypes.REQUEST_MESOS_STATE_ERROR:
+          this.processStateError();
+          break;
+        case ActionTypes.REQUEST_MESOS_STATE_ONGOING:
+          this.processOngoingRequest();
+          break;
+      }
+
+      return true;
+    });
+
+    VisibilityStore.addChangeListener(
+      VISIBILITY_CHANGE,
+      this.onVisibilityStoreChange.bind(this)
+    );
   }
 
-  if (!isInactive && MesosStateStore.shouldPoll()) {
-    startPolling();
-  }
-}
-
-VisibilityStore.addChangeListener(VISIBILITY_CHANGE, handleInactiveChange);
-
-var MesosStateStore = Store.createStore({
-  storeID: 'state',
-
-  mixins: [GetSetMixin],
-
-  getSet_data: {
-    lastMesosState: {}
-  },
-
-  addChangeListener: function (eventName, callback) {
+  addChangeListener(eventName, callback) {
     this.on(eventName, callback);
 
     if (this.shouldPoll()) {
       startPolling();
     }
-  },
+  }
 
-  removeChangeListener: function (eventName, callback) {
+  removeChangeListener(eventName, callback) {
     this.removeListener(eventName, callback);
 
     if (!this.shouldPoll()) {
       stopPolling();
     }
-  },
+  }
 
-  shouldPoll: function () {
-    return !_.isEmpty(this.listeners(MESOS_STATE_CHANGE));
-  },
+  onVisibilityStoreChange() {
+    if (!VisibilityStore.isInactive() && this.shouldPoll()) {
+      startPolling();
+      return;
+    }
 
-  getHostResourcesByFramework: function (filter) {
+    stopPolling();
+  }
+
+  shouldPoll() {
+    return !!this.listeners(MESOS_STATE_CHANGE).length;
+  }
+
+  getHostResourcesByFramework(filter) {
     return MesosStateUtil.getHostResourcesByFramework(
-      MesosStateStore.get('lastMesosState'), filter
+      this.get('lastMesosState'), filter
     );
-  },
+  }
 
-  getServiceFromName: function (name) {
+  getServiceFromName(name) {
     let services = this.get('lastMesosState').frameworks;
-    return _.findWhere(services, {name});
-  },
 
-  getNodeFromID: function (id) {
+    if (services) {
+      return services.find(function (service) {
+        return service.name === name;
+      });
+    }
+
+    return null;
+  }
+
+  getNodeFromID(id) {
     let nodes = this.get('lastMesosState').slaves;
-    return _.findWhere(nodes, {id});
-  },
 
-  getTasksFromNodeID: function (nodeID) {
+    if (nodes) {
+      return nodes.find(function (node) {
+        return node.id === id;
+      });
+    }
+
+    return null;
+  }
+
+  getTasksFromNodeID(nodeID) {
     let services = this.get('lastMesosState').frameworks || [];
     let memberTasks = {};
 
@@ -108,39 +143,53 @@ var MesosStateStore = Store.createStore({
       });
     });
 
-    return _.values(memberTasks);
-  },
+    return Object.values(memberTasks);
+  }
 
-  getTaskFromTaskID: function (taskID) {
+  getTaskFromTaskID(taskID) {
     let services = this.get('lastMesosState').frameworks;
     let foundTask = null;
 
-    _.some(services, function (service) {
+    services.some(function (service) {
       let tasks = service.tasks.concat(service.completed_tasks);
 
-      return _.some(tasks, function (task) {
-        let equalTask = task.id === taskID;
-
-        if (equalTask) {
-          foundTask = task;
-        }
-
-        return equalTask;
+      foundTask = tasks.find(function (task) {
+        return task.id === taskID;
       });
+
+      return foundTask;
     });
 
-    return foundTask;
-  },
-
-  getSchedulerTaskFromServiceName: function (serviceName) {
-    let frameworks = this.get('lastMesosState').frameworks;
-    let framework = _.findWhere(frameworks, {name: 'marathon'});
-    if (!framework) {
+    if (foundTask == null) {
       return null;
     }
 
-    let result = _.find(framework.tasks, function (task) {
-      let frameworkName = _.find(task.labels, function (label) {
+    return new Task(foundTask);
+  }
+
+  getSchedulerTaskFromServiceName(serviceName) {
+    let frameworks = this.get('lastMesosState').frameworks;
+
+    if (!frameworks) {
+      return null;
+    }
+
+    let framework = frameworks.find(function (framework) {
+      return framework.name.toLowerCase() === 'marathon';
+    });
+
+    if (!framework || !framework.tasks) {
+      return null;
+    }
+
+    let result = framework.tasks.find(function (task) {
+      let labels = task.labels;
+
+      if (!labels) {
+        return false;
+      }
+
+      let frameworkName = labels.find(function (label) {
         return label.key === 'DCOS_PACKAGE_FRAMEWORK_NAME';
       });
 
@@ -148,11 +197,18 @@ var MesosStateStore = Store.createStore({
     });
 
     return result;
-  },
+  }
 
-  getTasksFromServiceName: function (serviceName) {
+  getTasksFromServiceName(serviceName) {
     let frameworks = this.get('lastMesosState').frameworks;
-    let framework = _.findWhere(frameworks, {name: serviceName});
+
+    if (!frameworks) {
+      return null;
+    }
+
+    let framework = frameworks.find(function (framework) {
+      return framework.name === serviceName;
+    });
 
     if (framework) {
       let activeTasks = framework.tasks || [];
@@ -162,9 +218,9 @@ var MesosStateStore = Store.createStore({
     }
 
     return [];
-  },
+  }
 
-  getTasksByServiceId: function (serviceId) {
+  getTasksByServiceId(serviceId) {
     // Convert serviceId to Mesos service name
     let mesosServiceName = serviceId.split('/').slice(1).reverse().join('.');
     let frameworks = this.get('lastMesosState').frameworks;
@@ -177,7 +233,7 @@ var MesosStateStore = Store.createStore({
     // Marathon tasks. This will give you a list of framework tasks including
     // the scheduler tasks or a list of Marathon application tasks.
     return frameworks.reduce(function (serviceTasks, framework) {
-      let {tasks=[], completed_tasks={}, name} = framework;
+      let {tasks = [], completed_tasks = {}, name} = framework;
 
       if (name === mesosServiceName) {
         return serviceTasks.concat(tasks, completed_tasks);
@@ -193,43 +249,33 @@ var MesosStateStore = Store.createStore({
 
       return serviceTasks;
     }, []);
-  },
+  }
 
-  processStateSuccess: function (lastMesosState) {
+  getTasksFromVirtualNetworkName(overlayName) {
+    return MesosStateUtil.getTasksFromVirtualNetworkName(
+      this.get('lastMesosState'),
+      overlayName
+    );
+  }
+
+  processStateSuccess(lastMesosState) {
     CompositeState.addState(lastMesosState);
     this.set({lastMesosState});
     this.emit(MESOS_STATE_CHANGE);
-  },
+  }
 
-  processStateError: function () {
+  processStateError() {
     this.emit(MESOS_STATE_REQUEST_ERROR);
-  },
+  }
 
-  processOngoingRequest: function () {
+  processOngoingRequest() {
     // Handle ongoing request here.
-  },
+  }
 
-  dispatcherIndex: AppDispatcher.register(function (payload) {
-    if (payload.source !== ActionTypes.SERVER_ACTION) {
-      return false;
-    }
+  get storeID() {
+    return 'state';
+  }
 
-    var action = payload.action;
-    switch (action.type) {
-      case ActionTypes.REQUEST_MESOS_STATE_SUCCESS:
-        MesosStateStore.processStateSuccess(action.data);
-        break;
-      case ActionTypes.REQUEST_MESOS_STATE_ERROR:
-        MesosStateStore.processStateError();
-        break;
-      case ActionTypes.REQUEST_MESOS_STATE_ONGOING:
-        MesosStateStore.processOngoingRequest();
-        break;
-    }
+}
 
-    return true;
-  })
-
-});
-
-module.exports = MesosStateStore;
+module.exports = new MesosStateStore();

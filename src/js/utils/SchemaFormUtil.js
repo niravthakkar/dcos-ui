@@ -1,5 +1,7 @@
-import _ from 'underscore';
 import tv4 from 'tv4';
+
+import FormUtil from './FormUtil';
+import Util from './Util';
 
 function filteredPaths(combinedPath) {
   return combinedPath.split('/').filter(function (path) {
@@ -7,9 +9,49 @@ function filteredPaths(combinedPath) {
   });
 }
 
-function setDefinitionValue(thingToSet, definition) {
+function setDefinitionValue(thingToSet, definition, renderRemove) {
   let {path, value} = thingToSet;
   let definitionToSet = SchemaFormUtil.getDefinitionFromPath(definition, path);
+
+  if (Array.isArray(value) && value.length !== 0) {
+    let prop = path[path.length - 1];
+
+    let firstIndex = 0;
+    definitionToSet.definition.find(function (field, i) {
+      if (FormUtil.isFieldInstanceOfProp(prop, field)) {
+        firstIndex = i;
+        return true;
+      }
+
+      return false;
+    });
+
+    FormUtil.removePropID(definitionToSet.definition, prop);
+    value.forEach(function (item) {
+      let propID = Util.uniqueID(prop);
+      let instanceDefinition = FormUtil.getMultipleFieldDefinition(
+        prop,
+        propID,
+        definitionToSet.definition.itemShapes[prop].definition,
+        item
+      );
+
+      if (definitionToSet.definition.itemShapes[prop].filterProperties) {
+        definitionToSet.definition.itemShapes[prop]
+          .filterProperties(item, instanceDefinition);
+      }
+
+      let arrayAction = 'push';
+      if (definitionToSet.definition.itemShapes[prop].deleteButtonTop) {
+        arrayAction = 'unshift';
+      }
+
+      instanceDefinition[arrayAction](
+        renderRemove(definitionToSet.definition, prop, propID)
+      );
+      definitionToSet.definition.splice(firstIndex++, 0, instanceDefinition);
+    });
+  }
 
   definitionToSet.value = value;
   definitionToSet.startValue = value;
@@ -18,6 +60,15 @@ function setDefinitionValue(thingToSet, definition) {
 function getThingsToSet(model, path) {
   path = path || [];
   let thingsToSet = [];
+
+  if (Array.isArray(model)) {
+    thingsToSet.push({
+      path,
+      value: model
+    });
+
+    return thingsToSet;
+  }
 
   Object.keys(model).forEach(function (key) {
     let pathCopy = path.concat([key]);
@@ -77,13 +128,13 @@ let SchemaFormUtil = {
         return;
       }
 
-      let nextDefinition = _.find(
-        definition.definition,
-        function (definitionField) {
-          return definitionField.name === path
-            || definitionField.title === path;
-        }
-      );
+      let nextDefinition = Array.prototype
+        .concat.apply([], definition.definition).find(
+          function (definitionField) {
+            return definitionField.name === path
+              || definitionField.title === path;
+          }
+        );
 
       if (nextDefinition) {
         definition = nextDefinition;
@@ -122,14 +173,14 @@ let SchemaFormUtil = {
       }
     });
 
-    return newModel;
+    return FormUtil.modelToCombinedProps(newModel);
   },
 
-  mergeModelIntoDefinition(model, definition) {
+  mergeModelIntoDefinition(model, definition, renderRemove) {
     let thingsToSet = getThingsToSet(model);
 
     thingsToSet.forEach(function (thingToSet) {
-      setDefinitionValue(thingToSet, definition);
+      setDefinitionValue(thingToSet, definition, renderRemove);
     });
   },
 
@@ -154,7 +205,8 @@ let SchemaFormUtil = {
 
   validateModelWithSchema(model, schema) {
     let result = tv4.validateMultiple(model, schema);
-    if (result.valid) {
+
+    if (result == null || result.valid) {
       return [];
     }
 

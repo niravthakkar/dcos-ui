@@ -17,8 +17,16 @@ const DateUtil = {
     return dateStr;
   },
 
-  msToRelativeTime: function (ms) {
-    return moment.unix(ms).fromNow();
+  msToRelativeTime: function (ms, suppressRelativeTime = false) {
+    return moment(ms).fromNow(suppressRelativeTime);
+  },
+
+   /**
+    * @param  {Date} date Date object to turn into relative time.
+    * @return {String} The relative time.
+    */
+  dateToRelativeTime: function (date) {
+    return moment(date.getTime()).fromNow()
   },
 
   formatAMPM: function (date) {
@@ -41,6 +49,18 @@ const DateUtil = {
 
     var strTime = `${hours}:${minutes} ${meridiem}`;
     return strTime;
+  },
+
+  strToMs: function (str) {
+    if (str == null) {
+      return null;
+    }
+
+    return moment(str).valueOf();
+  },
+
+  getDuration: function (time, formatKey = 'seconds') {
+    return moment.duration(time, formatKey).humanize();
   }
 };
 

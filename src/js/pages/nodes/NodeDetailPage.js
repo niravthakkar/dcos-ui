@@ -6,17 +6,18 @@ import React from 'react';
 import {RouteHandler} from 'react-router';
 import {StoreMixin} from 'mesosphere-shared-reactjs';
 
+import Breadcrumbs from '../../components/Breadcrumbs';
 import CompositeState from '../../structs/CompositeState';
 import DateUtil from '../../utils/DateUtil';
 import DescriptionList from '../../components/DescriptionList';
 import HealthTab from '../../components/HealthTab';
-import IconChevron from '../../components/icons/IconChevron';
+import Icon from '../../components/Icon';
 import InternalStorageMixin from '../../mixins/InternalStorageMixin';
 import MesosSummaryStore from '../../stores/MesosSummaryStore';
 import MesosStateStore from '../../stores/MesosStateStore';
 import NodeHealthStore from '../../stores/NodeHealthStore';
 import Page from '../../components/Page';
-import SidePanels from '../../components/SidePanels';
+import PageHeader from '../../components/PageHeader';
 import StringUtil from '../../utils/StringUtil';
 import ResourceChart from '../../components/charts/ResourceChart';
 import TabsMixin from '../../mixins/TabsMixin';
@@ -63,26 +64,13 @@ class NodeDetailPage extends mixin(InternalStorageMixin, TabsMixin, StoreMixin) 
     }
   }
 
-  getBasicInfo(node) {
-    return (
-      <div className="detail-page-header">
-        <h1 className="inverse flush">
-          {node.hostname}
-        </h1>
-        {this.getSubHeader(node)}
-      </div>
-    );
-  }
-
   getBreadcrumbs(nodeID) {
     return (
       <h5 className="inverse">
         <Link className="headline emphasize" to="nodes">
           Nodes
         </Link>
-        <IconChevron
-          className="icon icon-micro"
-          isForward={true}/>
+        <Icon family="small" id="caret-right" size="small" />
         {nodeID}
       </h5>
     );
@@ -204,46 +192,56 @@ class NodeDetailPage extends mixin(InternalStorageMixin, TabsMixin, StoreMixin) 
         <DescriptionList
           className="container container-fluid flush container-pod container-pod-super-short flush-top"
           hash={node.attributes}
-          headline="Attributes"
-          headlineClassName="flush-top inverse" />
+          headline="Attributes" />
       </div>
     );
   }
 
   render() {
     let node = this.internalStorage_get().node;
+    let {params} = this.props;
 
+    // TODO (DCOS-7580): Clean up NodeDetailPage routed and unrouted views
     if (!node) {
       return (
         <Page title="Nodes">
-          {this.getNotFound(this.props.params.nodeID)}
+          {this.getNotFound(params.nodeID)}
         </Page>
       );
     }
 
+    if (params.taskID || params.volumeID) {
+      // Make sure to grow when logs are displayed
+      let routes = this.context.router.getCurrentRoutes();
+
+      return (
+        <Page
+          dontScroll={routes[routes.length - 1].dontScroll}
+          title="Nodes">
+          <RouteHandler />
+        </Page>
+      );
+    }
+
+    let tabs = (
+      <ul className="tabs list-inline flush-bottom container-pod
+        container-pod-short-top inverse">
+        {this.tabs_getUnroutedTabs()}
+      </ul>
+    );
+
     return (
       <Page title="Nodes">
-        <div className="container container-fluid flush breadcrumbs">
-          {this.getBreadcrumbs(node.get('hostname'))}
-        </div>
-        <div>
-          <div className="container container-fluid container-pod container-pod-short container-pod-super-short-top flush">
-            {this.getBasicInfo(node)}
-            <div className="container-pod container-pod-short">
-              {this.getCharts('Node', node)}
-            </div>
-            <div className="container-pod container-pod-divider-bottom container-pod-divider-inverse container-pod-divider-bottom-align-right flush-top flush-bottom">
-              <ul className="tabs list-inline flush-bottom inverse">
-                {this.tabs_getUnroutedTabs()}
-              </ul>
-            </div>
+        <Breadcrumbs />
+        <PageHeader
+          navigationTabs={tabs}
+          subTitle={this.getSubHeader(node)}
+          title={node.hostname}>
+          <div className="container-pod container-pod-short flush-bottom">
+            {this.getCharts('Node', node)}
           </div>
-          {this.tabs_getTabView()}
-          <SidePanels
-            params={this.props.params}
-            openedPage="nodes" />
-          <RouteHandler />
-        </div>
+        </PageHeader>
+        {this.tabs_getTabView()}
       </Page>
     );
   }

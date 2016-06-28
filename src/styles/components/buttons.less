@@ -88,11 +88,16 @@ components/buttons.less
 
   .button-collection {
 
+    & > .dropdown {
+      margin-right: @button-collection-spacing;
+      margin-bottom: @button-collection-spacing;
+      vertical-align: middle;
+    }
+
     &.button-collection-stacked {
 
-      .button,
-      .button-collection-spacing {
-        margin-bottom: @base-spacing-unit * 1/2;
+      .button {
+        margin-right: 0;
 
         &:last-child {
           margin-bottom: 0;
@@ -143,9 +148,18 @@ components/buttons.less
 
   .button-align-content {
 
+    align-items: center;
     display: flex;
     flex-flow: row nowrap;
+
+  }
+
+  .button-split-content {
+
     align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
 
   }
 
@@ -174,6 +188,14 @@ components/buttons.less
 
   @media (min-width: @screen-mini) {
 
+    .button-collection {
+
+      & > .dropdown {
+        margin-right: @button-collection-spacing-screen-mini;
+        margin-bottom: @button-collection-spacing-screen-mini;
+      }
+    }
+
   }
 
 }
@@ -194,6 +216,14 @@ components/buttons.less
   ----------------------------------------------------------------------------- */
 
   @media (min-width: @screen-small) {
+
+    .button-collection {
+
+      & > .dropdown {
+        margin-right: @button-collection-spacing-screen-small;
+        margin-bottom: @button-collection-spacing-screen-small;
+      }
+    }
 
     /* -----------------------------------------------------------------------------
     --------------------------------------------------------------------------------
@@ -240,6 +270,14 @@ components/buttons.less
 
   @media (min-width: @screen-medium) {
 
+    .button-collection {
+
+      & > .dropdown {
+        margin-right: @button-collection-spacing-screen-medium;
+        margin-bottom: @button-collection-spacing-screen-medium;
+      }
+    }
+
     /* -----------------------------------------------------------------------------
     --------------------------------------------------------------------------------
 
@@ -284,6 +322,14 @@ components/buttons.less
   ----------------------------------------------------------------------------- */
 
   @media (min-width: @screen-large) {
+
+    .button-collection {
+
+      & > .dropdown {
+        margin-right: @button-collection-spacing-screen-large;
+        margin-bottom: @button-collection-spacing-screen-large;
+      }
+    }
 
     /* -----------------------------------------------------------------------------
     --------------------------------------------------------------------------------

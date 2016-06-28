@@ -1,6 +1,5 @@
 import Item from './Item';
 import StringUtil from '../utils/StringUtil';
-import Util from '../utils/Util';
 
 /**
  * Cast an item to the List's type, if specified.
@@ -36,10 +35,15 @@ module.exports = class List {
     this.list = [];
 
     if (options.items) {
-      if (!Util.isArray(options.items)) {
+      if (!Array.isArray(options.items)) {
         throw new Error('Expected an array.');
       }
-      this.list = options.items.map(cast.bind(this));
+      if (this.constructor.type != null) {
+        this.list = options.items.map(cast.bind(this));
+      } else {
+        this.list = options.items;
+      }
+
     }
 
     this.filterProperties = options.filterProperties || {};

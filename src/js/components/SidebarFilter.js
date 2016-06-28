@@ -144,8 +144,8 @@ class SidebarFilter extends mixin(QueryParamsMixin) {
       let checked = selectedNodes.indexOf(value) > -1;
 
       let labelClassSet = classNames(
-        'side-list-item form-row-element form-element-checkbox ' +
-        'inverse row row-flex flush clickable',
+        'side-list-item form-row-element form-element-checkbox inverse',
+        'row row-flex flex-align-items-center vertical-center flush clickable',
         {
           'filter-active': this.getCountByValue(filterValue) > 0,
           'filter-checked': checked
@@ -168,7 +168,7 @@ class SidebarFilter extends mixin(QueryParamsMixin) {
 
   getHealthNodes() {
     let definition = [{
-      fieldType: 'checkboxMultiple',
+      fieldType: 'checkbox',
       name: 'healthNodes',
       value: this.getHealthCheckboxes(),
       writeType: 'input'
@@ -199,7 +199,7 @@ class SidebarFilter extends mixin(QueryParamsMixin) {
     let {props} = this;
 
     return (
-      <div className="side-list sidebar-filters">
+      <div className="side-list sidebar-filters hidden-medium hidden-small hidden-mini">
         <div className="flex-box flex-align-right flush">
           {this.getTitle()}
           {this.getClearLinkForFilter(props.filterType)}

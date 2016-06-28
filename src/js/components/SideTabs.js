@@ -26,16 +26,16 @@ class SideTabs extends React.Component {
     let {selectedTab, tabs} = this.props;
 
     return tabs.map((tab, index) => {
-      let {title} = tab;
+      let {title, selectValue} = tab;
       let classes = classNames('sidebar-menu-item clickable visible-block', {
-        selected: title === selectedTab
+        selected: selectValue === selectedTab || title === selectedTab
       });
 
       return (
         <li
           className={classes}
           key={index}
-          onClick={this.handleTabClick.bind(this, title)}>
+          onClick={this.handleTabClick.bind(this, selectValue)}>
           <a>{title}</a>
         </li>
       );

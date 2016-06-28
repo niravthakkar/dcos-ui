@@ -2,10 +2,13 @@ import Application from './Application';
 import Framework from './Framework';
 import HealthSorting from '../constants/HealthSorting';
 import HealthStatus from '../constants/HealthStatus';
+import List from './List';
 import Service from './Service';
+import ServiceOther from '../constants/ServiceOther';
 import ServiceStatus from '../constants/ServiceStatus';
+import ServiceUtil from '../utils/ServiceUtil';
 import Tree from './Tree';
-import Util from '../utils/Util';
+import VolumeList from '../structs/VolumeList';
 
 module.exports = class ServiceTree extends Tree {
   /**
@@ -28,16 +31,6 @@ module.exports = class ServiceTree extends Tree {
       this.id = options.id;
     }
 
-    // Append Marathon groups
-    if (options.groups) {
-      this.list = this.list.concat(options.groups);
-    }
-
-    // Append applications
-    if (options.apps) {
-      this.list = this.list.concat(options.apps);
-    }
-
     // Converts items into instances of ServiceTree, Application or Framework
     // based on their properties.
     this.list = this.list.map((item) => {
@@ -45,11 +38,9 @@ module.exports = class ServiceTree extends Tree {
         return item;
       }
 
-      // Check item properties and convert items with an items array or an apps
-      // and groups array (Marathon group structure) into ServiceTree instances.
-      if ((item.items != null && Util.isArray(item.items)) ||
-          (item.groups != null && Util.isArray(item.groups) &&
-          item.apps != null && Util.isArray(item.apps))) {
+      // Check item properties and convert items with an items array (sub trees)
+      // into ServiceTree instances.
+      if ((item.items != null && Array.isArray(item.items))) {
         return new this.constructor(
           Object.assign({filterProperties: this.getFilterProperties()}, item)
         );
@@ -102,6 +93,87 @@ module.exports = class ServiceTree extends Tree {
     });
   }
 
+  // TODO @pierlo-upitup MARATHON-1030: refactor for more generic usage
+  filterItemsByFilter(filter) {
+    let services = this.getItems();
+
+    if (filter) {
+      if (filter.ids) {
+        services = services.filter(function (service) {
+          return this.ids.indexOf(service.id) !== -1;
+        }, {ids: filter.ids});
+      }
+
+      if (filter.id) {
+        let filterProperties = Object.assign({}, this.getFilterProperties(), {
+          name: function (item) {
+            return item.getId();
+          }
+        });
+
+        services = this.filterItemsByText(filter.id, filterProperties).getItems();
+      }
+
+      if (filter.health != null && filter.health.length !== 0) {
+        services = services.filter(function (service) {
+          return filter.health.some(function (healthValue) {
+            return service.getHealth().value === parseInt(healthValue, 10);
+          });
+        });
+      }
+
+      if (filter.labels != null && filter.labels.length > 0) {
+        services = services.filter(function (service) {
+          return filter.labels.some(function (label) {
+            let serviceLabels = service.getLabels();
+
+            if (service instanceof Service) {
+              serviceLabels = ServiceUtil.convertServiceLabelsToArray(
+                service
+              );
+            }
+
+            return serviceLabels.some(function (serviceLabel) {
+              return serviceLabel.key === label[0] &&
+                serviceLabel.value === label[1];
+            });
+          });
+        });
+      }
+
+      if (filter.other != null && filter.other.length !== 0) {
+        services = services.filter(function (service) {
+          return filter.other.some(function (otherKey) {
+
+            if (parseInt(otherKey, 10) === ServiceOther.UNIVERSE.key) {
+              if (service instanceof ServiceTree) {
+                return service.getFrameworks().length > 0;
+              }
+
+              return service instanceof Framework;
+            }
+
+            if (parseInt(otherKey, 10) === ServiceOther.VOLUMES.key) {
+              let volumes = service.getVolumes();
+
+              return volumes.list && volumes.list.length > 0;
+            }
+          });
+        });
+      }
+
+      if (filter.status != null && filter.status.length !== 0) {
+        services = services.filter(function (service) {
+          return filter.status.some(function (statusValue) {
+            return service.getServiceStatus().key === parseInt(statusValue, 10);
+          });
+        });
+      }
+    }
+
+    return new this.constructor(Object.assign({}, this, {items: services}));
+  }
+
   getInstancesCount() {
     return this.reduceItems(function (instances, item) {
       if (item instanceof Service) {
@@ -131,22 +203,40 @@ module.exports = class ServiceTree extends Tree {
   }
 
   getStatus() {
-    let {tasksRunning} = this.getTasksSummary();
-    let deployments = this.getDeployments();
-
-    if (deployments.length > 0) {
-      return ServiceStatus.DEPLOYING.displayName;
+    let status = this.getServiceStatus();
+    if (status == null) {
+      return null;
     }
 
-    if (tasksRunning > 0) {
-      return ServiceStatus.RUNNING.displayName;
-    }
+    return status.displayName;
+  }
 
-    let instances = this.getInstancesCount();
-    if (instances === 0) {
-      return ServiceStatus.SUSPENDED.displayName;
-    }
+  getServiceStatus() {
+    return this.reduceItems(function (serviceTreeStatus, item) {
+      if (item instanceof Service) {
+        let status = item.getServiceStatus();
+        if (status == null) {
+          return serviceTreeStatus;
+        }
 
+        if (status.key > serviceTreeStatus.key) {
+          serviceTreeStatus = status;
+        }
+      }
+      return serviceTreeStatus;
+    }, ServiceStatus.NA);
+  }
+
+  getServices() {
+    let items = this.reduceItems(function (services, item) {
+      if (item instanceof Service) {
+        services.push(item);
+      }
+
+      return services;
+    }, []);
+
+    return new List({items});
   }
 
   getTasksSummary() {
@@ -170,5 +260,44 @@ module.exports = class ServiceTree extends Tree {
       return taskSummary;
     }, {tasksHealthy: 0, tasksRunning: 0, tasksStaged: 0, tasksUnhealthy: 0,
       tasksUnknown: 0});
+  }
+
+  getFrameworks() {
+    return this.reduceItems(function (frameworks, item) {
+      if (item instanceof Framework) {
+        frameworks.push(item);
+      }
+
+      return frameworks;
+    }, []);
+  }
+
+  getVolumes() {
+    let items = this.reduceItems(function (serviceTreeVolumes, item) {
+      if (item instanceof Service) {
+        let itemVolumes = item.getVolumes().getItems();
+        if (itemVolumes && itemVolumes.length) {
+          serviceTreeVolumes.push(itemVolumes);
+        }
+      }
+
+      return serviceTreeVolumes;
+    }, []);
+
+    return new VolumeList({items});
+  }
+
+  getLabels() {
+    return this.reduceItems(function (serviceTreeLabels, item) {
+      ServiceUtil.convertServiceLabelsToArray(item)
+        .forEach(function ({key, value}) {
+          if (0 > serviceTreeLabels.findIndex(function (label) {
+            return label.key === key && label.value === value;
+          })) {
+            serviceTreeLabels = serviceTreeLabels.concat([{key, value}]);
+          }
+        });
+      return serviceTreeLabels;
+    }, []);
   }
 };

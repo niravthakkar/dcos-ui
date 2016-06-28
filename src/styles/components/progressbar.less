@@ -8,6 +8,13 @@
   }
 }
 
+.inline-progress-bar-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding-left: @base-spacing-unit * 0.5;
+}
+
 .progress-bar {
   background-color: @neutral;
   border-radius: @table-header-border-radius;
@@ -20,7 +27,10 @@
   .bar {
     box-shadow: 1px 0px 0px 0px @body-background-color;
     height: 100%;
-    transition: width 600ms;
+    transform: scaleX(0);
+    transform-origin: 0;
+    transition: transform 600ms;
+    width: 100%;
 
     &.color-1 {
       background-color: @purple;

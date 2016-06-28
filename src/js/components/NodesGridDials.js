@@ -1,10 +1,10 @@
-var _ = require('underscore');
 var React = require('react');
 import {Tooltip} from 'reactjs-components';
 
 var Chart = require('./charts/Chart');
 var DialChart = require('./charts/DialChart');
-var ResourceTypes = require('../constants/ResourceTypes');
+import Icon from './Icon';
+var ResourcesUtil = require('../utils/ResourcesUtil');
 
 var colors = {
   error: 2,
@@ -17,7 +17,6 @@ var NodesGridDials = React.createClass({
 
   propTypes: {
     hosts: React.PropTypes.array.isRequired,
-    // enum: ['cpus', 'mem', 'disk']
     selectedResource: React.PropTypes.string.isRequired,
     serviceColors: React.PropTypes.object.isRequired,
     showServices: React.PropTypes.bool.isRequired,
@@ -42,13 +41,13 @@ var NodesGridDials = React.createClass({
       return config;
     }
 
-    _.each(resourcesByFramework, function (fwkResources, fwkId) {
-      var percentage = fwkResources[props.selectedResource] * 100;
+    Object.keys(resourcesByFramework).forEach(function (frameworkID) {
+      var percentage = resourcesByFramework[frameworkID][props.selectedResource] * 100;
       percentage /= node.getUsageStats(props.selectedResource).total;
 
       config.push({
-        colorIndex: props.serviceColors[fwkId],
-        name: fwkId,
+        colorIndex: props.serviceColors[frameworkID],
+        name: frameworkID,
         percentage: percentage
       });
     });
@@ -57,22 +56,23 @@ var NodesGridDials = React.createClass({
   },
 
   getUsedSliceConfig: function (node) {
-    var props = this.props;
-    var resourceConfig = ResourceTypes[props.selectedResource];
+    let {selectedResource} = this.props;
+    let colorIndex = ResourcesUtil.getResourceColor(selectedResource);
+    let label = ResourcesUtil.getResourceLabel(selectedResource);
     var serviceSlices = this.getServiceSlicesConfig(node);
     var percentage;
 
     if (serviceSlices.length > 0) {
-      percentage = _.foldl(serviceSlices, function (memo, slice) {
+      percentage = serviceSlices.reduce(function (memo, slice) {
         return memo + slice.percentage;
       }, 0);
     } else {
-      percentage = node.getUsageStats(props.selectedResource).percentage;
+      percentage = node.getUsageStats(selectedResource).percentage;
     }
 
     return [{
-      colorIndex: resourceConfig.colorIndex,
-      name: resourceConfig.label,
+      colorIndex: colorIndex,
+      name: label,
       percentage: percentage
     }];
   },
@@ -87,7 +87,7 @@ var NodesGridDials = React.createClass({
       config = this.getUsedSliceConfig(node);
     }
 
-    var percentage = _.reduce(config, function (memo, slice) {
+    var percentage = config.reduce(function (memo, slice) {
       memo += slice.percentage;
       return memo;
     }, 0);
@@ -116,7 +116,8 @@ var NodesGridDials = React.createClass({
   },
 
   getDialConfig: function (node) {
-    var resourceConfig = ResourceTypes[this.props.selectedResource];
+    let {selectedResource} = this.props;
+    let resourceLabel = ResourcesUtil.getResourceLabel(selectedResource);
 
     if (node.isActive()) {
       var sliceData = this.getActiveSliceData(node);
@@ -127,7 +128,7 @@ var NodesGridDials = React.createClass({
             {sliceData.usedPercentage}%
           </span>,
           <span className="unit-label text-muted" key={'unit-label'}>
-            {resourceConfig.label}
+            {resourceLabel}
           </span>
         ]
       };
@@ -136,7 +137,7 @@ var NodesGridDials = React.createClass({
         data: this.getInactiveSliceData(),
         description: (
           <span className="error">
-            <i className="icon icon-sprite icon-sprite-medium icon-sprite-medium-white icon-alert" />
+            <Icon id="yield" className="icon-alert" color="white" />
           </span>
         )
       };
@@ -144,7 +145,7 @@ var NodesGridDials = React.createClass({
   },
 
   getDials: function () {
-    return _.map(this.props.hosts, function (node) {
+    return this.props.hosts.map((node) => {
       var config = this.getDialConfig(node);
       let description = (
         <div className="description">
@@ -175,14 +176,14 @@ var NodesGridDials = React.createClass({
           </div>
         </a>
       );
-    }, this);
+    });
   },
 
   // Zero-height spacer items force dial charts in the last line of the flex layout
   // not to spread themselves across the line.
   getSpacers: function () {
-    return _.times(30, function (n) {
-      return <div className="nodes-grid-dials-spacer" key={n}></div>;
+    return Array(30).fill().map(function (v, index) {
+      return <div className="nodes-grid-dials-spacer" key={index}></div>
     });
   },
 

@@ -10,6 +10,7 @@ if (process.env.npm_config_externalplugins) {
 }
 
 var config = {
+  'name': '', // https://github.com/facebook/jest/issues/955
   'testDirectoryName': '__tests__',
   'testPathDirs': testPaths,
   'globals': {
@@ -40,11 +41,13 @@ var config = {
     'browser-info',
     'classnames',
     'd3',
+    'deep-equal',
     'events',
     'flux',
     'jasmine-reporters',
     'localStorage',
     'mesosphere-shared-reactjs',
+    'moment',
     'md5',
     'mixins/index',
     'src/js/config/',
@@ -55,6 +58,8 @@ var config = {
     'src/js/plugin-bridge/middleware',
     'src/js/plugin-bridge/PluginSDK',
     'src/js/plugin-bridge/PluginTestUtils',
+    'src/js/stores/BaseStore',
+    'src/js/stores/GetSetBaseStore',
     'src/js/structs',
     'src/js/utils',
     'plugins',

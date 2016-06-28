@@ -5,6 +5,7 @@ import {StoreMixin} from 'mesosphere-shared-reactjs';
 import {Tooltip} from 'reactjs-components';
 
 var HostTableHeaderLabels = require('../constants/HostTableHeaderLabels');
+import Icon from '../components/Icon';
 var InternalStorageMixin = require('../mixins/InternalStorageMixin');
 var ResourceTableUtil = require('../utils/ResourceTableUtil');
 var ProgressBar = require('./charts/ProgressBar');
@@ -22,7 +23,7 @@ var HostTable = React.createClass({
   statics: {
     routeConfig: {
       label: 'Nodes',
-      icon: 'datacenter',
+      icon: <Icon id="servers" />,
       matches: /^\/nodes/
     }
   },
@@ -64,8 +65,12 @@ var HostTable = React.createClass({
     if (!node.isActive()) {
       headline = (
         <Tooltip anchor="start" content="Connection to node lost">
-          <i className="icon icon-sprite icon-sprite-mini icon-sprite-mini-white
-            icon-alert" />
+          <Icon
+            family="mini"
+            id="yield"
+            size="mini"
+            className="icon-alert icon-margin-right"
+            color="white" />
           {headline}
         </Tooltip>
       );

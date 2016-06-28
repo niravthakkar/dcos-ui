@@ -3,35 +3,35 @@ import {Route, Redirect, NotFoundRoute} from 'react-router';
 import dashboard from './dashboard';
 import {Hooks} from 'PluginSDK';
 import Index from '../pages/Index';
+import Network from './factories/network';
 import nodes from './nodes';
 import NotFoundPage from '../pages/NotFoundPage';
 import System from './factories/system';
 import services from './services';
+import jobs from './jobs';
 import universe from './universe';
 
-// Statically defined routes
-let applicationRoutes = [
-  dashboard,
-  services,
-  nodes,
-
-  universe,
-  {
-    type: Redirect,
-    from: '/',
-    to: 'dashboard'
-  },
-  {
-    type: NotFoundRoute,
-    handler: NotFoundPage
-  }
-];
-
 // Modules that produce routes
-let routeFactories = [System];
+let routeFactories = [System, Network];
 
 function getApplicationRoutes() {
-  let routes = applicationRoutes.slice();
+  // Statically defined routes
+  let routes = [
+    dashboard,
+    services,
+    jobs,
+    nodes,
+    universe,
+    {
+      type: Redirect,
+      from: '/',
+      to: Hooks.applyFilter('applicationRedirectRoute', 'dashboard')
+    },
+    {
+      type: NotFoundRoute,
+      handler: NotFoundPage
+    }
+  ];
 
   routeFactories.forEach(function (routeFactory) {
     routes.push(routeFactory.getRoutes());

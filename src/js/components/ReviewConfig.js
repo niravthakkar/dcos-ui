@@ -3,7 +3,7 @@ import React from 'react';
 
 import DescriptionList from './DescriptionList';
 import GeminiUtil from '../utils/GeminiUtil';
-import IconDownload from './icons/IconDownload';
+import Icon from './Icon';
 
 class ReviewConfig extends React.Component {
   componentDidMount() {
@@ -37,7 +37,7 @@ class ReviewConfig extends React.Component {
             <div className="media-object-spacing-wrapper media-object-spacing-narrow media-object-offset">
               <div className="media-object media-object-align-middle">
                 <div className="media-object-item">
-                  <div className="icon icon-sprite icon-sprite-medium icon-sprite-medium-color icon-image-container icon-app-container icon-default-white">
+                  <div className="icon icon-medium icon-image-container icon-app-container icon-default-white">
                     <img src={packageIcon} />
                   </div>
                 </div>
@@ -58,7 +58,7 @@ class ReviewConfig extends React.Component {
               onClick={ieDownloadConfig}
               download={fileName}
               href={`data:attachment/json;content-disposition=attachment;filename=${fileName};charset=utf-8,${encodeURIComponent(configString)}`}>
-              <IconDownload /> Download config.json
+              <Icon family="mini" id="download" size="mini" /> Download config.json
             </a>
           </div>
         </div>

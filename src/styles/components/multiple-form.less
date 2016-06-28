@@ -22,11 +22,18 @@ base/forms.less
 
   --------------------------------------------------------------------------------
   ----------------------------------------------------------------------------- */
+  .form-element-inline {
+    display: inline-block;
+
+    & + .form-element-inline {
+      margin-left: @base-spacing-unit;
+    }
+  }
+
   .horizontal-center {
 
     .form-element-inline {
       border-radius: 0;
-      display: inline-block;
 
       .form-element-inline-text {
         flex: none;
@@ -49,12 +56,18 @@ base/forms.less
 
   }
 
+  .permission-form {
+    min-height: 325px;
+  }
+
   .review-config,
   .multiple-form {
     height: 462px;
   }
 
-  .multiple-form-modal {
+  .multiple-form-modal,
+  .permission-form-modal,
+  .review-config {
 
     .button-collection {
       display: flex;
@@ -73,6 +86,21 @@ base/forms.less
 
       &:after, &:before {
         display: none;
+      }
+    }
+  }
+
+  .multiple-form-modal {
+
+    .form-row-element {
+
+      &.checkbox {
+        align-items: flex-end;
+        display: flex;
+
+        .form-element-checkbox {
+          padding-bottom: 6px;
+        }
       }
     }
 
@@ -112,8 +140,10 @@ base/forms.less
 
       .form-row-element {
         padding-bottom: @base-spacing-unit * 2/3;
-        padding-left: @base-spacing-unit;
-        padding-right: @base-spacing-unit;
+
+        &.hidden-form-element {
+          display: none;
+        }
       }
 
       .media-object-item {
@@ -121,10 +151,11 @@ base/forms.less
       }
 
       .multiple-form-left-column {
-        height: auto;
         flex: 0 0 auto;
+        height: auto;
         max-height: 300px;
         overflow: auto;
+        padding-right: 0;
 
         &:first-child {
           border-bottom: 1px solid color-lighten(@neutral, 80);
@@ -135,32 +166,80 @@ base/forms.less
       .multiple-form-right-column {
         // Make right column scroll
         flex: 1 1;
-        padding-bottom: @base-spacing-unit;
-        padding-right: 0;
-        padding-top: @base-spacing-unit;
+        padding: @base-spacing-unit 0;
       }
 
     }
 
     .form-panel {
+      padding-left: @base-spacing-unit;
       padding-right: @base-spacing-unit;
 
       > .form > *:last-child {
         padding-bottom: @base-spacing-unit;
       }
 
+      > .form > .healthChecks {
+        flex-direction: column;
+
+        .form-row-element {
+          padding-left: 0px;
+          padding-right: 0px;
+          width: auto;
+        }
+      }
     }
 
   }
 
-}
+  .modal-form {
 
-& when (@screen-mini-enabled) {
+    .error-field {
+      background: color-lighten(@red, 60);
+      border-bottom: @red 1px solid;
+      padding: (@base-spacing-unit / 2) @base-spacing-unit;
 
-  @media (max-width: @screen-mini-max) {
+      li:before {
+        background-color: currentColor;
+      }
+    }
 
-    .multiple-form-modal .multiple-form .form-row-element {
-      padding-left: @base-spacing-unit * 4/3;
+    label {
+      white-space: nowrap;
+    }
+
+    .modal-header {
+      background: @white;
+
+      .header-flex {
+        display: flex;
+        flex-wrap: wrap-reverse;
+        width: 100%;
+
+        .header-left, .header-right {
+          display: inline-flex;
+          flex: 0 0 auto;
+          flex-wrap: wrap;
+          max-width: 100%;
+          width: auto;
+        }
+
+        .header-right {
+          margin-left: auto;
+          padding-right: 0;
+        }
+      }
+    }
+
+    .modal-header-title {
+      color: @heading-h3-text-color;
+      font-size: @form-label-font-size * @form-label-font-size-scale-screen-small;
+      line-height: @form-label-line-height * @form-label-line-height-scale-screen-small;
+    }
+
+    .modal-form-title-label {
+      color: currentColor;
+      font-weight: 300;
     }
 
   }

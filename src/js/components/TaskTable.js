@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import {Link} from 'react-router';
 import React from 'react';
 
 import ResourceTableUtil from '../utils/ResourceTableUtil';
@@ -10,7 +11,6 @@ import TaskUtil from '../utils/TaskUtil';
 import Units from '../utils/Units';
 
 const METHODS_TO_BIND = [
-  'handleTaskClick',
   'renderHeadline',
   'renderState',
   'renderStats'
@@ -23,12 +23,6 @@ class TaskTable extends React.Component {
     METHODS_TO_BIND.forEach(function (method) {
       this[method] = this[method].bind(this);
     }, this);
-  }
-
-  handleTaskClick(params) {
-    let linkTo = this.getTaskPanelRoute();
-
-    this.props.parentRouter.transitionTo(linkTo, params);
   }
 
   getStatValue(task, prop) {
@@ -105,17 +99,10 @@ class TaskTable extends React.Component {
         <col />
         <col style={{width: '120px'}} />
         <col style={{width: '120px'}} />
-        <col style={{width: '85px'}} />
-        <col style={{width: '110px'}} />
+        <col style={{width: '85px'}} className="hidden-mini" />
+        <col style={{width: '110px'}} className="hidden-mini" />
       </colgroup>
     );
-  }
-
-  getTaskPanelRoute() {
-    let currentRoutes = this.props.parentRouter.getCurrentRoutes();
-    let currentPage = currentRoutes[currentRoutes.length - 2].name;
-
-    return `${currentPage}-task-panel`;
   }
 
   renderHeadline(prop, task) {
@@ -133,6 +120,11 @@ class TaskTable extends React.Component {
     let params = this.props.parentRouter.getCurrentParams();
     let routeParams = Object.assign({taskID: task.id}, params);
 
+    let linkTo = 'services-task-details';
+    if (params.nodeID != null) {
+      linkTo = 'nodes-task-details';
+    }
+
     return (
       <div className="flex-box flex-box-align-vertical-center
         table-cell-flex-box">
@@ -141,12 +133,13 @@ class TaskTable extends React.Component {
           <span className={statusClass}></span>
         </div>
         <div className="table-cell-value flex-box flex-box-col">
-          <a
+          <Link
             className="emphasize clickable text-overflow"
-            onClick={this.handleTaskClick.bind(this, routeParams)}
+            to={linkTo}
+            params={routeParams}
             title={title}>
             {title}
-          </a>
+          </Link>
         </div>
       </div>
     );
@@ -162,15 +155,11 @@ class TaskTable extends React.Component {
 
   renderState(prop, task) {
     let statusClassName = TaskUtil.getTaskStatusClassName(task);
-    let statusIcon = TaskUtil.getTaskStatusIcon(task);
     let statusLabelClasses = `${statusClassName} table-cell-value`;
 
     return (
       <div className="flex-box flex-box-align-vertical-center
         table-cell-flex-box">
-        <div className="table-cell-icon table-cell-icon-mini">
-          {statusIcon}
-        </div>
         <span className={statusLabelClasses}>
           {this.getStateValue(task, prop)}
         </span>
@@ -189,14 +178,17 @@ class TaskTable extends React.Component {
         containerSelector=".gm-scroll-view"
         data={tasks.slice()}
         itemHeight={TableUtil.getRowHeight()}
-        sortBy={{prop: 'updated', order: 'asc'}} />
+        sortBy={{prop: 'updated', order: 'desc'}} />
     );
   }
 }
 
 TaskTable.propTypes = {
   className: React.PropTypes.string,
-  parentRouter: React.PropTypes.func.isRequired,
+  parentRouter: React.PropTypes.oneOfType([
+    React.PropTypes.func,
+    React.PropTypes.object
+  ]).isRequired,
   tasks: React.PropTypes.array.isRequired
 };
 

@@ -1,15 +1,15 @@
-var _ = require('underscore');
 var React = require('react');
 import ReactDOM from 'react-dom';
+import {StoreMixin} from 'mesosphere-shared-reactjs';
 
-var InternalStorageMixin = require('../../mixins/InternalStorageMixin');
 var DOMUtils = require('../../utils/DOMUtils');
+var InternalStorageMixin = require('../../mixins/InternalStorageMixin');
 
 var Chart = React.createClass({
 
   displayName: 'Chart',
 
-  mixins: [InternalStorageMixin],
+  mixins: [InternalStorageMixin, StoreMixin],
 
   propTypes: {
     calcHeight: React.PropTypes.func,
@@ -24,7 +24,14 @@ var Chart = React.createClass({
   },
 
   componentWillMount: function () {
-    this.internalStorage_set({height: null, width: null});
+    this.store_listeners = [
+      {
+        name: 'sidebar',
+        events: ['widthChange']
+      }
+    ];
+
+    this.internalStorage_set({width: null});
   },
 
   componentDidMount: function () {
@@ -49,6 +56,10 @@ var Chart = React.createClass({
     window.removeEventListener('resize', this.updateWidth);
   },
 
+  onSidebarStoreWidthChange: function () {
+    this.updateWidth();
+  },
+
   updateWidth: function () {
     if (!this.isMounted()) {
       return;
@@ -70,14 +81,14 @@ var Chart = React.createClass({
     if (width != null) {
       var calcHeight = this.props.calcHeight;
 
-      if (_.isFunction(calcHeight)) {
+      if (typeof calcHeight === 'function') {
         height = calcHeight(width);
       }
 
       var children = this.props.children;
-      if (_.isArray(children)) {
+      if (Array.isArray(children)) {
         height = height / children.length;
-        return _.map(children, function (child) {
+        return children.map(function (child) {
           return React.cloneElement(
             child,
             {width: width, height: height}

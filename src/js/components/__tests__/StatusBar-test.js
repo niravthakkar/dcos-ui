@@ -144,7 +144,7 @@ describe('#StatusBar', function () {
           ).toBeTruthy();
         });
 
-      it('should have a width of 40', function () {
+      it('should have a width of 40%', function () {
         expect(
           this.container.querySelector('.bar:first-child')
             .style.width
@@ -161,7 +161,7 @@ describe('#StatusBar', function () {
         ).toBeTruthy();
       });
 
-      it('should have a width of 60', function () {
+      it('should have a width of 60%', function () {
         expect(
           this.container.querySelector('.bar:nth-child(2)')
             .style.width

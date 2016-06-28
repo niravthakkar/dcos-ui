@@ -1,6 +1,7 @@
 // Modules to paths
 module.exports = {
   constants: {
+    EventTypes: 'EventTypes',
     FrameworkConstants: 'FrameworkConstants',
     HTTPStatusCodes: 'HTTPStatusCodes'
   },
@@ -9,51 +10,71 @@ module.exports = {
   },
   stores: {
     AuthStore: 'AuthStore',
+    BaseStore: 'BaseStore',
     ConfigStore: 'ConfigStore',
+    CosmosPackagesStore: 'CosmosPackagesStore',
+    MarathonStore: 'MarathonStore',
+    MetadataStore: 'MetadataStore',
+    NotificationStore: 'NotificationStore',
     UsersStore: 'UsersStore',
-    UserStore: 'UserStore'
+    UserStore: 'UserStore',
+    VisibilityStore: 'VisibilityStore'
   },
   structs: {
-    List: 'List',
+    CompositeState: 'CompositeState',
     Item: 'Item',
-    CompositeState: 'CompositeState'
+    List: 'List',
+    Tree: 'Tree'
   },
   utils: {
+    ApplicationUtil: 'ApplicationUtil',
     CookieUtils: 'CookieUtils',
-    StringUtil: 'StringUtil',
-    RequestUtil: 'RequestUtil',
+    DateUtil: 'DateUtil',
     DOMUtils: 'DOMUtils',
-    ResourceTableUtil: 'ResourceTableUtil',
-    TableUtil: 'TableUtil',
+    FormUtil: 'FormUtil',
     LocalStorageUtil: 'LocalStorageUtil',
     Maths: 'Maths',
+    ResourceTableUtil: 'ResourceTableUtil',
+    RouterUtil: 'RouterUtil',
+    StoreMixinConfig: 'StoreMixinConfig',
+    StringUtil: 'StringUtil',
+    TableUtil: 'TableUtil',
+    TabsUtil: 'TabsUtil',
     Units: 'Units',
-    Util: 'Util',
-    StoreMixinConfig: 'StoreMixinConfig'
+    Util: 'Util'
   },
   mixins: {
     InternalStorageMixin: 'InternalStorageMixin',
     TabsMixin: 'TabsMixin'
   },
   components: {
-    Authenticated: 'Authenticated',
     AccessDeniedPage: 'AccessDeniedPage',
-    SidePanelContents: 'SidePanelContents',
-    RequestErrorMsg: 'RequestErrorMsg',
-    IconInfo: 'icons/IconInfo',
-    MesosphereLogo: 'icons/MesosphereLogo',
-    FormModal: 'FormModal',
+    ActionsModal: 'modals/ActionsModal',
+    AlertPanel: 'AlertPanel',
+    Authenticated: 'Authenticated',
+    Breadcrumbs: 'Breadcrumbs',
+    Chart: 'charts/Chart',
+    CheckboxTable: 'CheckboxTable',
+    ClipboardTrigger: 'ClipboardTrigger',
+    ClusterHeader: 'ClusterHeader',
+    ClusterName: 'ClusterName',
+    DCOSLogo: 'DCOSLogo',
+    DescriptionList: 'DescriptionList',
     FilterBar: 'FilterBar',
+    FilterButtons: 'FilterButtons',
     FilterHeadline: 'FilterHeadline',
     FilterInputText: 'FilterInputText',
-    ActionsModal: 'modals/ActionsModal',
-    ClusterHeader: 'ClusterHeader',
-    AlertPanel: 'AlertPanel',
-    DCOSLogo: 'DCOSLogo',
-    ClusterName: 'ClusterName',
-    DescriptionList: 'DescriptionList',
-    Chart: 'charts/Chart',
-    Page: 'Page'
+    FormModal: 'FormModal',
+    Icon: 'Icon',
+    MesosphereLogo: 'icons/MesosphereLogo',
+    NestedServiceLinks: 'NestedServiceLinks',
+    Page: 'Page',
+    PageHeader: 'PageHeader',
+    ProgressBar: 'charts/ProgressBar',
+    RequestErrorMsg: 'RequestErrorMsg',
+    RouterUtil: 'RouterUtil',
+    TabForm: 'TabForm',
+    ToggleButton: 'ToggleButton'
   },
   config: {
     Config: 'Config'

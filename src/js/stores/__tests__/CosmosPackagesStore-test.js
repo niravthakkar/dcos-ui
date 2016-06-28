@@ -7,7 +7,7 @@ jest.dontMock('./fixtures/MockPackageDescribeResponse.json');
 jest.dontMock('./fixtures/MockPackagesListResponse.json');
 jest.dontMock('./fixtures/MockPackagesSearchResponse.json');
 
-var _ = require('underscore');
+import {RequestUtil} from 'mesosphere-shared-reactjs';
 
 var AppDispatcher = require('../../events/AppDispatcher');
 var Config = require('../../config/Config');
@@ -35,7 +35,6 @@ var packageDescribeFixture =
 var packagesListFixture = require('./fixtures/MockPackagesListResponse.json');
 var packagesSearchFixture =
   require('./fixtures/MockPackagesSearchResponse.json');
-var RequestUtil = require('../../utils/RequestUtil');
 import {
   REQUEST_COSMOS_PACKAGES_LIST_ERROR,
   REQUEST_COSMOS_PACKAGES_LIST_SUCCESS,
@@ -75,9 +74,9 @@ describe('CosmosPackagesStore', function () {
     beforeEach(function () {
       this.requestFn = RequestUtil.json;
       RequestUtil.json = function (handlers) {
-        handlers.success(_.clone(packagesSearchFixture));
+        handlers.success(Object.assign({}, packagesSearchFixture));
       };
-      this.packagesSearchFixture = _.clone(packagesSearchFixture);
+      this.packagesSearchFixture = Object.assign({}, packagesSearchFixture);
     });
 
     afterEach(function () {
@@ -160,9 +159,9 @@ describe('CosmosPackagesStore', function () {
     beforeEach(function () {
       this.requestFn = RequestUtil.json;
       RequestUtil.json = function (handlers) {
-        handlers.success(_.clone(packageDescribeFixture));
+        handlers.success(Object.assign({}, packageDescribeFixture));
       };
-      this.packageDescribeFixture = _.clone(packageDescribeFixture);
+      this.packageDescribeFixture = Object.assign({}, packageDescribeFixture);
     });
 
     afterEach(function () {
@@ -248,9 +247,9 @@ describe('CosmosPackagesStore', function () {
     beforeEach(function () {
       this.requestFn = RequestUtil.json;
       RequestUtil.json = function (handlers) {
-        handlers.success(_.clone(packagesListFixture));
+        handlers.success(Object.assign({}, packagesListFixture));
       };
-      this.packagesListFixture = _.clone(packagesListFixture);
+      this.packagesListFixture = Object.assign({}, packagesListFixture);
     });
 
     afterEach(function () {

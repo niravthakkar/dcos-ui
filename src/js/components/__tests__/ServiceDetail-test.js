@@ -1,6 +1,10 @@
+jest.dontMock('../PageHeader');
 jest.dontMock('../ServiceDetail');
+jest.dontMock('../ServiceDetailDebugTab');
+jest.dontMock('../ServiceDetailConfigurationTab');
 jest.dontMock('../ServiceDetailTaskTab');
 jest.dontMock('../ServiceInfo');
+jest.dontMock('../../structs/Service');
 
 /* eslint-disable no-unused-vars */
 var React = require('react');
@@ -11,7 +15,10 @@ var JestUtil = require('../../utils/JestUtil');
 
 var Service = require('../../structs/Service');
 var ServiceDetail = require('../ServiceDetail');
+var ServiceDetailDebugTab = require('../ServiceDetailDebugTab');
+var ServiceDetailConfigurationTab = require('../ServiceDetailConfigurationTab');
 var ServiceDetailTaskTab = require('../ServiceDetailTaskTab');
+var VolumeTable = require('../VolumeTable');
 
 describe('ServiceDetail', function () {
 
@@ -24,7 +31,12 @@ describe('ServiceDetail', function () {
     tasksStaged: 0,
     tasksRunning: 2,
     tasksHealthy: 2,
-    tasksUnhealthy: 0
+    tasksUnhealthy: 0,
+    version: '2001-01-01T01:01:01.001Z',
+    versionInfo: {
+      lastConfigChangeAt: '2001-01-01T01:01:01.001Z',
+      lastScalingAt: '2001-01-01T01:01:01.001Z'
+    }
   });
 
   beforeEach(function () {
@@ -52,39 +64,35 @@ describe('ServiceDetail', function () {
 
   describe('#renderConfigurationTabView', function () {
 
-    it('renders placeholder', function () {
+    it('renders the configuration tab', function () {
       var configurationTabView = ReactDOM.render(
-        this.instance.renderConfigurationTabView('disk'),
+        this.instance.renderConfigurationTabView(),
         this.container
       );
+      var serviceDetailTaskTab = TestUtils.findRenderedComponentWithType(
+        configurationTabView,
+        ServiceDetailConfigurationTab
+      );
 
-      expect(configurationTabView.textContent).toEqual('Configuration Placeholder');
+      expect(serviceDetailTaskTab).toBeDefined();
+
     });
 
   });
 
   describe('#renderDebugTabView', function () {
 
-    it('renders placeholder', function () {
+    it('renders debug tab', function () {
       var debugTabView = ReactDOM.render(
-        this.instance.renderDebugTabView('disk'),
+        this.instance.renderDebugTabView(),
         this.container
       );
-
-      expect(debugTabView.textContent).toEqual('Debug Placeholder');
-    });
-
-  });
-
-  describe('#renderLogsTabView', function () {
-
-    it('renders placeholder', function () {
-      var logsTabView = ReactDOM.render(
-        this.instance.renderLogsTabView('disk'),
-        this.container
+      var serviceDetailDebugTab = TestUtils.findRenderedComponentWithType(
+        debugTabView,
+        ServiceDetailDebugTab
       );
 
-      expect(logsTabView.textContent).toEqual('Logs Placeholder');
+      expect(serviceDetailDebugTab).toBeDefined();
     });
 
   });
@@ -96,8 +104,10 @@ describe('ServiceDetail', function () {
         this.instance.renderTasksTabView(),
         this.container
       );
-      var serviceDetailTaskTab = TestUtils
-        .findRenderedComponentWithType(tasksTabView, ServiceDetailTaskTab);
+      var serviceDetailTaskTab = TestUtils.findRenderedComponentWithType(
+        tasksTabView,
+        ServiceDetailTaskTab
+      );
 
       expect(serviceDetailTaskTab).toBeDefined();
 

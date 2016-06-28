@@ -1,15 +1,22 @@
 jest.dontMock('../InstallPackageModal');
 jest.dontMock('../../CosmosErrorMessage');
 jest.dontMock('../../ReviewConfig');
+jest.dontMock('../../SchemaForm');
 jest.dontMock('../../../stores/CosmosPackagesStore');
 jest.dontMock('../../../mixins/InternalStorageMixin');
 jest.dontMock('../../../mixins/TabsMixin');
+jest.dontMock('../../../utils/FormUtil');
+jest.dontMock('../../../utils/GeminiUtil');
+jest.dontMock('../../../utils/SchemaFormUtil');
+jest.dontMock('../../../utils/SchemaUtil');
+jest.dontMock('../../TabForm');
+jest.dontMock('../../../utils/Util');
 
-var _ = require('underscore');
 /* eslint-disable no-unused-vars */
 var React = require('react');
 /* eslint-enable no-unused-vars */
 var ReactDOM = require('react-dom');
+import {RequestUtil} from 'mesosphere-shared-reactjs';
 var TestUtils = require('react-addons-test-utils');
 
 var InstallPackageModal = require('../InstallPackageModal');
@@ -17,7 +24,6 @@ var JestUtil = require('../../../utils/JestUtil');
 var JestUtil = require('../../../utils/JestUtil');
 var packageDescribeFixture =
   require('../../../../../tests/_fixtures/cosmos/package-describe.json');
-var RequestUtil = require('../../../utils/RequestUtil');
 var UniversePackage = require('../../../structs/UniversePackage');
 
 JestUtil.unMockStores(['CosmosPackagesStore']);
@@ -30,7 +36,7 @@ describe('InstallPackageModal', function () {
     RequestUtil.json = function (handlers) {
       handlers.success(packageDescribeFixture);
     };
-    this.packageDescribeFixture = _.clone(packageDescribeFixture);
+    this.packageDescribeFixture = Object.assign({}, packageDescribeFixture);
 
     this.container = document.createElement('div');
     this.instance = ReactDOM.render(
@@ -64,7 +70,7 @@ describe('InstallPackageModal', function () {
         this.instance.getModalContents(),
         this.container
       ));
-      var result = node.querySelectorAll('p')[1];
+      var result = node.querySelectorAll('p')[4];
       expect(result.textContent).toEqual('0.11.1');
     });
 

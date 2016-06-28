@@ -4,6 +4,52 @@ var StringUtil = require('../StringUtil');
 
 describe('StringUtil', function () {
 
+  describe('#arrayToJoinedString', function () {
+
+    it('should join array with default separator', function () {
+      var result = StringUtil.arrayToJoinedString([1, 2]);
+
+      expect(result).toEqual('1, 2');
+    });
+
+    it('should join array with the given separator', function () {
+      var result = StringUtil.arrayToJoinedString([1, 2], '-');
+
+      expect(result).toEqual('1-2');
+    });
+
+    it('should not append separator if array has only one  element', function () {
+      var result = StringUtil.arrayToJoinedString([1]);
+
+      expect(result).toEqual('1');
+    });
+
+    it('should return empty string if array is null', function () {
+      var result = StringUtil.arrayToJoinedString(null);
+
+      expect(result).toEqual('');
+    });
+
+    it('should return empty string if array is undefined', function () {
+      var result = StringUtil.arrayToJoinedString();
+
+      expect(result).toEqual('');
+    });
+
+    it('should return empty string if array is and object', function () {
+      var result = StringUtil.arrayToJoinedString({});
+
+      expect(result).toEqual('');
+    });
+
+    it('should return empty string if array is empty', function () {
+      var result = StringUtil.arrayToJoinedString([]);
+
+      expect(result).toEqual('');
+    });
+
+  });
+
   describe('#filterByString', function () {
 
     it('filters using a key as getter', function () {
@@ -152,6 +198,32 @@ describe('StringUtil', function () {
       expect(StringUtil.capitalize(capitalizedString))
         .toEqual(capitalizedString);
     });
+  });
+
+  describe('#humanizeArray', function () {
+
+    it('returns an empty string for a 0-length array', function () {
+      expect(StringUtil.humanizeArray([])).toEqual('');
+    });
+
+    it('returns the sole member of a 1-length array', function () {
+      expect(StringUtil.humanizeArray(['one'])).toEqual('one');
+    });
+    
+    it('joins a 2-length array with \'and\'', function () {
+      expect(StringUtil.humanizeArray(['one', 'two'])).toEqual('one and two');
+    });
+
+    it('joins a 3-length array with commas and \'and\'', function () {
+      expect(StringUtil.humanizeArray(['one', 'two', 'three']))
+        .toEqual('one, two, and three');
+    });
+
+    it('allows the user to disable the serial comma', function () {
+      expect(StringUtil.humanizeArray(['one', 'two', 'three'], false))
+        .toEqual('one, two and three');
+    });
+
   });
 
 });

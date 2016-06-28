@@ -32,4 +32,43 @@ describe('DateUtil', function () {
       expect(result).toEqual('10-19-93 at 11:29 am');
     });
   });
+
+  describe('#msToRelativeTime', function () {
+    it('defaults to returning the suffix', function () {
+      let date = new Date();
+      date.setYear(date.getFullYear() - 1);
+      let result = DateUtil.msToRelativeTime(date.getTime());
+
+      expect(result).toEqual('a year ago');
+    });
+
+    it('suppresses the suffix if specified', function () {
+      let date = new Date();
+      date.setYear(date.getFullYear() - 1);
+      let result = DateUtil.msToRelativeTime(date.getTime(), true);
+
+      expect(result).toEqual('a year');
+    });
+  });
+
+  describe('#dateToRelativeTime', function () {
+    it('returns "in a year" if the date in a year from now', function () {
+      let date = new Date();
+      date.setYear(date.getFullYear() + 1);
+      let result = DateUtil.dateToRelativeTime(date);
+
+      expect(result).toEqual('in a year');
+    });
+  });
+
+  describe('#strToMs', function () {
+    it('returns value of date in ms', function () {
+      expect(DateUtil.strToMs('1990-01-03T00:00:00Z-1')).toEqual(631324800000);
+    });
+
+    it('returns null if the string is undefined or null', function () {
+      expect(DateUtil.strToMs(null)).toEqual(null);
+      expect(DateUtil.strToMs(undefined)).toEqual(null);
+    });
+  });
 });

@@ -1,4 +1,9 @@
 const TaskStates = {
+  TASK_CREATED: {
+    stateTypes: ['active', 'success'],
+    displayName: 'Created'
+  },
+
   TASK_STAGING: {
     stateTypes: ['active', 'success'],
     displayName: 'Staging'
@@ -7,6 +12,11 @@ const TaskStates = {
   TASK_STARTING: {
     stateTypes: ['active', 'success'],
     displayName: 'Starting'
+  },
+
+  TASK_STARTED: {
+    stateTypes: ['active', 'success'],
+    displayName: 'Running'
   },
 
   TASK_RUNNING: {

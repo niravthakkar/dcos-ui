@@ -29,7 +29,11 @@ class HealthBar extends React.Component {
       return (
         <div key={index}>
           <span className={classSet} />
-          {` ${tasksSummary[task]} ${HealthBarStates[task].label} (${percentage} %)`}
+          {` ${tasksSummary[task]} ${HealthBarStates[task].label} `}
+          <span className="health-bar-tooltip-instances-total">
+            of {instancesCount}
+          </span>
+          {` (${percentage}%)`}
         </div>
       );
     });
@@ -55,7 +59,7 @@ class HealthBar extends React.Component {
     }
 
     return (
-      <Tooltip content={this.renderToolTip()}>
+      <Tooltip interactive={true} content={this.renderToolTip()}>
         <StatusBar
           data={this.getMappedTasksSummary(tasksSummary)}
           scale={instancesCount}/>

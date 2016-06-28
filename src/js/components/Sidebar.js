@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var classNames = require('classnames');
 var GeminiScrollbar = require('react-gemini-scrollbar');
 var Link = require('react-router').Link;
@@ -9,15 +8,25 @@ import {Tooltip} from 'reactjs-components';
 import ClusterHeader from './ClusterHeader';
 import Config from '../config/Config';
 var EventTypes = require('../constants/EventTypes');
+import Icon from './Icon';
 import IconDCOSLogoMark from './icons/IconDCOSLogoMark';
-import PluginSDK from 'PluginSDK';
-
+import {keyCodes} from '../utils/KeyboardUtil';
 var InternalStorageMixin = require('../mixins/InternalStorageMixin');
 var MesosSummaryStore = require('../stores/MesosSummaryStore');
-var MetadataStore = require('../stores/MetadataStore');
+import MetadataStore from '../stores/MetadataStore';
+import NotificationStore from '../stores/NotificationStore';
+import PluginSDK from 'PluginSDK';
 var SidebarActions = require('../events/SidebarActions');
 
-let defaultMenuItems = ['dashboard', 'services', 'nodes-list', 'universe', 'system'];
+let defaultMenuItems = [
+  'dashboard',
+  'services-page',
+  'jobs-page',
+  'nodes-list',
+  'network',
+  'universe',
+  'system'
+];
 
 let {Hooks} = PluginSDK;
 
@@ -31,6 +40,12 @@ var Sidebar = React.createClass({
     router: React.PropTypes.func
   },
 
+  getInitialState: function () {
+    // TODO: Use SaveState mixin to remember the user's preference.
+    // https://mesosphere.atlassian.net/browse/DCOS-6909
+    return {sidebarExpanded: true};
+  },
+
   componentDidMount: function () {
     this.internalStorage_update({
       mesosInfo: MesosSummaryStore.get('states').lastSuccessful()
@@ -40,6 +55,8 @@ var Sidebar = React.createClass({
       EventTypes.DCOS_METADATA_CHANGE,
       this.onDCOSMetadataChange
     );
+
+    global.window.addEventListener('keydown', this.handleKeyPress, true);
   },
 
   componentWillUnmount: function () {
@@ -47,6 +64,8 @@ var Sidebar = React.createClass({
       EventTypes.DCOS_METADATA_CHANGE,
       this.onDCOSMetadataChange
     );
+
+    global.window.removeEventListener('keydown', this.handleKeyPress, true);
   },
 
   onDCOSMetadataChange: function () {
@@ -56,6 +75,19 @@ var Sidebar = React.createClass({
   handleInstallCLI: function () {
     SidebarActions.close();
     SidebarActions.openCliInstructions();
+  },
+
+  handleKeyPress: function (event) {
+    let nodeName = event.target.nodeName;
+    if (event.keyCode === keyCodes.leftBracket
+      && !(nodeName === 'INPUT' || nodeName === 'TEXTAREA')) {
+      // #sidebarWidthChange is passed as a callback so that the sidebar
+      // has had a chance to update before Gemini re-renders.
+      this.setState(
+        {sidebarExpanded: !this.state.sidebarExpanded},
+        SidebarActions.sidebarWidthChange
+      );
+    }
   },
 
   handleVersionClick: function () {
@@ -71,35 +103,48 @@ var Sidebar = React.createClass({
       defaultMenuItems
     );
 
-    return _.map(menuItems, function (routeKey) {
+    return menuItems.map((routeKey) => {
+      let notificationCount = NotificationStore.getNotificationCount(routeKey);
       var route = this.context.router.namedRoutes[routeKey];
       // Figure out if current route is active
       var isActive = route.handler.routeConfig.matches.test(currentPath);
-      var iconClasses = {
-        'sidebar-menu-item-icon icon icon-sprite icon-sprite-medium': true,
-        'icon-sprite-medium-color': isActive,
-        'icon-sprite-medium-black': !isActive
-      };
-
-      iconClasses[`icon-${route.handler.routeConfig.icon}`] = true;
+      let icon = React.cloneElement(
+        route.handler.routeConfig.icon,
+        {className: 'sidebar-menu-item-icon icon icon-medium'}
+      );
 
       var itemClassSet = classNames({
         'sidebar-menu-item': true,
         'selected': isActive
       });
 
+      let sidebarText = (
+        <span className="sidebar-menu-item-label h4 flush">
+          {route.handler.routeConfig.label}
+        </span>
+      );
+
+      if (notificationCount > 0) {
+        sidebarText = (
+          <span className="sidebar-menu-item-label h4 flush badge-container badge-primary">
+            <span className="sidebar-menu-item-label-text">
+              {route.handler.routeConfig.label}
+            </span>
+            <span className="badge text-align-center">{notificationCount}</span>
+          </span>
+        );
+      }
+
       return (
         <li className={itemClassSet} key={route.name}>
           <Link to={route.name}>
-            <i className={classNames(iconClasses)}></i>
-            <span className="sidebar-menu-item-label h4 flush">
-              {route.handler.routeConfig.label}
-            </span>
+            {icon}
+            {sidebarText}
           </Link>
         </li>
       );
 
-    }, this);
+    });
   },
 
   getVersion() {
@@ -116,15 +161,15 @@ var Sidebar = React.createClass({
   getFooter() {
     let defaultButtonSet = [(
       <Tooltip content="Documentation" key="button-docs" elementTag="a"
-        href={`${Config.documentationURI}/`} target="_blank"
+        href={MetadataStore.buildDocsURI('/')} target="_blank"
         wrapperClassName="button button-link tooltip-wrapper">
-        <i className="icon icon-sprite icon-documents icon-sprite-medium clickable"></i>
+        <Icon className="clickable" id="pages" />
       </Tooltip>
     ), (
       <Tooltip content="Install CLI"
         key="button-cli" elementTag="a" onClick={this.handleInstallCLI}
         wrapperClassName="button button-link tooltip-wrapper">
-        <i className="icon icon-sprite icon-cli icon-sprite-medium clickable"></i>
+        <Icon className="clickable" id="cli" />
       </Tooltip>
     )];
 
@@ -141,19 +186,21 @@ var Sidebar = React.createClass({
   },
 
   render: function () {
+    let sidebarClasses = classNames('sidebar flex-container-col', {
+      'is-expanded': this.state.sidebarExpanded
+    });
+
     return (
-      <div className="sidebar flex-container-col">
+      <div className={sidebarClasses}>
         <div className="sidebar-header">
           <ClusterHeader />
         </div>
         <GeminiScrollbar autoshow={true} className="sidebar-content container-scrollable">
           <div className="sidebar-content-wrapper">
             <nav className="sidebar-navigation">
-              <div className="container container-fluid container-fluid-narrow">
-                <ul className="sidebar-menu list-unstyled">
-                  {this.getMenuItems()}
-                </ul>
-              </div>
+              <ul className="sidebar-menu list-unstyled flush-bottom">
+                {this.getMenuItems()}
+              </ul>
             </nav>
             <div className="container container-fluid container-pod container-pod-short sidebar-logo-container">
               <div className="sidebar-footer-image">

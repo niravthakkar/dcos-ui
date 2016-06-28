@@ -1,5 +1,5 @@
-var _ = require('underscore');
 var classNames = require('classnames');
+import deepEqual from 'deep-equal';
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 import {StoreMixin} from 'mesosphere-shared-reactjs';
@@ -8,7 +8,6 @@ var Config = require('../config/Config');
 import ConfigStore from '../stores/ConfigStore';
 import EventTypes from '../constants/EventTypes';
 import HistoryStore from '../stores/HistoryStore';
-import IconDCOSLogoMark from '../components/icons/IconDCOSLogoMark';
 var InternalStorageMixin = require('../mixins/InternalStorageMixin');
 var MetadataStore = require('../stores/MetadataStore');
 var MesosSummaryStore = require('../stores/MesosSummaryStore');
@@ -42,7 +41,6 @@ var Index = React.createClass({
 
   componentWillMount: function () {
     HistoryStore.init();
-    MesosSummaryStore.init();
     MetadataStore.init();
     SidebarStore.init();
 
@@ -55,7 +53,6 @@ var Index = React.createClass({
     }];
 
     let state = getSidebarState();
-    state.metadataLoaded = false;
     this.internalStorage_set(state);
   },
 
@@ -68,15 +65,11 @@ var Index = React.createClass({
     ConfigStore.addChangeListener(
       EventTypes.CONFIG_ERROR, this.onConfigError
     );
-
-    MetadataStore.addChangeListener(
-      EventTypes.METADATA_CHANGE, this.onMetadataStoreSuccess
-    );
   },
 
   shouldComponentUpdate: function (nextProps, nextState) {
-    return !(_.isEqual(this.props, nextProps) &&
-        _.isEqual(this.state, nextState));
+    return !(deepEqual(this.props, nextProps) &&
+        deepEqual(this.state, nextState));
   },
 
   componentWillUnmount: function () {
@@ -89,20 +82,12 @@ var Index = React.createClass({
       EventTypes.CONFIG_ERROR, this.onConfigError
     );
 
-    MetadataStore.removeChangeListener(
-      EventTypes.METADATA_CHANGE, this.onMetadataStoreSuccess
-    );
-
     MesosSummaryStore.unmount();
   },
 
   onSideBarChange: function () {
     this.internalStorage_update(getSidebarState());
     this.forceUpdate();
-  },
-
-  onMetadataStoreSuccess: function () {
-    this.internalStorage_update({'metadataLoaded': true});
   },
 
   onConfigError: function () {
@@ -114,16 +99,9 @@ var Index = React.createClass({
   },
 
   onSummaryStoreSuccess: function () {
-    let prevStatesProcessed = this.internalStorage_get().statesProcessed;
-
     // Reset count as we've just received a successful response
     if (this.state.mesosSummaryErrorCount > 0) {
       this.setState({mesosSummaryErrorCount: 0});
-    } else if (!prevStatesProcessed) {
-      // This conditional is needed to remove the loading screen after
-      // receiving a successful server response. This forceupdate should only
-      // run once, otherwise the whole application will update.
-      this.forceUpdate();
     }
   },
 
@@ -131,18 +109,6 @@ var Index = React.createClass({
     this.setState({
       mesosSummaryErrorCount: this.state.mesosSummaryErrorCount + 1
     });
-  },
-
-  getLoadingScreen: function (showLoadingScreen) {
-    if (!showLoadingScreen) {
-      return null;
-    }
-
-    return (
-      <div className="application-loading-indicator container container-pod vertical-center">
-        <IconDCOSLogoMark />
-      </div>
-    );
   },
 
   getErrorScreen: function (showErrorScreen) {
@@ -153,15 +119,14 @@ var Index = React.createClass({
     return <RequestErrorMsg />;
   },
 
-  getScreenOverlays: function (showLoadingScreen, showErrorScreen) {
-    if (!showLoadingScreen && !showErrorScreen) {
+  getScreenOverlays: function (showErrorScreen) {
+    if (!showErrorScreen) {
       return null;
     }
 
     return (
       <div className="container container-pod vertical-center">
         {this.getErrorScreen(showErrorScreen)}
-        {this.getLoadingScreen(showLoadingScreen)}
       </div>
     );
   },
@@ -169,10 +134,7 @@ var Index = React.createClass({
   render: function () {
     var data = this.internalStorage_get();
     let showErrorScreen =
-      (this.state.mesosSummaryErrorCount >= Config.delayAfterErrorCount)
-      || (this.state.configErrorCount >= Config.delayAfterErrorCount);
-    let showLoadingScreen = !showErrorScreen
-      && (!MesosSummaryStore.get('statesProcessed') || !data.metadataLoaded);
+      this.state.configErrorCount >= Config.delayAfterErrorCount;
 
     var classSet = classNames({
       'canvas-sidebar-open': data.isOpen
@@ -183,6 +145,7 @@ var Index = React.createClass({
     if (!content) {
       content = (
         <div id="canvas" className={classSet}>
+          {this.getScreenOverlays(showErrorScreen)}
           <Sidebar />
           <RouteHandler />
         </div>

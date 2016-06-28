@@ -49,12 +49,17 @@ class ServiceSearchFilter extends mixin(QueryParamsMixin) {
   render() {
     return (
       <FilterInputText
+        className="flush-bottom"
         handleFilterChange={this.setSearchString}
         inverseStyle={true}
         placeholder="Search"
         searchString={this.state.searchString} />
     );
   }
+};
+
+ServiceSearchFilter.propTypes = {
+  handleFilterChange: React.PropTypes.func.isRequired
 };
 
 module.exports = ServiceSearchFilter;
