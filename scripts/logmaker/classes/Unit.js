@@ -1,4 +1,4 @@
-let utils = require('../utils.js')
+import Util from '../Util.js';
 
 let address = null
 
@@ -12,7 +12,7 @@ class Unit {
   }
 
   write() {
-    utils.write(`./logmaker/out/unit-${address}.json`, this)
+    Util.write(`unit-${address}.json`, this)
   }
 }
 

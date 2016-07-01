@@ -1,13 +1,13 @@
-let utils = require('../utils.js')
+import Util from '../Util.js';
 
 class Nodes {
 	constructor(nodes) {
-		this.nodes = nodes
+		this.nodes = nodes;
 	}
 
 	write() {
-		utils.write('./logmaker/out/nodes.json', this)
+		Util.write('nodes.json', this);
 	}
 }
 
-module.exports = Nodes
+module.exports = Nodes;

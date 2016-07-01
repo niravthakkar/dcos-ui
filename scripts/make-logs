@@ -1,3 +1,5 @@
-#!/usr/bin/env babel-node
+#!/usr/bin/env node
 
-var s = require('./logmaker/summary.js');
+require('babel-register');
+require('babel-polyfill');
+require('./logmaker/summary.js');

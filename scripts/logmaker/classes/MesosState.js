@@ -1,11 +1,11 @@
-let utils = require('../utils.js')
+import Util from '../Util.js';
 
 const deleteList =  ['TASK_STAGING', 'TASK_STARTING', 'TASK_RUNNING', 'TASK_FINISHED', 'TASK_KILLED', 'TASK_FAILED', 'TASK_LOST', 'TASK_ERROR', 'framework_ids']
 
 function _transformSlaves(slaves) {
 	let slavesBasic = []
 	for (let slave of slaves) {
-		let trimmed = utils.trim(slave, deleteList)
+		let trimmed = Util.trim(slave, deleteList)
 		slavesBasic.push(trimmed)
 	}
 
@@ -16,7 +16,7 @@ function _transformFrameworks(frameworks) {
 	let frameworksNew = []
 	for (let framework of frameworks) {
 		// remove old props
-		let trimmed = utils.trim(framework, deleteList)
+		let trimmed = Util.trim(framework, deleteList)
 
 		// add new props
 		trimmed.failover_timeout = 604800
@@ -45,7 +45,7 @@ class MesosState {
 		this.start_time = Date.now()
 		this.elected_time = Date.now()
 		this.id = tag
-		this.hostname = utils.getIp4Address()
+		this.hostname = Util.getIp4Address()
 		this.pid = 'master@' + this.hostname + ':5050'
 		this.activited_slaves = slaves.length
 		this.deactivated_slaves = 0
@@ -63,7 +63,7 @@ class MesosState {
 	}
 
 	write() {
-		utils.write('./logmaker/out/mesosState.json', this)
+		Util.write('mesosState.json', this)
 	}
 }
 

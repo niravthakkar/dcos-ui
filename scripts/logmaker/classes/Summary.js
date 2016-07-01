@@ -1,15 +1,15 @@
-let utils = require('../utils.js')
+import Util from '../Util.js';
 
 class Summary {
 	constructor(slaves, frameworks) {
-		this.hostname = utils.getIp4Address()
+		this.hostname = Util.getIp4Address()
 		this.cluser = 'andrew-viz'
 		this.slaves = slaves
 		this.frameworks = frameworks
 	}
 
 	write() {
-		utils.write('./logmaker/out/summary.json', this)
+		Util.write('summary.json', this)
 	}
 }
 

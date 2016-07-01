@@ -1,19 +1,19 @@
-let utils = require('../utils.js')
-let MarathonTask = require('./MarathonTask.js')
-let Task = require('./Task.js')
+import MarathonTask from './MarathonTask.js';
+import Task from './Task.js';
+import Util from '../Util.js';
 
 class Framework {
 	constructor(tag, number, name, options = {cpus: 6.4, gpus: 0, mem: 4000, disk: 32000, tasks: 10}) {
 		this.id = tag + '0000'.substring((number + '').length) + number
 		this.name = name
-		this.hostname = utils.getIp4Address()
+		this.hostname = Util.getIp4Address()
 		this.pid =  'scheduler-' +
-					new Array(8).fill('').map(() => utils.getChar()).join('') + '-' +
-					new Array(4).fill('').map(() => utils.getChar()).join('') + '-' +
-					new Array(4).fill('').map(() => utils.getChar()).join('') + '-' +
-					new Array(4).fill('').map(() => utils.getChar()).join('') + '-' +
-					new Array(12).fill('').map(() => utils.getChar()).join('') + '@' +
-					this.hostname + ':' + utils.getRandomInteger(100, 90000)
+					new Array(8).fill('').map(() => Util.getChar()).join('') + '-' +
+					new Array(4).fill('').map(() => Util.getChar()).join('') + '-' +
+					new Array(4).fill('').map(() => Util.getChar()).join('') + '-' +
+					new Array(4).fill('').map(() => Util.getChar()).join('') + '-' +
+					new Array(12).fill('').map(() => Util.getChar()).join('') + '@' +
+					this.hostname + ':' + Util.getRandomInteger(100, 90000)
 		this.used_resources = {
 			cpus: options.cpus,
 			gpus: options.gpus,
@@ -50,10 +50,10 @@ class Framework {
 		// scheduler task
 		// 1 scheduler, using 1 share of resource
 		tasks.push(new Task(
-			utils.roundTenth(cpuEven),
-			utils.roundTenth(gpuEven),
-			utils.roundTenth(memEven),
-			utils.roundTenth(diskEven),
+			Util.roundTenth(cpuEven),
+			Util.roundTenth(gpuEven),
+			Util.roundTenth(memEven),
+			Util.roundTenth(diskEven),
 			this.id, // framework id
 			'scheduler-' + this.name // id of task
 		))
@@ -62,10 +62,10 @@ class Framework {
 		// 2 are big, using 4 shares of resource
 		for (let i = 0; i < 2; i++) {
 				tasks.push(new Task(
-					utils.roundTenth(cpuEven * 2),
-					utils.roundTenth(gpuEven * 2),
-					utils.roundTenth(memEven * 2),
-					utils.roundTenth(diskEven * 2),
+					Util.roundTenth(cpuEven * 2),
+					Util.roundTenth(gpuEven * 2),
+					Util.roundTenth(memEven * 2),
+					Util.roundTenth(diskEven * 2),
 					this.id, // framework id
 					this.name + i // id of the task, will be unique
 			))
@@ -75,10 +75,10 @@ class Framework {
 		// 3 are normal, using 3 shares of resource
 		for (let i = 2; i < 5; i++) {
 				tasks.push(new Task(
-					utils.roundTenth(cpuEven),
-					utils.roundTenth(gpuEven),
-					utils.roundTenth(memEven),
-					utils.roundTenth(diskEven),
+					Util.roundTenth(cpuEven),
+					Util.roundTenth(gpuEven),
+					Util.roundTenth(memEven),
+					Util.roundTenth(diskEven),
 					this.id, // framework id
 					this.name + i // id of the task, will be unique
 			))
@@ -88,10 +88,10 @@ class Framework {
 		// 4 are small, using last 2 shares of resource
 		for (let i = 6; i < 10; i++) {
 				tasks.push(new Task(
-					utils.roundTenth(cpuEven / 2),
-					utils.roundTenth(gpuEven / 2),
-					utils.roundTenth(memEven / 2),
-					utils.roundTenth(diskEven / 2),
+					Util.roundTenth(cpuEven / 2),
+					Util.roundTenth(gpuEven / 2),
+					Util.roundTenth(memEven / 2),
+					Util.roundTenth(diskEven / 2),
 					this.id, // framework id
 					this.name + i // id of the task, will be unique
 			))

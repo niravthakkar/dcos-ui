@@ -1,70 +1,83 @@
 /*
-Generate fixture data.
-
-Make random number of frameworks, with varying number of tasks each.
-A random number of slaves will be created.
-The tasks are gaurenteed to fit on the slaves because more are created if not enough space.
-
-User input:
-- # frameworks
-- degree of varience of framework size
-- variance of task size
+ * Generate fixture data.
+ *
+ * Make random number of frameworks, with varying number of tasks each.
+ * A random number of slaves will be created.
+ * The tasks are guaranteed to fit on the slaves because more are created
+ * if there's not enough space.
+ *
+ * User input:
+ * - # frameworks
+ * - degree of varience of framework size
+ * - variance of task size
 */
 
-let Framework = require('./classes/Framework.js')
-let Slave = require('./classes/Slave.js')
-let Summary = require('./classes/Summary.js')
-let Task = require('./classes/Task.js')
-let MarathonTask = require('./classes/MarathonTask.js')
-let MarathonGroups = require('./classes/MarathonGroups.js')
-let MesosState = require('./classes/MesosState.js')
-let Units = require('./classes/Units.js')
-let Unit = require('./classes/Unit.js')
-let Nodes = require('./classes/Nodes.js')
-let Node = require('./classes/Node.js')
-let utils = require('./utils.js')
+import Framework from './classes/Framework.js';
+import MarathonTask from './classes/MarathonTask.js';
+import MarathonGroups from './classes/MarathonGroups.js';
+import Nodes from './classes/Nodes.js';
+import Node from './classes/Node.js';
+import MesosState from './classes/MesosState.js';
+import Slave from './classes/Slave.js';
+import Summary from './classes/Summary.js';
+import Task from './classes/Task.js';
+import Units from './classes/Units.js';
+import Unit from './classes/Unit.js';
+import Util from './Util.js';
+import yargs from 'yargs';
 
-
-/************** CLI ARGS *****************/
-let numberSlaves = process.argv[2]
-let numberFrameworks = Math.min(process.argv[3], 10) // must be less than 10
-let numberApps = process.argv[4]
-
-
+let argv = yargs
+  .usage('Usage: $0 [options]')
+  .example('$0 -s 2 -a 5000 -f 8', '20 Slaves, 8 Frameworks, 5000 Apps')
+  .option('s', {
+    alias: 'slaves',
+    demand: true,
+    describe: 'Number of Slaves',
+    type: 'number'
+  })
+  .option('a', {
+    alias: 'apps',
+    default: 0,
+    describe: 'Number of Apps',
+    type: 'number'
+  })
+  .option('f', {
+    alias: 'frameworks',
+    default: 0,
+    describe: 'Number of Frameworks',
+    type: 'number'
+  })
+  .help('h')
+  .alias('h', 'help')
+  .demand(['s', 'a', 'f'])
+  .argv;
 
 /*********** MAKE FRAMEWORKS **************/
-
-const tag = utils.getTag()
-let frameworks = []
+const tag = Util.getTag();
+let frameworks = [];
 
 frameworks.push(new Framework(tag, 0, 'marathon', {
 	cpus: 4,
 	gpus: 0,
 	mem: 4000,
 	disk: 32000,
-	tasks: numberApps
-}))
+	tasks: argv.apps
+}));
 
-const names = ['arangodb', 'cassandra', 'chronos', 'jenkins', 'kafka', 'spark', 'elasticsearch', 'calico', 'hdfs', 'mysql']
-for (let i = 0; i < numberFrameworks; i++) {
-	let index = utils.getRandomInteger(0, names.length - 1)
-	frameworks.push(new Framework(tag, frameworks.length, names[index]))
-	names.splice(index, 1)
+const names = ['arangodb', 'cassandra', 'chronos', 'jenkins', 'kafka', 'spark', 'elasticsearch', 'calico', 'hdfs', 'mysql'];
+for (let i = 0; i < argv.frameworks; i++) {
+	let index = Util.getRandomInteger(0, names.length - 1);
+	frameworks.push(new Framework(tag, frameworks.length, names[index]));
+	names.splice(index, 1);
 }
 
-
-
 /************** MAKE SLAVES **************/
-
 let slaves = []
-for (let i = 0; i < numberSlaves; i++) {
+for (let i = 0; i < argv.slaves; i++) {
 	slaves.push(new Slave(tag, slaves.length))
 }
 
-
-
 /************* SCHEDULE ALL *************/
-
 let tasks = []
 
 for (let f of frameworks) {
@@ -109,14 +122,11 @@ while (tasks.length > 0) {
 	}
 }
 
-
 /*************** SUMMARY JSON *******************/
-
 let summary = new Summary(slaves, frameworks)
 summary.write()
 
 /*************** MARATHON GROUPS JSON *************/
-
 let marathonTasks = []
 
 // one scheduler for each framework (except marathon)
@@ -129,14 +139,11 @@ let marathonGroups = new MarathonGroups(marathonTasks)
 marathonGroups.write()
 
 /**************** MESOS STATE JSON ****************/
-
 let mesosState = new MesosState(tag, slaves, frameworks)
 mesosState.write()
 
 /**************** NODE HEALTH ****************/
-
 // /nodes (master and all slaves)
-
 let n = []
 let master = {
 	host_ip: mesosState.hostname,
@@ -155,23 +162,14 @@ for (let ip of slaves.map((s) => s.hostname)) { // slaves
 let nodes = new Nodes(n)
 nodes.write()
 
-
 // nodes/<ip-of-node> (for now pick master)
-
 let node = new Node(master)
 node.write()
 
-
 // nodes/<ip-of-node>/units (also pick master)
-
 let units = new Units(mesosState.hostname)
 units.write()
 
-
 // node/<ip-of-node>/units/<unit-id> (also pick master first unit)
-
 let unit = new Unit(mesosState.hostname)
 unit.write()
-
-
-

@@ -1,4 +1,4 @@
-let utils = require('../utils.js')
+import Util from '../Util.js';
 
 class MarathonGroups {
 	constructor(marathonTasks) {
@@ -10,7 +10,7 @@ class MarathonGroups {
 	}
 
 	write() {
-		utils.write('./logmaker/out/marathonGroups.json', this)
+		Util.write('marathonGroups.json', this)
 	}
 }
 

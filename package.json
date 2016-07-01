@@ -103,7 +103,8 @@
     "vinyl": "1.1.1",
     "webpack": "1.13.0",
     "webpack-dev-server": "1.14.1",
-    "webpack-notifier": "1.3.0"
+    "webpack-notifier": "1.3.0",
+    "yargs": "^4.7.1"
   },
   "scripts": {
     "clean": "rm -rf dist",

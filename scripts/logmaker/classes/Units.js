@@ -1,7 +1,7 @@
-let utils = require('../utils.js')
-let Unit = require('./Unit.js')
+import Unit from './Unit.js';
+import Util from '../Util.js';
 
-let address = null
+let address = null;
 
 function populateUnits() {
   let units = []
@@ -18,8 +18,8 @@ class Units {
   }
 
   write() {
-    utils.write(`./logmaker/out/units-${address}.json`, this)
+    Util.write(`units-${address}.json`, this)
   }
 }
 
-module.exports = Units
+module.exports = Units;
