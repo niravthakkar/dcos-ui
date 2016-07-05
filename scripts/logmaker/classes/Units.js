@@ -4,21 +4,21 @@ import Util from '../Util.js';
 let address = null;
 
 function populateUnits() {
-  let units = []
-  units.push(new Unit('dcos-cluster-id.service', 'Cluster ID', 0, 'Generates anonymous DCOS Cluster ID'))
-  units.push(new Unit('dcos-adminrouter-reload.service', 'Admin Router Reloader', 0, 'Reload admin router to get new DNS'))
+  let units = [];
+  units.push(new Unit('dcos-cluster-id.service', 'Cluster ID', 0, 'Generates anonymous DCOS Cluster ID'));
+  units.push(new Unit('dcos-adminrouter-reload.service', 'Admin Router Reloader', 0, 'Reload admin router to get new DNS'));
 
-  return units
+  return units;
 }
 
 class Units {
   constructor(ip) {
-    address = ip
-    this.units = populateUnits()
+    address = ip;
+    this.units = populateUnits();
   }
 
   write() {
-    Util.write(`units-${address}.json`, this)
+    Util.write(`units-${address}.json`, this);
   }
 }
 

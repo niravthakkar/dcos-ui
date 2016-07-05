@@ -72,104 +72,104 @@ for (let i = 0; i < argv.frameworks; i++) {
 }
 
 /************** MAKE SLAVES **************/
-let slaves = []
+let slaves = [];
 for (let i = 0; i < argv.slaves; i++) {
-	slaves.push(new Slave(tag, slaves.length))
+	slaves.push(new Slave(tag, slaves.length));
 }
 
 /************* SCHEDULE ALL *************/
-let tasks = []
+let tasks = [];
 
 for (let f of frameworks) {
-	tasks = tasks.concat(f.tasks)
+	tasks = tasks.concat(f.tasks);
 }
 
-let slaveIndex = 0
+let slaveIndex = 0;
 while (tasks.length > 0) {
-	let task = tasks.pop()
+	let task = tasks.pop();
 
 	// find slave with enough space
-	let slave = slaves[slaveIndex]
-	let start = slaveIndex
+	let slave = slaves[slaveIndex];
+	let start = slaveIndex;
 	while (!slave.hasSpaceForTask(task)) {
 		// circular iteration
-		slaveIndex += 1
+		slaveIndex += 1;
 		if (slaveIndex >= slaves.length) {
-			slaveIndex = 0
+			slaveIndex = 0;
 		}
-		slave = slaves[slaveIndex]
+		slave = slaves[slaveIndex];
 
 		// no slaves have space for task, make a new slave and schedule task on it
 		if (slaveIndex === start) {
-			let emptySlave = new Slave(tag, slaves.length)
-			slaves.push(emptySlave)
-			slave = emptySlave
+			let emptySlave = new Slave(tag, slaves.length);
+			slaves.push(emptySlave);
+			slave = emptySlave;
 			break;
 		}
 	}
 
-	slave.scheduleTask(task)
+	slave.scheduleTask(task);
 
 	for (let f of frameworks) {
 		if (f.id === task.framework_id && !f.slave_ids.includes(slave.id)) {
-			f.slave_ids.push(slave.id)
+			f.slave_ids.push(slave.id);
 		}
 	}
 
-	slaveIndex += 1
+	slaveIndex += 1;
 	if (slaveIndex >= slaves.length) {
-		slaveIndex = 0
+		slaveIndex = 0;
 	}
 }
 
 /*************** SUMMARY JSON *******************/
-let summary = new Summary(slaves, frameworks)
-summary.write()
+let summary = new Summary(slaves, frameworks);
+summary.write();
 
 /*************** MARATHON GROUPS JSON *************/
-let marathonTasks = []
+let marathonTasks = [];
 
 // one scheduler for each framework (except marathon)
 for (let f of frameworks) {
-	if (f.name === 'marathon') continue
-	marathonTasks.push(f.getMarathonTask())
+	if (f.name === 'marathon') continue;
+	marathonTasks.push(f.getMarathonTask());
 }
 
-let marathonGroups = new MarathonGroups(marathonTasks)
-marathonGroups.write()
+let marathonGroups = new MarathonGroups(marathonTasks);
+marathonGroups.write();
 
 /**************** MESOS STATE JSON ****************/
-let mesosState = new MesosState(tag, slaves, frameworks)
-mesosState.write()
+let mesosState = new MesosState(tag, slaves, frameworks);
+mesosState.write();
 
 /**************** NODE HEALTH ****************/
 // /nodes (master and all slaves)
-let n = []
+let n = [];
 let master = {
 	host_ip: mesosState.hostname,
 	health: 0,
 	role: 'master'
-}
-n.push(master)
+};
+n.push(master);
 for (let ip of slaves.map((s) => s.hostname)) { // slaves
 	n.push({
 		host_ip: ip,
 		health: 0,
 		role: 'agent'
-	})
+	});
 }
 
-let nodes = new Nodes(n)
-nodes.write()
+let nodes = new Nodes(n);
+nodes.write();
 
 // nodes/<ip-of-node> (for now pick master)
-let node = new Node(master)
-node.write()
+let node = new Node(master);
+node.write();
 
 // nodes/<ip-of-node>/units (also pick master)
-let units = new Units(mesosState.hostname)
-units.write()
+let units = new Units(mesosState.hostname);
+units.write();
 
 // node/<ip-of-node>/units/<unit-id> (also pick master first unit)
-let unit = new Unit(mesosState.hostname)
-unit.write()
+let unit = new Unit(mesosState.hostname);
+unit.write();

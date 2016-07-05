@@ -2,15 +2,15 @@ import Util from '../Util.js';
 
 class Summary {
 	constructor(slaves, frameworks) {
-		this.hostname = Util.getIp4Address()
-		this.cluser = 'andrew-viz'
-		this.slaves = slaves
-		this.frameworks = frameworks
+		this.hostname = Util.getIp4Address();
+		this.cluser = 'andrew-viz';
+		this.slaves = slaves;
+		this.frameworks = frameworks;
 	}
 
 	write() {
-		Util.write('summary.json', this)
+		Util.write('summary.json', this);
 	}
 }
 
-module.exports = Summary
+module.exports = Summary;

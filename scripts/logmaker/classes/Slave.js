@@ -49,22 +49,22 @@ class Slave {
     return  task.resources.cpus <= (this.resources.cpus - this.used_resources.cpus) &&
         task.resources.gpus <= (this.resources.gpus - this.used_resources.gpus) &&
         task.resources.mem <= (this.resources.mem - this.used_resources.mem)   &&
-        task.resources.disk <= (this.resources.disk - this.used_resources.disk)
+        task.resources.disk <= (this.resources.disk - this.used_resources.disk);
   }
 
   scheduleTask(task) {
-    this.used_resources.cpus = Util.roundTenth(task.resources.cpus + this.used_resources.cpus)
-    this.used_resources.gpus = Util.roundTenth(task.resources.gpus + this.used_resources.gpus)
-    this.used_resources.mem = Util.roundTenth(task.resources.mem + this.used_resources.mem)
-    this.used_resources.disk = Util.roundTenth(task.resources.disk + this.used_resources.disk)
+    this.used_resources.cpus = Util.roundTenth(task.resources.cpus + this.used_resources.cpus);
+    this.used_resources.gpus = Util.roundTenth(task.resources.gpus + this.used_resources.gpus);
+    this.used_resources.mem = Util.roundTenth(task.resources.mem + this.used_resources.mem);
+    this.used_resources.disk = Util.roundTenth(task.resources.disk + this.used_resources.disk);
 
-    this.TASK_RUNNING += 1
+    this.TASK_RUNNING += 1;
 
     // update the slave id on the task
-    task.slave_id = this.id
+    task.slave_id = this.id;
 
     if (!this.framework_ids.includes(task.framework_id)) {
-      this.framework_ids.push(task.framework_id)
+      this.framework_ids.push(task.framework_id);
     }
   }
 }
