@@ -5,7 +5,7 @@ class Slave {
     cpus: 6.4, gpus: 2, mem: 16000, disk: 256000
   }) {
     this.id = `${tag}S${number}`;
-    this.hostname = Util.getIp4Address();
+    this.hostname = Util.generateIPv4Address();
     this.pid = `slave(1)@${this.hostname}:5051`;
     this.registered_time = Date.now();
     this.resources = {

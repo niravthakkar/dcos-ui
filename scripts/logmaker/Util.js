@@ -6,7 +6,7 @@ module.exports = {
 		return Math.floor(Math.random() * (high - low + 1)) + low;
 	},
 
-	getIp4Address: function() {
+	generateIPv4Address: function() {
 		let hostPart1 = this.getRandomInteger(0, 9);
 		let hostPart2 = this.getRandomInteger(0,255);
 		return `10.0.${hostPart1}.${hostPart2}`;

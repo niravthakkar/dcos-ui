@@ -45,8 +45,8 @@ class MesosState {
 		this.start_time = Date.now();
 		this.elected_time = Date.now();
 		this.id = tag;
-		this.hostname = Util.getIp4Address();
-		this.pid = 'master@' + this.hostname + ':5050';
+		this.hostname = Util.generateIPv4Address();
+		this.pid = `master@${this.hostname}:5050`;
 		this.activited_slaves = slaves.length;
 		this.deactivated_slaves = 0;
 		this.cluster = 'andrew-viz';
