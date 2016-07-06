@@ -186,7 +186,7 @@ var Sidebar = React.createClass({
   },
 
   render: function () {
-    let sidebarClasses = classNames('sidebar flex-container-col', {
+    let sidebarClasses = classNames('sidebar', {
       'is-expanded': this.state.sidebarExpanded
     });
 
