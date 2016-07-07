@@ -1,6 +1,8 @@
 import classNames from 'classnames/dedupe';
 import React from 'react';
 
+import CollapsingString from './CollapsingString';
+
 class PageHeader extends React.Component {
 
   getIcon() {
@@ -37,7 +39,9 @@ class PageHeader extends React.Component {
     );
 
     return (
-      <h1 className={titleClasses}>{title}</h1>
+      <h1 className={titleClasses}>
+        <CollapsingString string={title} />
+      </h1>
     );
   }
 

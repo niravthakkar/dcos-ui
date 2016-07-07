@@ -10,6 +10,7 @@ import {StoreMixin} from 'mesosphere-shared-reactjs';
 import {Table} from 'reactjs-components';
 
 import AlertPanel from '../../components/AlertPanel';
+import CollapsingString from '../../components/CollapsingString';
 import DCOSStore from '../../stores/DCOSStore';
 import Icon from '../../components/Icon';
 import MarathonActions from '../../events/MarathonActions';
@@ -94,7 +95,9 @@ class DeploymentsTab extends mixin(StoreMixin) {
   renderAffectedServices(prop, deployment) {
     return (
       <dl className="deployment-services-list flush-top flush-bottom tree-list">
-        <dt className="deployment-id text-uppercase">{deployment.getId()}</dt>
+        <dt className="deployment-id text-uppercase">
+          <CollapsingString string={deployment.getId()} />
+        </dt>
         {this.renderAffectedServicesList(deployment.getAffectedServices())}
       </dl>
     );

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import {Link} from 'react-router';
 import React from 'react';
 
+import CollapsingString from '../../components/CollapsingString';
 import DateUtil from '../../utils/DateUtil';
 import ExpandingTable from '../../components/ExpandingTable';
 import FilterHeadline from '../../components/FilterHeadline';
@@ -161,7 +162,7 @@ class JobRunHistoryTable extends React.Component {
             to="jobs-task-details"
             params={{id, taskID}}
             title={taskID}>
-            {taskID}
+            <CollapsingString string={taskID} />
           </Link>
         </div>
       );
@@ -178,7 +179,7 @@ class JobRunHistoryTable extends React.Component {
 
     return (
       <div className={classes} onClick={clickHandler}>
-        {row[prop]}
+        <CollapsingString string={row[prop]} />
       </div>
     );
   }
