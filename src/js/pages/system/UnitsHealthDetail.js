@@ -163,8 +163,9 @@ class UnitsHealthDetail extends mixin(StoreMixin) {
           title={unit.getTitle()} />
         <FilterHeadline
           currentLength={visibleData.length}
+          isFiltering={healthFilter !== 'all' || searchString !== ''}
           inverseStyle={true}
-          name={"Health Check"}
+          name="Health Check"
           onReset={this.resetFilter}
           totalLength={nodes.getItems().length} />
         <FilterBar>
