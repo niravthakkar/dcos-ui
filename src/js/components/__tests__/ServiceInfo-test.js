@@ -14,6 +14,7 @@ describe('ServiceInfo', function () {
   const service = new Service({
     id: '/group/test',
     healthChecks: [{path: '', protocol: 'HTTP'}],
+    deployments: [],
     cpus: 1,
     mem: 2048,
     disk: 0,
@@ -53,7 +54,7 @@ describe('ServiceInfo', function () {
     it('renders health state', function () {
       expect(
         this.node.querySelectorAll('.page-header-text')[0].children[1].children[0].textContent
-      ).toEqual('Healthy');
+      ).toEqual('Running');
     });
 
     it('renders number of running tasks', function () {
