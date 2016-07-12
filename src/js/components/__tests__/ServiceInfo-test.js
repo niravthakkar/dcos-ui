@@ -60,7 +60,7 @@ describe('ServiceInfo', function () {
     it('renders number of running tasks', function () {
       expect(
         this.node.querySelectorAll('.page-header-text')[0].children[1].children[1].textContent
-      ).toEqual('2 Running Tasks');
+      ).toEqual('2 Tasks');
     });
 
   });
