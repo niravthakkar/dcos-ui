@@ -84,7 +84,7 @@ var CliInstructionsModal = React.createClass({
           <h4 className="snippet-description">To install the CLI, copy and paste into your terminal:</h4>
           <div className="flush-top snippet-wrapper">
             <ClickToSelect>
-              <pre className="mute prettyprint flush-bottom prettyprinted">{cliSnippet}</pre>
+              <pre className="prettyprint flush-bottom">{cliSnippet}</pre>
             </ClickToSelect>
           </div>
         </div>
