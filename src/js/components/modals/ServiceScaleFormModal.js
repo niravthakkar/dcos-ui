@@ -6,6 +6,7 @@ import {StoreMixin} from 'mesosphere-shared-reactjs';
 
 import FormModal from '../FormModal';
 import MarathonStore from '../../stores/MarathonStore';
+import ServiceTree from '../../structs/ServiceTree';
 
 const METHODS_TO_BIND = [
   'handleScaleSubmit',
@@ -69,11 +70,20 @@ class ServiceScaleFormModal extends mixin(StoreMixin) {
   }
 
   handleScaleSubmit({instances}) {
+    let {service} = this.props;
+
     this.setState({disableForm: true}, () => {
-      MarathonStore.editService({
-        id: this.props.service.id,
-        instances: parseInt(instances, 10)
-      });
+      if (service instanceof ServiceTree) {
+        MarathonStore.editGroup({
+          id: this.props.service.id,
+          scaleBy: parseInt(instances, 10)
+        });
+      } else {
+        MarathonStore.editService({
+          id: this.props.service.id,
+          instances: parseInt(instances, 10)
+        });
+      }
     });
   }
 
@@ -107,6 +117,33 @@ class ServiceScaleFormModal extends mixin(StoreMixin) {
     ];
   }
 
+  getHeader() {
+    let headerText = 'Service';
+
+    if (this.props.service instanceof ServiceTree) {
+      headerText = 'Group';
+    }
+
+    return (
+      <h2 className="modal-header-title text-align-center flush-top">
+        Scale {headerText}
+      </h2>
+    );
+  }
+
+  getBodyText() {
+    let bodyText = 'How many instances would you like to scale to?';
+    if (this.props.service instanceof ServiceTree) {
+      bodyText = 'By which factor would you like to scale all applications within this group?';
+    }
+
+    return (
+      <p className="text-align-center flush-top">
+        {bodyText}
+      </p>
+    );
+  }
+
   render() {
     let {props, state} = this;
 
@@ -120,12 +157,8 @@ class ServiceScaleFormModal extends mixin(StoreMixin) {
         onChange={this.resetState}
         open={props.open}
         definition={this.getScaleFormDefinition()}>
-        <h2 className="modal-header-title text-align-center flush-top">
-          Scale Service
-        </h2>
-        <p className="text-align-center flush-top">
-          How many instances would you like to scale to?
-        </p>
+        {this.getHeader()}
+        {this.getBodyText()}
         {this.getErrorMessage()}
       </FormModal>
     );

@@ -79,6 +79,7 @@ module.exports = {
 
   editGroup: function (data, force) {
     let url = `${Config.rootUrl}${Config.marathonAPIPrefix}/groups/${data.id}`;
+    delete data.id;
 
     if (force === true) {
       url += '?force=true';
