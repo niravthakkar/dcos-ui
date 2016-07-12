@@ -93,7 +93,7 @@ class ServiceInfo extends React.Component {
       },
       {
         classes: 'media-object-item',
-        label: `${runningTasksCount} Running ${runningTasksSubHeader}`,
+        label: `${runningTasksCount} ${runningTasksSubHeader}`,
         shouldShow: runningTasksCount != null && runningTasksSubHeader != null
       },
       {
