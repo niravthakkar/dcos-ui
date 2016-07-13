@@ -89,17 +89,17 @@
   },
   "scripts": {
     "clean": "rm -rf build",
-    "prebuild-ee": "./scripts/validate-tests",
-    "build-ee": "npm run clean && npm test && NODE_ENV='production' ./node_modules/.bin/gulp dist",
-    "dist": "npm run build-ee",
-    "prebuild-ce": "./scripts/validate-tests",
-    "build-ce": "npm run clean && npm test && NODE_ENV='production' ./node_modules/.bin/gulp dist",
+    "prebuild-ee": "sudo ./scripts/validate-tests",
+    "build-ee": "sudo npm run clean && npm test && NODE_ENV='production' ./node_modules/.bin/gulp dist",
+    "dist": "sudo npm run build-ee",
+    "prebuild-ce": "sudo ./scripts/validate-tests",
+    "build-ce": "sudo npm run clean && npm test && NODE_ENV='production' ./node_modules/.bin/gulp dist",
     "serve": "NODE_ENV='development' ./node_modules/.bin/gulp serve",
     "serve-notify": "export NOTIFY=true && npm run serve",
     "testing": "NODE_ENV='testing' ./node_modules/.bin/gulp serve",
     "livereload": "NODE_ENV='development' ./node_modules/.bin/gulp livereload",
     "livereload-notify": "export NOTIFY=true && npm run livereload",
-    "test": "./node_modules/.bin/gulp copy:external-plugins && ./node_modules/.bin/gulp eslint && jest"
+    "test": "sudo ./node_modules/.bin/gulp copy:external-plugins && ./node_modules/.bin/gulp eslint && jest"
   },
   "jest-webpack-alias": {
     "configFile": ".webpack.config.js"
